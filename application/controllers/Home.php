@@ -1,8 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Home extends CI_Controller {
 
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('user_model');
+	}
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,6 +24,11 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$user = $this->user_model->getUserDetails(array('user_id'=>$this->session->userdata('user_id')));
+		$user = $user->row();
+		$outputData['user'] = $user;
+		if($user->type == '0')
+			$this->load->view('home.tpl',$outputData);
 	}
+
 }
