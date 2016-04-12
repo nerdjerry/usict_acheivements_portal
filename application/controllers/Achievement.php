@@ -2,13 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Achievement extends CI_Controller {
-
+	
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('user_model');
-		$this->load->model('achievement_model');
-		$this->load->helper('common_helper');
-
+		$outputData = array();
 	}
 	/**
 	 * Index Page for this controller.
@@ -30,7 +27,10 @@ class Achievement extends CI_Controller {
 		$achievements 				= $achievements->result_array();
 		$outputData['achievements'] = $achievements;
 		$outputData['user_name'] 	= get_user_name();
-		$this->load->view('achievements_student.tpl',$outputData);
+		if(get_user_type() == '2')
+			$this->load->view('achievements_student.tpl',$outputData);
+		else if(get_user_type() == '1')
+			$this->load->view('achievements_staff.tpl',$outputData);
 	}
 	public function store()
 	{
@@ -39,6 +39,24 @@ class Achievement extends CI_Controller {
 		if($this->achievement_model->newAchievement($user_type,$description)){
 			return redirect('/achievement');
 		}
+	}
+
+	public function staff()
+	{
+		$achievements = $this->achievement_model->getAllAchievements('1');
+		$achievements = $achievements->result_array();
+		$outputData['user_name'] 	= get_user_name();
+		$outputData['achievements'] = $achievements;
+		$this->load->view('home.tpl',$outputData);
+	}
+
+	public function student()
+	{
+		$achievements = $this->achievement_model->getAllAchievements('2');
+		$achievements = $achievements->result_array();
+		$outputData['user_name'] 	= get_user_name();
+		$outputData['achievements'] = $achievements;
+		$this->load->view('home.tpl',$outputData);
 	}
 
 }

@@ -5,8 +5,6 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('user_model');
-		$this->load->helper('common_helper');
 	}
 	/**
 	 * Index Page for this controller.
@@ -28,11 +26,18 @@ class Home extends CI_Controller {
 		$user = $this->user_model->getUserDetails(array('user_id'=>$this->session->userdata('user_id')));
 		if(isset($user) && !empty($user))
 		{
+			$outputData = array();
+			$outputData['user_name'] = get_user_name();
 			$user = $user->row();
-			$outputData['user'] = $user;
 			$user_type = get_user_type();
-			if($user_type == '0')
+			if($user_type == '0'){
+				$achievements = $this->achievement_model->getAllAchievements('1');
+				$achievements 				= $achievements->result_array();
+				$outputData['achievements'] = $achievements;
 				$this->load->view('home.tpl',$outputData);
+			}
+			else if($user_type == '1')
+				$this->load->view('new_staff_achievement.tpl',$outputData);
 			else if($user_type=='2')
 				$this->load->view('new_student_acheivement.tpl',$outputData);
 		} else {
@@ -41,5 +46,4 @@ class Home extends CI_Controller {
 			//show_error($message);
 		}
 	}
-
 }
