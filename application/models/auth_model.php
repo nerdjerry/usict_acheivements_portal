@@ -39,5 +39,10 @@ class Auth_model extends CI_Model {
 			$this->session->set_userdata($values);
 		}
 	}
+	function clearSession()
+	{
+		$array_items = array('user_id');
+		$this->session->unset_userdata($array_items);
+	}
 }
 ?>

@@ -4,7 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller {
 
 	public function __construct(){
+		
 		parent::__construct();
+		
 		$this->load->model('auth_model');
 	}
 	/**
@@ -24,7 +26,9 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('login.tpl');
+		if($this->session->userdata('user_id')){
+			return redirect('/home');
+		} else $this->load->view('login.tpl');
 	}
 
 	public function auth_login()
@@ -34,11 +38,11 @@ class Login extends CI_Controller {
 		$this->load->helper('cookie');
 		if($this->input->cookie('user_id', TRUE))
 		{
-			if($this->auth_model->login(array('users.user_id'=>$this->input->cookie('user_id')))){
+			if($this->auth_model->login(array('users.user_id'=>$this->input->cookie('user_id'))))
+			{
 				return redirect('/home');
 			}
 		}
-		$this->outputData['error'] = '';
 		if(isset($email) && !empty($email))
 		{
 			$conditions = array('email_id'=>$email,'password'=>$password);
@@ -46,9 +50,11 @@ class Login extends CI_Controller {
 			{ 
 				$this->auth_model->setSession($conditions);
 				return redirect('/home');
+			} else 
+			{
+				return redirect('/');
 			}
 		
-		}
-		
+		}	
 	}
 }
