@@ -31,13 +31,13 @@ class Home extends CI_Controller {
 			$user = $user->row();
 			$user_type = get_user_type();
 			if($user_type == '0'){
-				$achievements = $this->achievement_model->getAllAchievements('1');
+				$achievements 				= $this->achievement_model->getAllAchievements('1');
 				$achievements 				= $achievements->result_array();
 				$outputData['achievements'] = $achievements;
 				$this->load->view('home.tpl',$outputData);
 			}
 			else if($user_type == '1')
-				$this->load->view('new_staff_achievement.tpl',$outputData);
+				$this->load->view('publication.tpl');
 			else if($user_type=='2')
 				$this->load->view('new_student_acheivement.tpl',$outputData);
 		} else {
@@ -45,5 +45,22 @@ class Home extends CI_Controller {
 			//$message = 'Please '.'<a href ='.base_url().'><i>login</i></a> to View this Page';
 			//show_error($message);
 		}
+	}
+
+	public function award()
+	{
+		$this->load->view('award.tpl');
+	}
+	public function project()
+	{
+		$this->load->view('project.tpl');
+	}
+	public function publication()
+	{
+		$this->load->view('publication.tpl');
+	}
+	public function seminar()
+	{
+		$this->load->view('seminar.tpl');	
 	}
 }

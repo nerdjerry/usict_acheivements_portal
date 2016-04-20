@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
-	<title>My Achievements</title>
+	<title>Wolf - Bootstrap Admin Theme</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- stylesheets -->
@@ -29,19 +29,18 @@
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.time.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.tooltip.js');?>"></script>
 
-
 	<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body id="reports">
+<body id="form">
 	<div id="wrapper">
 		<div id="sidebar-default" class="main-sidebar">
 			<div class="current-user">
 				<a href="index.html" class="name">
-					<img class="avatar" src="images/avatars/1.jpg" />
+					<img class="avatar" src="<?php echo base_url('images/avatars/1.jpg');?>" />
 					<span>
-						<?php echo $user_name;?>
+						<?php echo get_user_name(); ?>
 						<i class="fa fa-chevron-down"></i>
 					</span>
 				</a>
@@ -54,9 +53,27 @@
 			<div class="menu-section">
 				<ul>
 					<li>
-						<a href="<?php echo base_url('/home');?>">
+						<a href="<?php echo base_url('home/award');?>">
 							<i class="ion-flash"></i> 
-							<span>Add Achievement</span>
+							<span>Awards</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url('home/project');?>">
+							<i class="ion-flash"></i> 
+							<span>Projects</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url('home/publication');?>">
+							<i class="ion-flash"></i> 
+							<span>Publications</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url('home/seminar');?>">
+							<i class="ion-flash"></i> 
+							<span>Seminars</span>
 						</a>
 					</li>
 					<li>
@@ -70,22 +87,45 @@
 		</div>
 
 		<div id="content">
-			<div class="row">
-				<div class="col-md-3"><h3><strong>Achievement</strong></h3></div>
-				<div class="col-md-3"><h3><strong>Organisation</strong></h3></div>
-				<div class="col-md-3"><h3><strong>Description</strong></h3></div>
-				<div class="col-md-3"><h3><strong>Created at</strong></h3></div>
+			<div class="menubar">
+				<div class="sidebar-toggler visible-xs">
+					<i class="ion-navicon"></i>
+				</div>
+
+				<div class="page-title">
+					Add an Award 
+				</div>
 			</div>
-			<?php foreach($achievements as $achievement): ?>
-    		<div class="row">
-    			<div class="col-md-3">Fake Achievement</div>
-    			<div class="col-md-3">Fake Organisation</div>
-	            <div class="col-md-3"><?php echo $achievement['description']; ?></div>
-	            <div class="col-md-3"><?php echo $achievement['created_at']; ?></div>
-            </div>
-        	<?php endforeach; ?>
+
+			<div class="content-wrapper">
+				<form id="new-award" class="form-horizontal" method="post" action="#" role="form">
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Award Details</label>
+					    <div class="col-sm-10 col-md-8">
+					      <input type="text" class="form-control" name="award_details" />
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Date</label>
+					    <div class="col-sm-10 col-md-8">
+					      <input type="text" class="form-control" name="award_date" />
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Amount</label>
+					    <div class="col-sm-10 col-md-8">
+					    	<input type="text" class="form-control" name="award_amount" />
+					    </div>
+				  	</div>
+				  	<div class="form-group form-actions">
+				    	<div class="col-sm-offset-2 col-sm-10">
+				    		<a href="form.html" class="btn btn-default">Cancel</a>
+				      		<button type="submit" class="btn btn-success">Save Award</button>
+			    		</div>
+				  	</div>
+				</form>
+			</div>
 		</div>
 	</div>
-
 </body>
 </html>

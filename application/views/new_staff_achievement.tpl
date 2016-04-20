@@ -34,7 +34,7 @@
 		<div id="sidebar-default" class="main-sidebar">
 			<div class="current-user">
 				<a href="index.html" class="name">
-					<img class="avatar" src="images/avatars/1.jpg" />
+					<img class="avatar" src="<?php echo base_url('images/avatars/1.jpg');?>" />
 					<span>
 						<?php echo $user_name; ?>
 						<i class="fa fa-chevron-down"></i>
@@ -52,6 +52,30 @@
 						<a href="<?php echo base_url('/home');?>">
 							<i class="ion-flash"></i> 
 							<span>Add Achievement</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url('home/award');?>">
+							<i class="ion-flash"></i> 
+							<span>Awards</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url('home/project');?>">
+							<i class="ion-flash"></i> 
+							<span>Projects</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url('home/publication');?>">
+							<i class="ion-flash"></i> 
+							<span>Publications</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url('home/seminar');?>">
+							<i class="ion-flash"></i> 
+							<span>Seminars</span>
 						</a>
 					</li>
 					<li>
