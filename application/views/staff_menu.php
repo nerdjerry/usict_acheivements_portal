@@ -18,28 +18,32 @@
 		<ul>
 			<li>
 				<a href="<?php echo base_url('home/award');?>">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					<span>Awards</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('home/project');?>">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					<span>Projects</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('home/publication');?>">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					<span>Publications</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('home/seminar');?>">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					<span>Seminars</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('nerdachievement');?>">
-				<i class="ion-flash"></i> 
-				<span>My Achievements</span>
+				<i class="fa fa-download" aria-hidden="true"></i>
+					<span>My Achievements</span>
 				</a>
 			</li>
 		</ul>
