@@ -41,7 +41,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url('achievement');?>">
+				<a href="<?php echo base_url('nerdachievement');?>">
 					<i class="ion-flash"></i> 
 					<span>My Achievements</span>
 				</a>
