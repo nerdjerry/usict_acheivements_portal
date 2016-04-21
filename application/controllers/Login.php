@@ -25,7 +25,7 @@ class Login extends CI_Controller {
 	{
 		if($this->session->userdata('user_id')){
 			return redirect('/home');
-		} else $this->load->view('login.tpl');
+		} else $this->load->view('login');
 	}
 
 	public function auth_login()

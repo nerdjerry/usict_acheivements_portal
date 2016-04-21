@@ -18,7 +18,10 @@ function get_user_name(){
 	if(isset($user) && !empty($user))
 	{
 		$user = $user->row();
-		$name = $user->name;
+		$name = "Testing Name";
+		//$name = $user->name;
 		return $name;
 	}
 }
+
+
