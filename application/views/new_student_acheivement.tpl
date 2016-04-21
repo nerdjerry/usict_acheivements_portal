@@ -7,23 +7,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- stylesheets -->
-	<link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/animate.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/brankic.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/ionicons.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/compiled/theme.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/animate.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/brankic.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/ionicons.min.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/font-awesome.min.css');?>" />
 
-	<link rel="stylesheet" type="text/css" href="css/vendor/select2.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/select2-bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/select2.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/select2-bootstrap.css')?>" />
 
 	<!-- javascript -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-	<script src="js/bootstrap/bootstrap.min.js"></script>
-	<script src="js/vendor/select2.min.js"></script>
-	<script src="js/vendor/jquery.validate.min.js"></script>
-	<script src="js/vendor/jquery.cookie.js"></script>
-	<script src="js/vendor/jquery.maskedinput.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="<?php echo base_url('js/bootstrap/bootstrap.min.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/select2.min.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.validate.min.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.cookie.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.maskedinput.js');?>"></script>
+	<script src="<?php echo base_url('js/theme.js');?>"></script>
 
 	<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
