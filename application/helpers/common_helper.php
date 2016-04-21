@@ -35,5 +35,26 @@ function get_user_id(){
 	$CI = get_instance();
 	return $CI->session->userdata('user_id');
 }
+function get_user_pic(){
+	$CI = get_instance();
+	$type = get_user_type();
+	if($type == '1'){
+		$faculty = $CI->user_model->getFacultyDetails(array('faculty_id'=>get_user_id()));
+		if(isset($faculty) && !empty($faculty)){
+			$faculty = $faculty->row();
+			$pic = $faculty->profile_pic;
+		}
+	} else if($type == '2'){
+		$student = $CI->user_model->getStudentDetails(array('student_id'=>get_user_id()));
+		if(isset($student) && !empty($student)){
+			$student = $student->row();
+			$pic = $student->profile_pic;
+		}
+	}
+	if(isset($pic))
+		return $pic;
+	else
+		return "photos/default.jpg";
+}
 
 

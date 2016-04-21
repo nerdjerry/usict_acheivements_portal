@@ -2,7 +2,7 @@
 <div id="sidebar-default" class="main-sidebar">
 	<div class="current-user">
 		<a href="index.html" class="name">
-			<img class="avatar" src="<?php echo base_url('images/avatars/1.jpg');?>" />
+			<img class="avatar" src="<?php echo get_user_pic();?>" />
 			<span>
 				<?php echo get_user_name(); ?>
 				<i class="fa fa-chevron-down"></i>
