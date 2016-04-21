@@ -74,6 +74,7 @@
 					      	<input type="text" class="form-control" name="project_amount" placeholder="INR" />
 					    </div>
 				  	</div>
+				  	<input type="hidden" value="2" name="form_type"></input>
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">
 				    		<a href="form.html" class="btn btn-default">Cancel</a>
