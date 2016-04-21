@@ -28,9 +28,9 @@ class Achievement extends CI_Controller {
 		$outputData['achievements'] = $achievements;
 		$outputData['user_name'] 	= get_user_name();
 		if(get_user_type() == '2')
-			$this->load->view('achievements_student.tpl',$outputData);
+			$this->load->view('achievements_student',$outputData);
 		else if(get_user_type() == '1')
-			$this->load->view('achievements_staff.tpl',$outputData);
+			$this->load->view('achievements_staff',$outputData);
 	}
 	public function store()
 	{
@@ -47,7 +47,7 @@ class Achievement extends CI_Controller {
 		$achievements = $achievements->result_array();
 		$outputData['user_name'] 	= get_user_name();
 		$outputData['achievements'] = $achievements;
-		$this->load->view('home.tpl',$outputData);
+		$this->load->view('home',$outputData);
 	}
 
 	public function student()
@@ -56,7 +56,7 @@ class Achievement extends CI_Controller {
 		$achievements = $achievements->result_array();
 		$outputData['user_name'] 	= get_user_name();
 		$outputData['achievements'] = $achievements;
-		$this->load->view('home.tpl',$outputData);
+		$this->load->view('home',$outputData);
 	}
 
 }

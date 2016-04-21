@@ -36,7 +36,7 @@
 <body id="form">
 	<div id="wrapper">
 		<div id="sidebar-default" class="main-sidebar">
-		<div class="current-user">
+			<div class="current-user">
 				<a href="index.html" class="name">
 					<img class="avatar" src="<?php echo base_url('images/avatars/1.jpg');?>" />
 					<span>

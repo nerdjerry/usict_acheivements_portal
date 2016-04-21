@@ -34,12 +34,12 @@ class Home extends CI_Controller {
 				$achievements 				= $this->achievement_model->getAllAchievements('1');
 				$achievements 				= $achievements->result_array();
 				$outputData['achievements'] = $achievements;
-				$this->load->view('home.tpl',$outputData);
+				$this->load->view('home',$outputData);
 			}
 			else if($user_type == '1')
-				$this->load->view('publication.tpl');
+				$this->load->view('publication');
 			else if($user_type=='2')
-				$this->load->view('new_student_acheivement.tpl',$outputData);
+				$this->load->view('new_student_acheivement',$outputData);
 		} else {
 			return redirect('/');
 			//$message = 'Please '.'<a href ='.base_url().'><i>login</i></a> to View this Page';
@@ -49,18 +49,18 @@ class Home extends CI_Controller {
 
 	public function award()
 	{
-		$this->load->view('award.tpl');
+		$this->load->view('award');
 	}
 	public function project()
 	{
-		$this->load->view('project.tpl');
+		$this->load->view('project');
 	}
 	public function publication()
 	{
-		$this->load->view('publication.tpl');
+		$this->load->view('publication');
 	}
 	public function seminar()
 	{
-		$this->load->view('seminar.tpl');	
+		$this->load->view('seminar');	
 	}
 }
