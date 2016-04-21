@@ -93,7 +93,13 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Type</label>
 					    <div class="col-sm-10 col-md-8">
-					      	<input type="text" class="form-control" name="seminar_type" />
+					      	<select class="form-control" name="seminar_type">
+					    		<option value=""  selected disabled>Please Select a Seminar Type</option>
+							 	<option value="Seminar">Seminar</option>
+							  	<option value="Workshop">Workshop</option>
+							  	<option value="Training">Training</option>
+							  	<option value="FDP">Faculty Development Program</option>
+							</select>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
