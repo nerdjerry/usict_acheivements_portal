@@ -97,8 +97,9 @@
 					    		<option value=""  selected disabled>Please Select a Seminar Type</option>
 							 	<option value="Seminar">Seminar</option>
 							  	<option value="Workshop">Workshop</option>
-							  	<option value="Training">Training</option>
-							  	<option value="FDP">Faculty Development Program</option>
+							  	<option value="Training">Training Programme</option>
+							  	<option value="FDP">Faculty Development Programme</option>
+							  	<option value="FDP">Symposium</option>
 							</select>
 					    </div>
 				  	</div>
