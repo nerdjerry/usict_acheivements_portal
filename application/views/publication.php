@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="content-wrapper">
-				<form id="new-publication" class="form-horizontal" method="post" action="#" role="form">
+				<form id="new-publication" class="form-horizontal" method="post" action="<?php echo base_url('achievement/store'); ?>" role="form">
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Title</label>
 					    <div class="col-sm-10 col-md-8">
@@ -101,24 +101,26 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Presented in</label>
 					    <div class="col-sm-10 col-md-8">
-					    	<div class="has-feedback">
-					      		<input type="text" class="form-control" name="presented_in" />
-					      		<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="Journal/ Conference"></i>
-					      	</div>
+					    	<select class="form-control" name="presented_in">
+					    		<option value=""  selected disabled>Publication is Presented in..</option>
+							 	<option value="Journal">Journal</option>
+							  	<option value="Conference">Conference</option>
+							</select>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Presented at</label>
 					    <div class="col-sm-10 col-md-8">
-					    	<div class="has-feedback">
-					      		<input type="text" class="form-control" name="presented_at" />
-					      		<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="International/ Natrional"></i>
-					      	</div>
+					    	<select class="form-control" name="presented_at">
+					    		<option value=""  selected disabled>Publication is Presented at..</option>
+							 	<option value="International">International</option>
+							  	<option value="National">National</option>
+							</select>
 					    </div>
 				  	</div>
+				  	<input type="hidden" value="4" name="form_type"></input>
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">
-				    		<a href="form.html" class="btn btn-default">Cancel</a>
 				      		<button type="submit" class="btn btn-success">Save Publication</button>
 			    		</div>
 				  	</div>

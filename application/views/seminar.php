@@ -129,7 +129,6 @@
 
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">
-				    		<a href="form.html" class="btn btn-default">Cancel</a>
 				      		<button type="submit" class="btn btn-success">Save Seminar</button>
 			    		</div>
 				  	</div>
