@@ -12,7 +12,7 @@ class User_model extends CI_Model {
 		{
 			$this->db->where($conditions);
 		}
-		$this->db->select('users.user_id,users.email_id,users.name,users.type');
+		$this->db->select('users.user_id,users.email_id,users.type');
 		$result = $this->db->get('users');
 		if($result->num_rows()>0)
 		{
