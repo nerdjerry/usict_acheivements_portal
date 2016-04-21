@@ -1,5 +1,5 @@
 <div class="table-responsive">
-				<table class="table-hover">
+				<table class="table">
 				<?php if(!empty($info)):?>
 					<thead>
 						<tr>
