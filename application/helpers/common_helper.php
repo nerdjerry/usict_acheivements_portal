@@ -23,5 +23,9 @@ function get_user_name(){
 		return $name;
 	}
 }
+function get_user_id(){
+	$CI = get_instance();
+	return $CI->session->userdata('user_id');
+}
 
 
