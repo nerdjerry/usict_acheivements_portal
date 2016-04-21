@@ -18,31 +18,26 @@
 		<ul>
 			<li>
 				<a href="<?php echo base_url('home/award');?>">
-					<i class="ion-flash"></i> 
 					<span>Awards</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('home/project');?>">
-					<i class="ion-flash"></i> 
 					<span>Projects</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('home/publication');?>">
-					<i class="ion-flash"></i> 
 					<span>Publications</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('home/seminar');?>">
-					<i class="ion-flash"></i> 
 					<span>Seminars</span>
 				</a>
 			</li>
 			<li>
 				<a href="<?php echo base_url('achievement');?>">
-					<i class="ion-flash"></i> 
 					<span>My Achievements</span>
 				</a>
 			</li>
