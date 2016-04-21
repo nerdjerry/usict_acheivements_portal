@@ -28,6 +28,7 @@
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.time.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.tooltip.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.validate.min.js');?>"></script>
 
 	<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -35,57 +36,7 @@
 </head>
 <body id="form">
 	<div id="wrapper">
-		<div id="sidebar-default" class="main-sidebar">
-		<div class="current-user">
-				<a href="index.html" class="name">
-					<img class="avatar" src="<?php echo base_url('images/avatars/1.jpg');?>" />
-					<span>
-						<?php echo get_user_name(); ?>
-						<i class="fa fa-chevron-down"></i>
-					</span>
-				</a>
-				<ul class="menu">
-					<li>
-						<a href="<?php echo base_url('logout');?>">Sign out</a>
-					</li>
-				</ul>
-			</div>
-			<div class="menu-section">
-				<ul>
-					<li>
-						<a href="<?php echo base_url('home/award');?>">
-							<i class="ion-flash"></i> 
-							<span>Awards</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('home/project');?>">
-							<i class="ion-flash"></i> 
-							<span>Projects</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('home/publication');?>">
-							<i class="ion-flash"></i> 
-							<span>Publications</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('home/seminar');?>">
-							<i class="ion-flash"></i> 
-							<span>Seminars</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('achievement');?>">
-							<i class="ion-flash"></i> 
-							<span>My Achievements</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-
+		<?php include('staff_menu.php') ?>
 		<div id="content">
 			<div class="menubar">
 				<div class="sidebar-toggler visible-xs">
@@ -98,7 +49,7 @@
 			</div>
 
 			<div class="content-wrapper">
-				<form id="new-customer" class="form-horizontal" method="post" action="#" role="form">
+				<form id="new-seminar" class="form-horizontal" method="post" action="#" role="form">
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Title</label>
 					    <div class="col-sm-10 col-md-8">
@@ -120,29 +71,35 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Start date</label>
 					    <div class="col-sm-10 col-md-8">
-					      	<input type="text" class="form-control" name="start_date" />
+					      	<input type="text" class="form-control start_date" name="start_date" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">End date</label>
 					    <div class="col-sm-10 col-md-8">
-					      	<input type="text" class="form-control" name="end_date" />
+					      	<input type="text" class="form-control end_date" name="end_date" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Region</label>
 					    <div class="col-sm-10 col-md-8">
-					    	<div class="has-feedback">
-								<input type="text" class="form-control" name="region" />
-						      	<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="National/ International">
-						      	</i>
-							</div>
+					    	<select class="form-control" name="region">
+					    		<option value=""  selected disabled>Please Select a Region</option>
+							 	<option value="National">National</option>
+							  	<option value="International">International</option>
+							</select>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Type</label>
 					    <div class="col-sm-10 col-md-8">
-					      	<input type="text" class="form-control" name="seminar_type" />
+					      	<select class="form-control" name="seminar_type">
+					    		<option value=""  selected disabled>Please Select a Seminar Type</option>
+							 	<option value="Seminar">Seminar</option>
+							  	<option value="Workshop">Workshop</option>
+							  	<option value="Training">Training</option>
+							  	<option value="FDP">Faculty Development Program</option>
+							</select>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -154,11 +111,11 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Status</label>
 					    <div class="col-sm-10 col-md-8">
-					    	<div class="has-feedback">
-								<input type="text" class="form-control" name="region" />
-						      	<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="Attended/ Orgnised">
-						      	</i>
-							</div>
+					    	<select class="form-control" name="status">
+					    		<option value=""  selected disabled>Please Select a Status</option>
+							 	<option value="Attended">Attended</option>
+							  	<option value="Organised">Organised</option>
+							</select>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -180,3 +137,46 @@
 	</div>
 </body>
 </html>
+
+<script type="text/javascript">
+		$(function () {
+			// form validation
+			$('#new-seminar').validate({
+				rules: {
+					"seminar_title": {
+						required: true
+					},
+					"seminar_place": {
+						required: true
+					},
+					"start_date": {
+						required: true
+					},
+					"region": {
+						required: true
+					},
+					"seminar_type": {
+						required: true
+					},
+					"status": {
+						required: true
+					}
+
+				},
+				highlight: function (element) {
+					$(element).closest('.form-group').removeClass('success').addClass('error');
+				},
+				success: function (element) {
+					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
+				}
+			});
+			$('.start_date').datepicker({
+				format: 'dd MM yyyy',
+				autoclose:true
+			});
+			$('.end_date').datepicker({
+				format: 'dd MM yyyy',
+				autoclose:true
+			});
+		});
+	</script>
