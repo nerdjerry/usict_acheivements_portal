@@ -28,6 +28,7 @@
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.time.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.tooltip.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.validate.min.js');?>"></script>
 
 	<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -35,57 +36,7 @@
 </head>
 <body id="form">
 	<div id="wrapper">
-		<div id="sidebar-default" class="main-sidebar">
-			<div class="current-user">
-				<a href="index.html" class="name">
-					<img class="avatar" src="<?php echo base_url('images/avatars/1.jpg');?>" />
-					<span>
-						<?php echo get_user_name(); ?>
-						<i class="fa fa-chevron-down"></i>
-					</span>
-				</a>
-				<ul class="menu">
-					<li>
-						<a href="<?php echo base_url('logout');?>">Sign out</a>
-					</li>
-				</ul>
-			</div>
-			<div class="menu-section">
-				<ul>
-					<li>
-						<a href="<?php echo base_url('home/award');?>">
-							<i class="ion-flash"></i> 
-							<span>Awards</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('home/project');?>">
-							<i class="ion-flash"></i> 
-							<span>Projects</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('home/publication');?>">
-							<i class="ion-flash"></i> 
-							<span>Publications</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('home/seminar');?>">
-							<i class="ion-flash"></i> 
-							<span>Seminars</span>
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url('achievement');?>">
-							<i class="ion-flash"></i> 
-							<span>My Achievements</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-
+		<?php include('staff_menu.php') ?>
 		<div id="content">
 			<div class="menubar">
 				<div class="sidebar-toggler visible-xs">
@@ -108,13 +59,13 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Month of Publication</label>
 					    <div class="col-sm-10 col-md-8">
-					      <input type="text" class="form-control" name="month_of_pub" />
+					      <input type="text" class="form-control month_of_pub" name="month_of_pub" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Year of Publication</label>
 					    <div class="col-sm-10 col-md-8">
-					    	<input type="text" class="form-control" name="year_of_pub" />
+					    	<input type="text" class="form-control year_of_pub" name="year_of_pub" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -152,7 +103,7 @@
 					    <div class="col-sm-10 col-md-8">
 					    	<div class="has-feedback">
 					      		<input type="text" class="form-control" name="presented_in" />
-					      		<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="Presented in Meaning"></i>
+					      		<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="Journal/ Conference"></i>
 					      	</div>
 					    </div>
 				  	</div>
@@ -161,7 +112,7 @@
 					    <div class="col-sm-10 col-md-8">
 					    	<div class="has-feedback">
 					      		<input type="text" class="form-control" name="presented_at" />
-					      		<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="Presented at Meaning"></i>
+					      		<i class="ion-information-circled form-control-feedback" data-toggle="tooltip" title="International/ Natrional"></i>
 					      	</div>
 					    </div>
 				  	</div>
@@ -178,14 +129,10 @@
 
 	<script type="text/javascript">
 		$(function () {
-
 			// form validation
-			$('#new-customer').validate({
+			$('#new-publication').validate({
 				rules: {
-					"title": {
-						required: true
-					},
-					"month_of_pub": {
+					"publication_title": {
 						required: true
 					},
 					"year_of_pub": {
@@ -193,7 +140,14 @@
 					},
 					"journal_name": {
 						required: true
-					}
+					},
+					"presented_in": {
+						required: true
+					},
+					"presented_at": {
+						required: true
+					},
+
 				},
 				highlight: function (element) {
 					$(element).closest('.form-group').removeClass('success').addClass('error');
@@ -202,17 +156,18 @@
 					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
 				}
 			});
-
-			// tags with select2
-			$("#customer-tags").select2({
-				placeholder: 'Select tags or add new ones',
-				tags:["supplier", "lead", "client", "friend", "developer", "customer"],
-				tokenSeparators: [",", " "]
+			$('.month_of_pub').datepicker({
+				format: "MM", // Notice the Extra space at the beginning
+				viewMode: "months", 
+				minViewMode: "months",
+				autoclose: true
 			});
-
-			// masked input example using phone input
-			$(".mask-phone").mask("(999) 999-9999");
-			$(".mask-cc").mask("9999 9999 9999 9999");
+			$('.year_of_pub').datepicker({
+				format: " yyyy", // Notice the Extra space at the beginning
+				viewMode: "years", 
+				minViewMode: "years",
+				autoclose: true
+			});
 		});
 	</script>
 
