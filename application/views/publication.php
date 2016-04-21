@@ -59,13 +59,13 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Month of Publication</label>
 					    <div class="col-sm-10 col-md-8">
-					      <input type="text" class="form-control month_of_pub" name="month_of_pub" />
+					      <input type="text" class="form-control month_of_pub" name="month_of_pub" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Year of Publication</label>
 					    <div class="col-sm-10 col-md-8">
-					    	<input type="text" class="form-control year_of_pub" name="year_of_pub" />
+					    	<input type="text" class="form-control year_of_pub" name="year_of_pub" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">

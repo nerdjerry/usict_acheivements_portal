@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="content-wrapper">
-				<form id="new-award" class="form-horizontal" method="post" action="#" role="form">
+				<form id="new-award" class="form-horizontal" method="post" action="<?php echo base_url('achievement/store'); ?>" role="form">
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Award Details</label>
 					    <div class="col-sm-10 col-md-8">
@@ -59,7 +59,7 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Date</label>
 					    <div class="col-sm-10 col-md-8">
-					      <input type="text" class="form-control award_date" name="award_date" />
+					      <input type="text" class="form-control award_date" name="award_date" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -83,7 +83,7 @@
 		$(function () {
 
 			$('.award_date').datepicker({
-				format: 'dd MM yyyy',
+				format: 'yyyy-mm-dd',
 				autoclose:true
 			});
 			// form validation
@@ -91,6 +91,9 @@
 				rules: {
 					"award_details": {
 						required: true
+					},
+					"award_amount":{
+						number: true
 					}
 				},
 				highlight: function (element) {

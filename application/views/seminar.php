@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="content-wrapper">
-				<form id="new-seminar" class="form-horizontal" method="post" action="#" role="form">
+				<form id="new-seminar" class="form-horizontal" method="post" action="<?php echo base_url('achievement/store'); ?>" role="form">
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Title</label>
 					    <div class="col-sm-10 col-md-8">
@@ -71,13 +71,13 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Start date</label>
 					    <div class="col-sm-10 col-md-8">
-					      	<input type="text" class="form-control start_date" name="start_date" />
+					      	<input type="text" class="form-control start_date" name="start_date" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">End date</label>
 					    <div class="col-sm-10 col-md-8">
-					      	<input type="text" class="form-control end_date" name="end_date" />
+					      	<input type="text" class="form-control end_date" name="end_date" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -172,11 +172,11 @@
 				}
 			});
 			$('.start_date').datepicker({
-				format: 'dd MM yyyy',
+				format: 'yyyy-mm-dd',
 				autoclose:true
 			});
 			$('.end_date').datepicker({
-				format: 'dd MM yyyy',
+				format: 'yyyy-mm-dd',
 				autoclose:true
 			});
 		});
