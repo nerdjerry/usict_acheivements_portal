@@ -7,25 +7,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- stylesheets -->
-	<link rel="stylesheet" type="text/css" href="css/compiled/theme.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/animate.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/brankic.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/ionicons.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/font-awesome.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/vendor/jquery.dataTables.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/compiled/theme.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/animate.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/brankic.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo bse_url('css/vendor/ionicons.min.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/font-awesome.min.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/jquery.dataTables.css');?>" />
 
 
 	<!-- javascript -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-	<script src="js/bootstrap/bootstrap.min.js"></script>
-	<script src="js/vendor/jquery.dataTables.min.js"></script>
-	<script src="js/vendor/jquery.cookie.js"></script>
-	<script src="js/vendor/moment.min.js"></script>
-	<script src="js/theme.js"></script>
+	<script src="<?php echo base_url('js/bootstrap/bootstrap.min.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.dataTables.min.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.cookie.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/moment.min.js');?>"></script>
+	<script src="<?php echo base_url('js/theme.js');?>"></script>
 
-	<script src="js/vendor/jquery.flot/jquery.flot.js"></script>
-	<script src="js/vendor/jquery.flot/jquery.flot.time.js"></script>
-	<script src="js/vendor/jquery.flot/jquery.flot.tooltip.js"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.time.js');?>"></script>
+	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.tooltip.js');?>"></script>
 
 
 	<!--[if lt IE 9]>
