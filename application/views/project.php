@@ -49,7 +49,7 @@
 			</div>
 
 			<div class="content-wrapper">
-				<form id="new-project" class="form-horizontal" method="post" action="#" role="form">
+				<form id="new-project" class="form-horizontal" method="post" action="<?php echo base_url('achievement/store'); ?>" role="form">
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Title</label>
 					    <div class="col-sm-10 col-md-8">
@@ -65,7 +65,7 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Date</label>
 					    <div class="col-sm-10 col-md-8">
-					    	<input type="text" class="form-control project_date" name="project_date" placeholder="Date of Submission" />
+					    	<input type="text" class="form-control project_date" name="project_date" placeholder="Date of Submission" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -77,7 +77,6 @@
 				  	<input type="hidden" value="2" name="form_type"></input>
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">
-				    		<a href="form.html" class="btn btn-default">Cancel</a>
 				      		<button type="submit" class="btn btn-success">Save Project</button>
 			    		</div>
 				  	</div>
@@ -90,7 +89,7 @@
 		$(function () {
 
 			$('.project_date').datepicker({
-				format: 'dd MM yyyy',
+				format: 'yyyy-mm-dd',
 				autoclose:true
 			});
 			// form validation
@@ -100,7 +99,10 @@
 						required: true
 					},
 					"project_date": {
-						required: true,
+						required: true
+					},
+					"project_amount":{
+						number:true
 					}
 				},
 				highlight: function (element) {
