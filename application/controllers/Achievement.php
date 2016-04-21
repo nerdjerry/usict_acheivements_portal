@@ -153,15 +153,6 @@ class Achievement extends CI_Controller {
 		return redirect('/home/'.substr($table_name,0,-1));
 	}
 
-	public function staff()
-	{
-		$achievements = $this->achievement_model->getAllAchievements('1');
-		$achievements = $achievements->result_array();
-		$outputData['user_name'] 	= get_user_name();
-		$outputData['achievements'] = $achievements;
-		$this->load->view('home',$outputData);
-	}
-
 	public function student()
 	{
 		$achievements = $this->achievement_model->getAllAchievements('2');
@@ -169,6 +160,24 @@ class Achievement extends CI_Controller {
 		$outputData['user_name'] 	= get_user_name();
 		$outputData['achievements'] = $achievements;
 		$this->load->view('home',$outputData);
+	}
+
+	public function deleteAchievement($infoType,$id){
+		switch ($infoType) {
+			case 1:
+				$this->common_model->delete('publications',array('id' => $id));
+				break;
+			case 2:
+				$this->common_model->delete('seminars',array('id' => $id));
+				break;
+			case 3:
+				$this->common_model->delete('awards',array('id' => $id));
+				break;
+			case 4:
+				$this->common_model->delete('awards',array('id' => $id));
+				break;
+		}
+		redirect('/nerdachievement/staff/'.$infoType);
 	}
 
 }

@@ -6,6 +6,7 @@
 							<th>Details</th>
 							<th>Date</th>
 							<th>Amount</th>
+							<th></th>
 						</tr>
 					</thead>
 				<?php endif;?>
@@ -26,6 +27,7 @@
 									else
 										echo "Not Available";
 								?></td>
+								<td><a href="<?php echo base_url('/achievement/deleteAchievement/'.$infoType.'/'.$detail['id']);?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
 							</tr>
 							<?php endforeach;
 						else:
