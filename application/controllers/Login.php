@@ -23,7 +23,7 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		if($this->session->userdata('user_id')){
+		if($this->session->userdata('user_id') || $this->input->cookie('user_id')){
 			return redirect('/home');
 		} else $this->load->view('login');
 	}
@@ -44,7 +44,8 @@ class Login extends CI_Controller {
 				$this->auth_model->setSession($conditions);
 				return redirect('/home');
 			}
-		} else if(isset($email) && !empty($email))
+		} 
+		if(isset($email) && !empty($email))
 		{
 			$conditions = array('email_id'=>$email,'password'=>$password);
 			if($this->auth_model->login($conditions))

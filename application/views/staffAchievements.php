@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/font-awesome.min.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/datepicker.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/morris.css');?>" />
-
+	<link rel="icon" href="<?php echo base_url('favicon.png');?>" type="image/png"/>
 	<!-- javascript -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 	<script src="<?php echo base_url('js/bootstrap/bootstrap.min.js');?>"></script>
@@ -48,6 +48,9 @@
 					Achievements
 				</div>
 			</div>
+			<?php if($this->session->flashdata('insertionSuccess')): ?>
+				<div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('insertionSuccess'); ?></div>
+			<?php endif?>
 			<?php 
 				$status = $this->session->flashdata('deleteStatus');
 				if(isset($status)&&$status): ?>

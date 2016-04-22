@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
-	<title>Wolf - Bootstrap Admin Theme</title>
+	<title>Add Award</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- stylesheets -->
@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/font-awesome.min.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/datepicker.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/morris.css');?>" />
+	<link rel="icon" href="<?php echo base_url('favicon.png');?>" type="image/png"/>
 
 	<!-- javascript -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -29,7 +30,6 @@
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.time.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.tooltip.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.validate.min.js');?>"></script>
-
 	<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -47,9 +47,6 @@
 					Add an Award 
 				</div>
 			</div>
-			<?php if($this->session->flashdata('insertionSuccess')): ?>
-				<div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('insertionSuccess'); ?></div>
-			<?php endif?>
 			<div class="content-wrapper">
 				<form id="new-award" class="form-horizontal" method="post" action="<?php echo base_url('achievement/store'); ?>" role="form">
 				  	<div class="form-group">
@@ -70,7 +67,7 @@
 					    	<input type="text" class="form-control" name="award_amount" />
 					    </div>
 				  	</div>
-				  	<input type="hidden" value="3" name="form_type"></input>
+				  	<input type="hidden" value="4" name="form_type"></input>
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">
 				      		<button type="submit" class="btn btn-success">Save Award</button>
