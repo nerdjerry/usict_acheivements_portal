@@ -193,8 +193,7 @@ class Achievement extends CI_Controller {
 				$data['info'] = $this->awards->getAwards($facultyId,$userType);
 				break;
 			default:
-				$this->load->model('publications');
-				$data['info'] = $this->publications->getPublications($facultyId);
+				redirect('achievement/staff/');
 				break;
 		}
 		$this->load->view('staffAchievements.php',$data);
@@ -250,8 +249,7 @@ class Achievement extends CI_Controller {
 					$data['info'] = $this->awards->getAllStaffAwards();
 					break;
 				default:
-					$this->load->model('publications');
-					$data['info'] = $this->publications->getAllStaffPublications();
+					redirect('achievement/admin/');
 					break;
 			}	
 			$this->load->view('admin',$data);
