@@ -23,8 +23,11 @@ class Common_model extends CI_Model {
 		if(count($conditions)>0) {
 			$this->db->where($conditions);
 		}
-		$this->db->delete($table_name); 
-		return true;
+		$status = $this->db->delete($table_name); 
+		if(!$status)
+			return false;
+		else
+			return true;
 	}
 }
 ?>

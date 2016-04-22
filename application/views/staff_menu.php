@@ -56,7 +56,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url('nerdachievement');?>">
+				<a href="<?php echo base_url('achievement');?>">
 				<i class="fa fa-download" aria-hidden="true"></i>
 					<span>My Achievements</span>
 				</a>
