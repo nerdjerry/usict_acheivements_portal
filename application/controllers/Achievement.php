@@ -36,8 +36,11 @@ class Achievement extends CI_Controller {
 			$this->admin();
 		}
 	}
-	public function store()
-	{
+	public function store(){
+		$currentUserType = get_user_type();
+		if($this->input->post('form_type') == null || $currentUserType == self::ADMIN){
+			show_error("Action not allowed!!",401);
+		}
 		$table_name		= '';
 		$insertData 	= array();
 		$form_type 		= $this->input->post('form_type');
@@ -283,6 +286,10 @@ class Achievement extends CI_Controller {
 
 	/**This is called when a achievement in staff has to be removed **/
 	public function deleteAchievement($infoType,$id){
+		$currentUserType = get_user_type();
+		if(!isset($infoType)||!isset($id)||$currentUserType == self::ADMIN){
+			show_error("Action not allowed!!!",401);
+		}
 		switch ($infoType) {
 			case 1:
 				$status = $this->common_model->delete('publications',array('id' => $id));
