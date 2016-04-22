@@ -5,11 +5,13 @@ class Logout extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('cookie');
 	}
 	
 	function index()
 	{
-		$this->auth_model->clearSession();	
+		$this->auth_model->clearSession();
+		delete_cookie("user_id");
 		return redirect('/');
 	}
 	

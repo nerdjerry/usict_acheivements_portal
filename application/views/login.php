@@ -49,7 +49,7 @@
 			</div>
 			<div class="info">
 				<label>
-					<input type="checkbox" name="remember" checked />
+					<input type="checkbox" name="remember" data-val="true" value="true" checked />
 					Remember me
 				</label>
 			</div>
