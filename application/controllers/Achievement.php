@@ -184,7 +184,7 @@ class Achievement extends CI_Controller {
 			$data['noOfAwards'] = $count['awards'];
 			$data['infoType'] = $infoType;
 			$totalRows = 0;
-			$perPage = 1;
+			$perPage = 10;
 			$page=$this->uri->segment(4) != null? $this->uri->segment(4) : 1;
 			switch($infoType){
 				case 1:
