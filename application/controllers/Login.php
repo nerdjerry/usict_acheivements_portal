@@ -40,11 +40,11 @@ class Login extends CI_Controller {
 		{	
 			if($this->auth_model->login(array('users.user_id'=>$this->input->cookie('user_id'))))
 			{
+				$conditions = array('email_id'=>$email,'password'=>$password);
+				$this->auth_model->setSession($conditions);
 				return redirect('/home');
 			}
-		}
-
-		if(isset($email) && !empty($email))
+		} else if(isset($email) && !empty($email))
 		{
 			$conditions = array('email_id'=>$email,'password'=>$password);
 			if($this->auth_model->login($conditions))
