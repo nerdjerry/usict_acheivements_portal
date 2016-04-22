@@ -48,6 +48,9 @@
 					Achievements
 				</div>
 			</div>
+			<?php if($this->session->flashdata('insertionSuccess')): ?>
+				<div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('insertionSuccess'); ?></div>
+			<?php endif?>
 			<?php 
 				$status = $this->session->flashdata('deleteStatus');
 				if(isset($status)&&$status): ?>

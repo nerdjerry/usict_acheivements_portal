@@ -158,7 +158,23 @@ class Achievement extends CI_Controller {
 			$this->common_model->add($table_name,$insertData);
 		}
 		$this->session->set_flashdata('insertionSuccess', ucfirst(substr($table_name,0,-1).' Added Successfully'));
-		return redirect('/home/'.substr($table_name,0,-1));
+		switch ($form_type) {
+			case '1':
+				return redirect('achievement/staff/2');
+				break;
+			case '2':
+				return redirect('achievement/staff/3');
+				break;
+			case '3':
+				return redirect('achievement/staff/4');
+				break;
+			case '4':
+				return redirect('achievement/staff/1');
+				break;
+			default:
+				break;
+		}
+		//return redirect('/home/'.substr($table_name,0,-1));
 	}
 
 	/*infoType index

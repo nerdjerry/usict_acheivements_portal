@@ -54,22 +54,22 @@ class Home extends CI_Controller {
 
 	public function award()
 	{
-		$this->isAllowed();
+		//$this->isAllowed();
 		$this->load->view('award');
 	}
 	public function project()
 	{
-		$this->isAllowed();
+		//$this->isAllowed();
 		$this->load->view('project');
 	}
 	public function publication()
 	{
-		$this->isAllowed();
+		//$this->isAllowed();
 		$this->load->view('publication');
 	}
 	public function seminar()
 	{
-		$this->isAllowed();
+		//$this->isAllowed();
 		$this->load->view('seminar');	
 	}
 
