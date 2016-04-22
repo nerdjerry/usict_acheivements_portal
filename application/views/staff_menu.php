@@ -1,13 +1,27 @@
-
+<style type="text/css">
+	.nopadding{
+		padding: 0 !important;
+   		margin: 0 !important;
+	}
+	img{
+		width:50px;
+		height:50px
+	}
+</style>
 <div id="sidebar-default" class="main-sidebar">
 	<div class="current-user">
 		<a href="index.html" class="name">
-			<img class="avatar" src="<?php echo base_url(get_user_pic());?>" />
-			<span>
-				<?php echo get_user_name(); ?>
+			<div class="row">
+				<div class="col-md-2 nopadding">
+					<img class="avatar" src="<?php echo base_url(get_user_pic());?>" />
+				</div>
+				<div class="col-md-8">
+					<?php echo get_user_name(); ?>
+				</div>
+				<div class="col-md-2 nopadding">
 				<i class="fa fa-chevron-down" style=""></i>
-			</span>
-			
+				</div>
+			</div>
 		</a>
 		<ul class="menu">
 			<li>
