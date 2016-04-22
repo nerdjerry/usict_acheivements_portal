@@ -48,7 +48,14 @@
 					Achievements
 				</div>
 			</div>
-
+			<?php if($this->session->flashdata('deleteStatus')): ?>
+				<div class="alert alert-success" role="alert">Delete Successful!!</div>
+			<?php endif?>
+			<?php 
+				$status = $this->session->flashdata('deleteStatus'); 
+			if(isset($status)&&!($status)): ?>
+				<div class="alert alert-danger" role="alert">Delete Unsuccessful!!</div>
+			<?php endif?>
 			<div class="content-wrapper">
 				<div class="metrics clearfix">
 					<div class="metric">

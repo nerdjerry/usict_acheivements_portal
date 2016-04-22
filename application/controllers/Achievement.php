@@ -166,18 +166,19 @@ class Achievement extends CI_Controller {
 	public function deleteAchievement($infoType,$id){
 		switch ($infoType) {
 			case 1:
-				$this->common_model->delete('publications',array('id' => $id));
+				$status = $this->common_model->delete('publications',array('id' => $id));
 				break;
 			case 2:
-				$this->common_model->delete('seminars',array('id' => $id));
+				$status = $this->common_model->delete('seminars',array('id' => $id));
 				break;
 			case 3:
-				$this->common_model->delete('projects',array('id' => $id));
+				$status = $this->common_model->delete('projects',array('id' => $id));
 				break;
 			case 4:
-				$this->common_model->delete('awards',array('id' => $id));
+				$status = $this->common_model->delete('awards',array('id' => $id));
 				break;
 		}
+		$this->session->set_flashdata('deleteStatus',$status);
 		redirect('/nerdachievement/staff/'.$infoType);
 	}
 
