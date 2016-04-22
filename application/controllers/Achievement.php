@@ -147,6 +147,7 @@ class Achievement extends CI_Controller {
 			}
 			$this->common_model->add($table_name,$insertData);
 		}
+		$this->session->set_flashdata('insertionSuccess', ucfirst(substr($table_name,0,-1).' Added Successfully'));
 		return redirect('/home/'.substr($table_name,0,-1));
 	}
 
