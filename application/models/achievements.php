@@ -17,5 +17,16 @@ class Achievements extends CI_Model {
 		$count['awards'] = $query->num_rows();
 		return $count;
 	}
+	public function getAllStaffAchievementCounts(){
+		$query = $this->db->get('publications');
+		$count['publications'] = $query->num_rows();
+		$query = $this->db->get('seminars');
+		$count['seminars'] = $query->num_rows();
+		$query = $this->db->get('projects');
+		$count['projects'] = $query->num_rows();
+		$query = $this->db->get('awards');
+		$count['awards'] = $query->num_rows();
+		return $count;
+	}
 }
 ?>

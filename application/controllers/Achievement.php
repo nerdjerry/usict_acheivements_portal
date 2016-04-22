@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Achievement extends CI_Controller {
 	
-	const STAFF = 1;
+	const FACULTY = 1;
 	public function __construct(){
 		parent::__construct();
 		$outputData = array();
@@ -218,14 +218,14 @@ class Achievement extends CI_Controller {
 			$infoType
 
 	*/
-	public function admin($infoType=1,$dataClass=1){
+	public function admin($dataClass=self::FACULTY,$infoType=1){
 		$requestedUserType = $dataClass;
 		$requestedDataType = $infoType;
 		$adminId = get_user_id();
 		$data['requestedUserType'] = $requestedUserType;
-		if($requestedUserType == self::STAFF ){
+		if($requestedUserType == self::FACULTY ){
 			$this->load->model('achievements');
-			$count = $this->achievements->getAllStaffAchivementCounts();
+			$count = $this->achievements->getAllStaffAchievementCounts();
 			$data['noOfPublications'] = $count['publications'];
 			$data['noOfSeminars'] = $count['seminars'];
 			$data['noOfProjects'] = $count['projects'];

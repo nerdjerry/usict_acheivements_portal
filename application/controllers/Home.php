@@ -30,9 +30,9 @@ class Home extends CI_Controller {
 			$outputData['user_name'] = get_user_name();
 			$user = $user->row();
 			$user_type = get_user_type();
-			//Load Admin View if user is admin
+			//Redirect to admin view of achivement if user is admin
 			if($user_type == '0'){
-				$this->load->view('admin');
+				redirect('/achievement/admin');
 			}
 			//Load Faculty View,by default option to add publications if user is faculty member
 			else if($user_type == '1')
