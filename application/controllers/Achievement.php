@@ -153,6 +153,7 @@ class Achievement extends CI_Controller {
 		return redirect('/home/'.substr($table_name,0,-1));
 	}
 
+	//TODO:Fix this function to show correct student view
 	public function student()
 	{
 		$achievements = $this->achievement_model->getAllAchievements('2');
