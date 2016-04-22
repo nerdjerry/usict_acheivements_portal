@@ -15,7 +15,9 @@ class Projects extends CI_Model{
 	}
 	/*Returns an array containing details of projects made by the user*/
 	function getProjects($facultyId){
-		$query = $this->db->where('faculty_id',$facultyId)->get('projects');
+		$query = $this->db->where('faculty_id',$facultyId)
+							->order_by('date','DESC')
+							->get('projects');
 		return $query->result_array();
 	}
 }

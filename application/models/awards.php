@@ -15,7 +15,9 @@ class Awards extends CI_Model{
 	}
 	/*Returns an array containing details of awards made by the user*/
 	function getAwards($facultyId){
-		$query = $this->db->where('faculty_id',$facultyId)->get('awards');
+		$query = $this->db->where('faculty_id',$facultyId)
+							->order_by('date','DESC')
+							->get('awards');
 		return $query->result_array();
 	}
 }

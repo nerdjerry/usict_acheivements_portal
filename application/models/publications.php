@@ -15,7 +15,9 @@ class Publications extends CI_Model{
 	}
 	/*Returns an array containing details of publicaitons made by the user*/
 	function getPublications($facultyId){
-		$query = $this->db->where('faculty_id',$facultyId)->get('publications');
+		$query = $this->db->where('faculty_id',$facultyId)
+							->order_by('year_of_pub','DESC')
+							->get('publications');
 		return $query->result_array();
 	}
 }
