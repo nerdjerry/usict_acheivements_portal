@@ -171,7 +171,7 @@ class Achievement extends CI_Controller {
 				$this->common_model->delete('seminars',array('id' => $id));
 				break;
 			case 3:
-				$this->common_model->delete('awards',array('id' => $id));
+				$this->common_model->delete('projects',array('id' => $id));
 				break;
 			case 4:
 				$this->common_model->delete('awards',array('id' => $id));

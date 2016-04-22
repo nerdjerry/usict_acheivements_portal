@@ -6,7 +6,7 @@
 							<th>Title</th>
 							<th>Granting Agency</th>
 							<th>Date of Granting</th>
-							<th>Amount(in INR)</th>
+							<th>Amount</th>
 							<th></th>
 						</tr>
 					</thead>
