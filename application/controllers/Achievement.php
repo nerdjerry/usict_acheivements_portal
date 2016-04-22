@@ -44,12 +44,14 @@ class Achievement extends CI_Controller {
 		$table_name		= '';
 		$insertData 	= array();
 		$form_type 		= $this->input->post('form_type');
-		/*
-			form_type = 1		=> New Seminar
-			form_type = 2		=> New Project
-			form_type = 3		=> New Award
-			form_type = 4		=> New Publication
+
+		/*$form_type index
+			1 => Publication
+			2 => Seminar
+			3 => Projects
+			4 => Awards
 		*/
+			
 		if(isset($form_type) && !empty($form_type)){
 			if($form_type == '1'){
 				$table_name 							= 'publications';
