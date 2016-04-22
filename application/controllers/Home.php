@@ -5,7 +5,7 @@ class Home extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		if(!$this->session->userdata('username')) header('location:'.base_url('login'));
+		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
 	}
 	/**
 	 * Index Page for this controller.

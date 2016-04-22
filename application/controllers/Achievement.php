@@ -6,7 +6,7 @@ class Achievement extends CI_Controller {
 	const FACULTY = 1;
 	public function __construct(){
 		parent::__construct();
-		if(!$this->session->userdata('username')) header('location:'.base_url('login'));
+		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
 		$outputData = array();
 	}
 	/**
