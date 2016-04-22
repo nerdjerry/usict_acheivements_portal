@@ -3042,7 +3042,7 @@ body {
         max-width: 41px;
         border-radius: 50%;
         position: relative;
-        top: 2px;
+        top: -3px;
         margin-right: 12px; }
       #sidebar-default .current-user .name span {
         position: relative;

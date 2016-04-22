@@ -47,7 +47,9 @@
 					Add a new Publication 
 				</div>
 			</div>
-
+			<?php if($this->session->flashdata('insertionSuccess')): ?>
+				<div class="alert alert-success" role="alert"><?php echo $this->session->flashdata('insertionSuccess'); ?></div>
+			<?php endif?>
 			<div class="content-wrapper">
 				<form id="new-publication" class="form-horizontal" method="post" action="<?php echo base_url('achievement/store'); ?>" role="form">
 				  	<div class="form-group">
