@@ -125,7 +125,7 @@
 					    </div>
 				  	</div>
 
-				  	<input type="hidden" value="1" name="form_type"></input>
+				  	<input type="hidden" value="2" name="form_type"></input>
 
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">

@@ -51,7 +51,7 @@ class Achievement extends CI_Controller {
 			form_type = 4		=> New Publication
 		*/
 		if(isset($form_type) && !empty($form_type)){
-			if($form_type == '4'){
+			if($form_type == '1'){
 				$table_name 							= 'publications';
 				$insertData['faculty_id']				= $this->session->userdata('user_id');
 				$insertData['title']					= $this->input->post('publication_title');
@@ -84,37 +84,7 @@ class Achievement extends CI_Controller {
 				if(isset($coauthor_))
 					$insertData['coauthor_4'] 			= $coauthor_4;
 				else $insertData['coauthor_4']			= '';
-			} else if($form_type == '3'){
-				$table_name 							= 'awards';
-				$insertData['faculty_id']				= $this->session->userdata('user_id');
-				$insertData['details']					= $this->input->post('award_details');
-
-				$date 									= $this->input->post('award_date');
-				if(isset($date))
-					$insertData['date']					= $date;
-				else $insertData['date']				= '';
-
-				$amount 								=  $this->input->post('award_amount');
-				if(isset($amount))
-					$insertData['amount']				= $amount;
-				else $insertData['amount']				= '';
-
 			} else if($form_type == '2'){
-
-				$table_name 							= 'projects';
-				$insertData['faculty_id']				= $this->session->userdata('user_id');
-				$insertData['title']					= $this->input->post('project_title');
-				$insertData['date']						= $this->input->post('project_date');
-				$amount 								= $this->input->post('project_amount');
-				if(isset($amount))
-					$insertData['amount']				= $amount;
-				else $insertData['amount']				= '';
-
-				$granting_agency 						= $this->input->post('granting_agency');
-				if(isset($amount))
-					$insertData['granting_agency']		= $granting_agency;
-				else $insertData['granting_agency']		= '';
-			} else if($form_type == '1'){
 				$table_name 							= 'seminars';
 				$insertData['faculty_id']				= $this->session->userdata('user_id');
 				$insertData['title']					= $this->input->post('seminar_title');
@@ -153,28 +123,41 @@ class Achievement extends CI_Controller {
 				if(isset($no_of_participants))
 					$insertData['no_of_participant']	= $no_of_participants;
 				else $insertData['no_of_participant']	= '';
+			} else if($form_type == '3'){
 
-			}
+				$table_name 							= 'projects';
+				$insertData['faculty_id']				= $this->session->userdata('user_id');
+				$insertData['title']					= $this->input->post('project_title');
+				$insertData['date']						= $this->input->post('project_date');
+				$amount 								= $this->input->post('project_amount');
+				if(isset($amount))
+					$insertData['amount']				= $amount;
+				else $insertData['amount']				= '';
+
+				$granting_agency 						= $this->input->post('granting_agency');
+				if(isset($amount))
+					$insertData['granting_agency']		= $granting_agency;
+				else $insertData['granting_agency']		= '';
+			} else if($form_type == '4'){
+				$table_name 							= 'awards';
+				$insertData['faculty_id']				= $this->session->userdata('user_id');
+				$insertData['details']					= $this->input->post('award_details');
+
+				$date 									= $this->input->post('award_date');
+				if(isset($date))
+					$insertData['date']					= $date;
+				else $insertData['date']				= '';
+
+				$amount 								=  $this->input->post('award_amount');
+				if(isset($amount))
+					$insertData['amount']				= $amount;
+				else $insertData['amount']				= '';
+			} 
 			$this->common_model->add($table_name,$insertData);
 		}
 		$this->session->set_flashdata('insertionSuccess', ucfirst(substr($table_name,0,-1).' Added Successfully'));
-		switch ($form_type) {
-			case '1':
-				return redirect('achievement/staff/2');
-				break;
-			case '2':
-				return redirect('achievement/staff/3');
-				break;
-			case '3':
-				return redirect('achievement/staff/4');
-				break;
-			case '4':
-				return redirect('achievement/staff/1');
-				break;
-			default:
-				break;
-		}
-		//return redirect('/home/'.substr($table_name,0,-1));
+		
+		return redirect('achievement/staff/'.$form_type);
 	}
 
 	/*infoType index
