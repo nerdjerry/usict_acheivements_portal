@@ -10,7 +10,7 @@ class Home extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
-		$currentUserType = get_user_type();
+		$this->currentUserType = get_user_type();
 	}
 	/**
 	 * Index Page for this controller.
@@ -75,7 +75,7 @@ class Home extends CI_Controller {
 
 	//To restrict direct access to function calls.Direct user to home if he is not authorized
 	private function isAllowed(){
-		if($currentUserType != self::FACULTY){
+		if($this->currentUserType != self::FACULTY){
 			redirect('/home');
 		}
 	}
