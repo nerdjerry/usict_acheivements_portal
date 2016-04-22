@@ -3,9 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
+	const ADMIN = 0;
+	const FACULTY = 1;
+	const STUDENT = 2;
+	private $currentUserType;
 	public function __construct(){
 		parent::__construct();
 		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
+		$currentUserType = get_user_type();
 	}
 	/**
 	 * Index Page for this controller.
@@ -49,18 +54,29 @@ class Home extends CI_Controller {
 
 	public function award()
 	{
+		$this->isAllowed();
 		$this->load->view('award');
 	}
 	public function project()
 	{
+		$this->isAllowed();
 		$this->load->view('project');
 	}
 	public function publication()
 	{
+		$this->isAllowed();
 		$this->load->view('publication');
 	}
 	public function seminar()
 	{
+		$this->isAllowed();
 		$this->load->view('seminar');	
+	}
+
+	//To restrict direct access to function calls.Direct user to home if he is not authorized
+	private function isAllowed(){
+		if($currentUserType != self::FACULTY){
+			redirect('/home');
+		}
 	}
 }
