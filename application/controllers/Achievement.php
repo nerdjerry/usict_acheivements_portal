@@ -23,14 +23,11 @@ class Achievement extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index(){
-		$achievements 				= $this->achievement_model->getUserAchievements();
-		$achievements 				= $achievements->result_array();
-		$outputData['achievements'] = $achievements;
-		$outputData['user_name'] 	= get_user_name();
-		if(get_user_type() == '2')
-			$this->load->view('achievements_student',$outputData);
-		else if(get_user_type() == '1')
-			$this->load->view('achievements_staff',$outputData);
+		$userType = get_user_type();
+		if($userType==1){
+			//User is a faculty member so 
+			$this->staff();
+		}
 	}
 	public function store()
 	{
@@ -153,6 +150,46 @@ class Achievement extends CI_Controller {
 		return redirect('/home/'.substr($table_name,0,-1));
 	}
 
+	/*infoType index
+		1 => Publication
+		2 => Seminar
+		3 => Projects
+		4 => Awards
+	*/
+	/* Controller to display staff achievements*/
+	public function staff($requestedDataType = 1){
+		$userType = 1;
+		$facultyId = get_user_id();
+		$infoType = $requestedDataType;
+		//Loading required models
+		$this->load->model('achievements');
+		$count = $this->achievements->getStaffAchivementCounts($facultyId);
+		$data['noOfPublications'] = $count['publications'];
+		$data['noOfSeminars'] = $count['seminars'];
+		$data['noOfProjects'] = $count['projects'];
+		$data['noOfAwards'] = $count['awards'];
+		$data['infoType'] = $infoType;
+		switch($infoType){
+			case 1:
+				$this->load->model('publications');
+				$data['info'] = $this->publications->getPublications($facultyId);
+				break;
+			case 2:
+				$this->load->model('seminars');
+				$data['info'] = $this->seminars->getSeminars($facultyId);
+				break;
+			case 3:
+				$this->load->model('projects');
+				$data['info'] = $this->projects->getProjects($facultyId);
+				break;
+			case 4:
+				$this->load->model('awards');
+				$data['info'] = $this->awards->getAwards($facultyId,$userType);
+				break;
+		}
+		$this->load->view('staffAchievements.php',$data);
+	}
+
 	//TODO:Fix this function to show correct student view
 	public function student()
 	{
@@ -179,7 +216,7 @@ class Achievement extends CI_Controller {
 				break;
 		}
 		$this->session->set_flashdata('deleteStatus',$status);
-		redirect('/nerdachievement/staff/'.$infoType);
+		$this->staff($infoType);
 	}
 
 }
