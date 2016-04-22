@@ -4,3 +4,7 @@ a:hover{
 .center-error-text{
 	text-align: center;
 }
+.page-links{
+	margin: auto;
+	width: 30%;
+}

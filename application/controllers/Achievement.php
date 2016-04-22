@@ -182,28 +182,36 @@ class Achievement extends CI_Controller {
 			$data['noOfProjects'] = $count['projects'];
 			$data['noOfAwards'] = $count['awards'];
 			$data['infoType'] = $infoType;
+			$totalRows = 0;
+			$perPage = 1;
+			$page=$this->uri->segment(4) != null? $this->uri->segment(4) : 1;
 			switch($infoType){
 				case 1:
 					$this->load->model('publications');
-					$data['info'] = $this->publications->getPublications($facultyId);
+					$data['info'] = $this->publications->getPublications($facultyId,$perPage,$page);
+					$totalRows = $count['publications'];
 					break;
 				case 2:
 					$this->load->model('seminars');
-					$data['info'] = $this->seminars->getSeminars($facultyId);
+					$data['info'] = $this->seminars->getSeminars($facultyId,$perPage,$page);
+					$totalRows = $count['seminars'];
 					break;
 				case 3:
 					$this->load->model('projects');
-					$data['info'] = $this->projects->getProjects($facultyId);
+					$data['info'] = $this->projects->getProjects($facultyId,$perPage,$page);
+					$totalRows = $count['projects'];
 					break;
 				case 4:
 					$this->load->model('awards');
-					$data['info'] = $this->awards->getAwards($facultyId,$userType);
+					$data['info'] = $this->awards->getAwards($facultyId,$userType,$perPage,$page);
+					$totalRows = $count['awards'];
 					break;
 				default:
 					redirect('achievement/staff/');
 					break;
 			}
-			$this->load->view('staffAchievements.php',$data);
+			$data['links'] = $this->doPagination('/achievement/staff/'.$infoType,$totalRows,$perPage);
+			$this->load->view('staffAchievements',$data);
 			}else{
 				redirect('/home');
 			}
@@ -306,6 +314,21 @@ class Achievement extends CI_Controller {
 		}
 		$this->session->set_flashdata('deleteStatus',$status);
 		redirect('/achievement/staff/'.$infoType);
+	}
+	private function doPagination($baseUrl,$totalRows,$perPage){
+		$this->load->library('pagination');
+		$config['base_url'] = base_url($baseUrl);
+		$config['total_rows'] = $totalRows;
+		$config['per_page'] = $perPage;
+		$config['use_page_numbers'] = TRUE;
+		$config['uri_segment'] = 4;
+		$config['full_tag_open']='<div class="page-links">';
+		$config['full_tag_close'] = '</div>';
+		$config['cur_tag_open'] = '<button class="btn btn-primary active">';
+		$config['cur_tag_close'] = '</button>';
+		$config['attributes'] = array('class'=>'btn btn-default');
+		$this->pagination->initialize($config);
+		return $this->pagination->create_links();
 	}
 
 }

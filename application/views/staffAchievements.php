@@ -103,6 +103,7 @@
 					break;
 				}
 			?>
+			<?php echo $links;?>
 		</div>
 	</div>
 	

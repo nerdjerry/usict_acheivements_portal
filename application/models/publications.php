@@ -14,8 +14,10 @@ class Publications extends CI_Model{
 		return $query->num_rows();
 	}
 	/*Returns an array containing details of publicaitons made by the user*/
-	function getPublications($facultyId){
+	function getPublications($facultyId,$limit,$pageNo){
+		$offset = ($pageNo-1)*$limit;
 		$query = $this->db->where('faculty_id',$facultyId)
+							->limit($limit,$offset)
 							->order_by('year_of_pub','DESC')
 							->get('publications');
 		return $query->result_array();
