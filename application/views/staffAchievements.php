@@ -48,7 +48,9 @@
 					Achievements
 				</div>
 			</div>
-			<?php if($this->session->flashdata('deleteStatus')): ?>
+			<?php 
+				$status = $this->session->flashdata('deleteStatus');
+				if(isset($status)&&$status): ?>
 				<div class="alert alert-success" role="alert">Delete Successful!!</div>
 			<?php endif?>
 			<?php 
