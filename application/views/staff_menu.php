@@ -5,8 +5,9 @@
 			<img class="avatar" src="<?php echo base_url(get_user_pic());?>" />
 			<span>
 				<?php echo get_user_name(); ?>
-				<i class="fa fa-chevron-down"></i>
+				<i class="fa fa-chevron-down" style=""></i>
 			</span>
+			
 		</a>
 		<ul class="menu">
 			<li>
