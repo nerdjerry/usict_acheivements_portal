@@ -185,6 +185,7 @@ class Achievement extends CI_Controller {
 			$data['infoType'] = $infoType;
 			$totalRows = 0;
 			$perPage = 10;
+			$uriSegment = 4;
 			$page=$this->uri->segment(4) != null? $this->uri->segment(4) : 1;
 			switch($infoType){
 				case 1:
@@ -211,7 +212,7 @@ class Achievement extends CI_Controller {
 					redirect('achievement/staff/');
 					break;
 			}
-			$data['links'] = $this->doPagination('/achievement/staff/'.$infoType,$totalRows,$perPage);
+			$data['links'] = $this->doPagination('/achievement/staff/'.$infoType,$totalRows,$perPage,$uriSegment);
 			$this->load->view('staffAchievements',$data);
 			}else{
 				redirect('/home');
@@ -252,27 +253,36 @@ class Achievement extends CI_Controller {
 				$data['noOfProjects'] = $count['projects'];
 				$data['noOfAwards'] = $count['awards'];
 				$data['infoType'] = $requestedDataType;
+				$totalRows = 0;
+				$perPage = 30;
+				$uriSegment = 5;
+				$page=$this->uri->segment(5) != null? $this->uri->segment(5) : 1;
 				switch($requestedDataType){
 					case 1:
 						$this->load->model('publications');
-						$data['info'] = $this->publications->getAllStaffPublications();
+						$data['info'] = $this->publications->getAllStaffPublications($perPage,$page);
+						$totalRows = $count['publications'];
 						break;
 					case 2:
 						$this->load->model('seminars');
-						$data['info'] = $this->seminars->getAllStaffSeminars();
+						$data['info'] = $this->seminars->getAllStaffSeminars($perPage,$page);
+						$totalRows = $count['seminars'];
 						break;
 					case 3:
 						$this->load->model('projects');
-						$data['info'] = $this->projects->getAllStaffProjects();
+						$data['info'] = $this->projects->getAllStaffProjects($perPage,$page);
+						$totalRows = $count['projects'];
 						break;
 					case 4:
 						$this->load->model('awards');
-						$data['info'] = $this->awards->getAllStaffAwards();
+						$data['info'] = $this->awards->getAllStaffAwards($perPage,$page);
+						$totalRows = $count['awards'];
 						break;
 					default:
 						redirect('achievement/admin/');
 						break;
 				}	
+				$data['links'] = $this->doPagination('/achievement/admin/'.$requestedUserType.'/'.$requestedDataType,$totalRows,$perPage,$uriSegment);
 				$this->load->view('admin',$data);
 			}
 		}else{
@@ -316,13 +326,13 @@ class Achievement extends CI_Controller {
 		$this->session->set_flashdata('deleteStatus',$status);
 		redirect('/achievement/staff/'.$infoType);
 	}
-	private function doPagination($baseUrl,$totalRows,$perPage){
+	private function doPagination($baseUrl,$totalRows,$perPage,$uriSegment){
 		$this->load->library('pagination');
 		$config['base_url'] = base_url($baseUrl);
 		$config['total_rows'] = $totalRows;
 		$config['per_page'] = $perPage;
 		$config['use_page_numbers'] = TRUE;
-		$config['uri_segment'] = 4;
+		$config['uri_segment'] = $uriSegment;
 		$config['full_tag_open']='<div class="page-links">';
 		$config['full_tag_close'] = '</div>';
 		$config['cur_tag_open'] = '<button class="btn btn-primary active">';

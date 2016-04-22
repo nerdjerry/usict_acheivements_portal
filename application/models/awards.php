@@ -23,10 +23,12 @@ class Awards extends CI_Model{
 							->get('awards');
 		return $query->result_array();
 	}
-	function getAllStaffAwards(){
+	function getAllStaffAwards($limit,$pageNo){
+		$offset = ($pageNo-1)*$limit;
 		$query = $this->db->select('name,designation,details,date,amount')
 						->from('awards')
 						->join('faculty','faculty.faculty_id = awards.faculty_id')
+						->limit($limit,$pageNo)
 						->order_by('date','DESC')
 						->get();
 		return $query->result_array();

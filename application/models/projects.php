@@ -22,10 +22,12 @@ class Projects extends CI_Model{
 							->get('projects');
 		return $query->result_array();
 	}
-	function getAllStaffProjects(){
+	function getAllStaffProjects($limit,$pageNo){
+		$offset = ($pageNo-1)*$limit;
 		$query = $this->db->select('name,designation,title,granting_agency,date,amount')
 						->from('projects')
 						->join('faculty','faculty.faculty_id = projects.faculty_id')
+						->limit($limit,$pageNo)
 						->order_by('date','DESC')
 						->get();
 		return $query->result_array();

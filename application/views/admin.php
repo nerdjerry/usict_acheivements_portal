@@ -175,6 +175,7 @@
 				</div>
 			</div>-->
 			<?php endif;?>
+			<?php echo $links;?>
 		</div>
 	</div>
 	

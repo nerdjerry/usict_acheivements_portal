@@ -22,11 +22,13 @@ class Publications extends CI_Model{
 							->get('publications');
 		return $query->result_array();
 	}
-	function getAllStaffPublications(){
+	function getAllStaffPublications($limit,$pageNo){
+		$offset = ($pageNo-1)*$limit;
 		$query = $this->db->select('name,designation,title,month_of_pub,year_of_pub,
 			journal_name,coauthor_1,coauthor_2,coauthor_3,coauthor_4,presented_in,presented_at')
 				->from('publications')
 				->join('faculty','faculty.faculty_id = publications.faculty_id')
+				->limit($limit,$pageNo)
 				->order_by('year_of_pub','DESC')
 				->get();
 		return $query->result_array();
