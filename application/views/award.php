@@ -81,10 +81,9 @@
 </body>
 <script type="text/javascript">
 		$(function () {
-
 			$('.award_date').datepicker({
 				format: 'yyyy-mm-dd',
-				autoclose:true
+				autoclose:true,
 			});
 			// form validation
 			$('#new-award').validate({
