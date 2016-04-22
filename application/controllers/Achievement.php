@@ -245,6 +245,7 @@ class Achievement extends CI_Controller {
 		$this->load->view('home',$outputData);
 	}
 
+	/**This is called when a achievement in staff has to be removed **/
 	public function deleteAchievement($infoType,$id){
 		switch ($infoType) {
 			case 1:
@@ -261,7 +262,7 @@ class Achievement extends CI_Controller {
 				break;
 		}
 		$this->session->set_flashdata('deleteStatus',$status);
-		$this->staff($infoType);
+		redirect('/achievement/staff/'.$infoType);
 	}
 
 }
