@@ -3,8 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Achievement extends CI_Controller {
 	
-	const FACULTY = 1;
 	const ADMIN = 0;
+	const FACULTY = 1;
+	const STUDENT = 2;
 	public function __construct(){
 		parent::__construct();
 		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
@@ -267,13 +268,17 @@ class Achievement extends CI_Controller {
 		}
 	}
 	//TODO:Fix this function to show correct student view
-	public function student()
-	{
-		$achievements = $this->achievement_model->getAllAchievements('2');
-		$achievements = $achievements->result_array();
-		$outputData['user_name'] 	= get_user_name();
-		$outputData['achievements'] = $achievements;
-		$this->load->view('home',$outputData);
+	public function student(){
+		$currentUserType = get_user_type();
+		if($currentUserType == self::STUDENT){
+			$achievements = $this->achievement_model->getAllAchievements('2');
+			$achievements = $achievements->result_array();
+			$outputData['user_name'] 	= get_user_name();
+			$outputData['achievements'] = $achievements;
+			$this->load->view('home',$outputData);
+		}else{
+			redirect('/home');
+		}
 	}
 
 	/**This is called when a achievement in staff has to be removed **/
