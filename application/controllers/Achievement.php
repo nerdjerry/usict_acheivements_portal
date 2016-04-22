@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Achievement extends CI_Controller {
 	
+	const STAFF = 1;
 	public function __construct(){
 		parent::__construct();
 		$outputData = array();
@@ -27,6 +28,9 @@ class Achievement extends CI_Controller {
 		if($userType==1){
 			//User is a faculty member so 
 			$this->staff();
+		}elseif ($userType==0) {
+			//User is a admin member so show that view
+			$this->admin();
 		}
 	}
 	public function store()
@@ -186,10 +190,50 @@ class Achievement extends CI_Controller {
 				$this->load->model('awards');
 				$data['info'] = $this->awards->getAwards($facultyId,$userType);
 				break;
+			default:
+				$this->load->model('publications');
+				$data['info'] = $this->publications->getPublications($facultyId);
+				break;
 		}
 		$this->load->view('staffAchievements.php',$data);
 	}
+	/*
+		paramas:
+		$infoType = Type of information requested like publications,awards etc.
+		Default value is 1 for publicaitons
+		$dataClass = For what clas of user it is requested,like staff,student or tpc etc
+		Default value is 1 for staff
 
+		$dataClass = 1 => Staff Data
+		$dataClass = 2 => Student Data
+
+		For Staff data
+			$infoType
+				1 => Publications
+				2 => Seminars/Workshops
+				3 => Projects
+				4 => Awards
+		TODO:For Student Data
+			$infoType
+
+	*/
+	public function admin($infoType=1,$dataClass=1){
+		$requestedUserType = $dataClass;
+		$requestedDataType = $infoType;
+		$adminId = get_user_id();
+		$data['requestedUserType'] = $requestedUserType;
+		if($requestedUserType == self::STAFF ){
+			$this->load->model('achievements');
+			$count = $this->achievements->getAllStaffAchivementCounts();
+			$data['noOfPublications'] = $count['publications'];
+			$data['noOfSeminars'] = $count['seminars'];
+			$data['noOfProjects'] = $count['projects'];
+			$data['noOfAwards'] = $count['awards'];
+			$data['infoType'] = $infoType;
+			$this->load->view('admin',$data);
+		}
+
+	}
 	//TODO:Fix this function to show correct student view
 	public function student()
 	{
