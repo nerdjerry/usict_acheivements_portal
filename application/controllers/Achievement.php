@@ -243,7 +243,7 @@ class Achievement extends CI_Controller {
 					break;
 				case 3:
 					$this->load->model('projects');
-					$data['info'] = $this->projects->getProjects($facultyId);
+					$data['info'] = $this->projects->getAllStaffProjects();
 					break;
 				case 4:
 					$this->load->model('awards');
@@ -251,7 +251,7 @@ class Achievement extends CI_Controller {
 					break;
 				default:
 					$this->load->model('publications');
-					$data['info'] = $this->publications->getPublications($facultyId);
+					$data['info'] = $this->publications->getAllStaffPublications();
 					break;
 			}	
 			$this->load->view('admin',$data);
