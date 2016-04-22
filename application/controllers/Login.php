@@ -30,25 +30,36 @@ class Login extends CI_Controller {
 
 	public function auth_login()
 	{
-		$email 		= $this->input->post('email');
-		$password 	= $this->input->post('password');
+		$email 			= $this->input->post('email');
+		$password 		= $this->input->post('password');
+		$remember_me 	= $this->input->post('remember');
+		
 		$this->load->helper('cookie');
-		if($this->input->cookie('user_id', TRUE))
-		{
+
+		if($this->input->cookie('user_id'))
+		{	
 			if($this->auth_model->login(array('users.user_id'=>$this->input->cookie('user_id'))))
 			{
 				return redirect('/home');
 			}
 		}
+
 		if(isset($email) && !empty($email))
 		{
 			$conditions = array('email_id'=>$email,'password'=>$password);
 			if($this->auth_model->login($conditions))
 			{ 
 				$this->auth_model->setSession($conditions);
+				if(isset($remember_me) && $remember_me!='' && $remember_me == 'true'){
+					$this->input->set_cookie('user_id',$this->session->userdata('user_id'), mktime(). time()+60*60*24*365);
+				} else {
+					if($this->input->cookie('user_id'))
+						$this->input->delete_cookie("user_id");
+				}
 				return redirect('/home');
 			} else 
 			{
+				$this->session->set_flashdata('loginError', 'Invalid Credentials');
 				return redirect('/');
 			}
 		
