@@ -230,10 +230,31 @@ class Achievement extends CI_Controller {
 			$data['noOfSeminars'] = $count['seminars'];
 			$data['noOfProjects'] = $count['projects'];
 			$data['noOfAwards'] = $count['awards'];
-			$data['infoType'] = $infoType;
+			$data['infoType'] = $requestedDataType;
+			switch($requestedDataType){
+				case 1:
+					$this->load->model('publications');
+					$data['info'] = $this->publications->getAllStaffPublications();
+					break;
+				case 2:
+					$this->load->model('seminars');
+					$data['info'] = $this->seminars->getSeminars($facultyId);
+					break;
+				case 3:
+					$this->load->model('projects');
+					$data['info'] = $this->projects->getProjects($facultyId);
+					break;
+				case 4:
+					$this->load->model('awards');
+					$data['info'] = $this->awards->getAwards($facultyId,$userType);
+					break;
+				default:
+					$this->load->model('publications');
+					$data['info'] = $this->publications->getPublications($facultyId);
+					break;
+			}	
 			$this->load->view('admin',$data);
 		}
-
 	}
 	//TODO:Fix this function to show correct student view
 	public function student()
