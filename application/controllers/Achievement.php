@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Achievement extends CI_Controller {
 	
 	const FACULTY = 1;
+	const ADMIN = 0;
 	public function __construct(){
 		parent::__construct();
 		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
@@ -219,40 +220,45 @@ class Achievement extends CI_Controller {
 
 	*/
 	public function admin($dataClass=self::FACULTY,$infoType=1){
-		$requestedUserType = $dataClass;
-		$requestedDataType = $infoType;
-		$adminId = get_user_id();
-		$data['requestedUserType'] = $requestedUserType;
-		if($requestedUserType == self::FACULTY ){
-			$this->load->model('achievements');
-			$count = $this->achievements->getAllStaffAchievementCounts();
-			$data['noOfPublications'] = $count['publications'];
-			$data['noOfSeminars'] = $count['seminars'];
-			$data['noOfProjects'] = $count['projects'];
-			$data['noOfAwards'] = $count['awards'];
-			$data['infoType'] = $requestedDataType;
-			switch($requestedDataType){
-				case 1:
-					$this->load->model('publications');
-					$data['info'] = $this->publications->getAllStaffPublications();
-					break;
-				case 2:
-					$this->load->model('seminars');
-					$data['info'] = $this->seminars->getAllStaffSeminars();
-					break;
-				case 3:
-					$this->load->model('projects');
-					$data['info'] = $this->projects->getAllStaffProjects();
-					break;
-				case 4:
-					$this->load->model('awards');
-					$data['info'] = $this->awards->getAllStaffAwards();
-					break;
-				default:
-					redirect('achievement/admin/');
-					break;
-			}	
-			$this->load->view('admin',$data);
+		$currentUserType = get_user_type();
+		if($currentUserType == self::ADMIN){
+			$requestedUserType = $dataClass;
+			$requestedDataType = $infoType;
+			$adminId = get_user_id();
+			$data['requestedUserType'] = $requestedUserType;
+			if($requestedUserType == self::FACULTY ){
+				$this->load->model('achievements');
+				$count = $this->achievements->getAllStaffAchievementCounts();
+				$data['noOfPublications'] = $count['publications'];
+				$data['noOfSeminars'] = $count['seminars'];
+				$data['noOfProjects'] = $count['projects'];
+				$data['noOfAwards'] = $count['awards'];
+				$data['infoType'] = $requestedDataType;
+				switch($requestedDataType){
+					case 1:
+						$this->load->model('publications');
+						$data['info'] = $this->publications->getAllStaffPublications();
+						break;
+					case 2:
+						$this->load->model('seminars');
+						$data['info'] = $this->seminars->getAllStaffSeminars();
+						break;
+					case 3:
+						$this->load->model('projects');
+						$data['info'] = $this->projects->getAllStaffProjects();
+						break;
+					case 4:
+						$this->load->model('awards');
+						$data['info'] = $this->awards->getAllStaffAwards();
+						break;
+					default:
+						redirect('achievement/admin/');
+						break;
+				}	
+				$this->load->view('admin',$data);
+			}
+		}else{
+			redirect('/home');
 		}
 	}
 	//TODO:Fix this function to show correct student view
