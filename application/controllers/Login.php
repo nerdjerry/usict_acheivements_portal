@@ -59,6 +59,7 @@ class Login extends CI_Controller {
 				return redirect('/home');
 			} else 
 			{
+				$this->session->set_flashdata('loginError', 'Invalid Credentials');
 				return redirect('/');
 			}
 		

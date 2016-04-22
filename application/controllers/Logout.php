@@ -12,6 +12,7 @@ class Logout extends CI_Controller {
 	{
 		$this->auth_model->clearSession();
 		delete_cookie("user_id");
+		$this->session->set_flashdata('logoutSuccess', 'Logout Successful');
 		return redirect('/');
 	}
 	

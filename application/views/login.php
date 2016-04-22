@@ -53,6 +53,12 @@
 					Remember me
 				</label>
 			</div>
+			<?php if($this->session->flashdata('loginError')): ?>
+				<div class="alert alert-danger" role="alert"><?=$this->session->flashdata('loginError')?></div>
+			<?php endif?>
+			<?php if($this->session->flashdata('logoutSuccess')): ?>
+				<div class="alert alert-success" role="alert"><?=$this->session->flashdata('logoutSuccess')?></div>
+			<?php endif?>
 			<div class="actions">
 				<button type="submit" class="btn btn-primary btn-lg">Sign in</button>
 			</div>
