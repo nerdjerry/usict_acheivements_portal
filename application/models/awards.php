@@ -14,10 +14,19 @@ class Awards extends CI_Model{
 		return $query->num_rows();
 	}
 	/*Returns an array containing details of awards made by the user*/
-	function getAwards($facultyId){
+	//TODO:Get Awards for students too
+	function getAwards($facultyId,$userType){
 		$query = $this->db->where('faculty_id',$facultyId)
 							->order_by('date','DESC')
 							->get('awards');
+		return $query->result_array();
+	}
+	function getAllStaffAwards(){
+		$query = $this->db->select('name,designation,details,date,amount')
+						->from('awards')
+						->join('faculty','faculty.faculty_id = awards.faculty_id')
+						->order_by('date','DESC')
+						->get();
 		return $query->result_array();
 	}
 }

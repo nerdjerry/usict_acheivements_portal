@@ -215,7 +215,7 @@ class Achievement extends CI_Controller {
 				2 => Seminars/Workshops
 				3 => Projects
 				4 => Awards
-		TODO:For Student Data
+		TODO:For Student Data,display and everything
 			$infoType
 
 	*/
@@ -247,7 +247,7 @@ class Achievement extends CI_Controller {
 					break;
 				case 4:
 					$this->load->model('awards');
-					$data['info'] = $this->awards->getAwards($facultyId,$userType);
+					$data['info'] = $this->awards->getAllStaffAwards();
 					break;
 				default:
 					$this->load->model('publications');
