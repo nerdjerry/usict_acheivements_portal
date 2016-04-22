@@ -239,7 +239,7 @@ class Achievement extends CI_Controller {
 					break;
 				case 2:
 					$this->load->model('seminars');
-					$data['info'] = $this->seminars->getSeminars($facultyId);
+					$data['info'] = $this->seminars->getAllStaffSeminars();
 					break;
 				case 3:
 					$this->load->model('projects');

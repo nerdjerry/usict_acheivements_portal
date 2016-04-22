@@ -20,4 +20,14 @@ class Seminars extends CI_Model{
 							->get('seminars');
 		return $query->result_array();
 	}
+	function getAllStaffSeminars(){
+		$query = $this->db->select('name,designation,title,organiser,
+			place,start_date,end_date,region,type,event_details,status,
+			no_of_participant')
+						->from('seminars')
+						->join('faculty','faculty.faculty_id = seminars.faculty_id')
+						->order_by('start_date','DESC')
+						->get();
+		return $query->result_array();
+	}
 }
