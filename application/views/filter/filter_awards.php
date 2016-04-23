@@ -8,15 +8,9 @@
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Designation</label>
 	    <div class="col-sm-10 col-md-8">
-	      	<label class="radio-inline">
-		     	<input type="radio" name="designation" value="professor">Professor
-		    </label>
-		    <label class="radio-inline">
-		     	<input type="radio" name="designation" value="Associate professor">Associate Professor
-		    </label>
-		    <label class="radio-inline">
-		     	<input type="radio" name="designation" value="Assistant professor">Assistant Professor
-		    </label>
+	      	<label class="checkbox-inline"><input type="checkbox" name="professor" value="Professor">Professor</label>
+			<label class="checkbox-inline"><input type="checkbox" name="associate_professor" value="Associate Professor">Associate Professor</label>
+			<label class="checkbox-inline"><input type="checkbox" name="assistant_professor" value="Assistant Professor">Assistant Professor</label>
 	    </div>
   	</div>
   	<div class="form-group">
