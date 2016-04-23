@@ -31,7 +31,7 @@ class Login extends CI_Controller {
 	public function auth_login()
 	{
 		$email 			= $this->input->post('email');
-		$password 		= $this->input->post('password');
+		$password 		= md5($this->input->post('password'));
 		$remember_me 	= $this->input->post('remember');
 		
 		$this->load->helper('cookie');
