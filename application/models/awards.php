@@ -28,7 +28,7 @@ class Awards extends CI_Model{
 		$query = $this->db->select('name,designation,details,date,amount')
 						->from('awards')
 						->join('faculty','faculty.faculty_id = awards.faculty_id')
-						->limit($limit,$pageNo)
+						->limit($limit,$offset)
 						->order_by('date','DESC')
 						->get();
 		return $query->result_array();

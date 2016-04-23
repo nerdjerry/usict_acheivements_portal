@@ -29,7 +29,7 @@ class Seminars extends CI_Model{
 			no_of_participant')
 						->from('seminars')
 						->join('faculty','faculty.faculty_id = seminars.faculty_id')
-						->limit($limit,$pageNo)
+						->limit($limit,$offset)
 						->order_by('start_date','DESC')
 						->get();
 		return $query->result_array();

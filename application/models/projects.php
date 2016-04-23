@@ -27,7 +27,7 @@ class Projects extends CI_Model{
 		$query = $this->db->select('name,designation,title,granting_agency,date,amount')
 						->from('projects')
 						->join('faculty','faculty.faculty_id = projects.faculty_id')
-						->limit($limit,$pageNo)
+						->limit($limit,$offset)
 						->order_by('date','DESC')
 						->get();
 		return $query->result_array();
