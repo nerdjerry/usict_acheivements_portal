@@ -130,6 +130,14 @@
 
 	<script type="text/javascript">
 		$(function () {
+
+			var today = new Date();
+		    var mm = today.getMonth()+1; //January is 0!
+		    var yyyy = today.getFullYear();
+		    
+		    if(mm<10){
+		        mm='0'+mm
+		    } 
 			// form validation
 			$('#new-publication').validate({
 				rules: {
@@ -137,7 +145,11 @@
 						required: true
 					},
 					"year_of_pub": {
-						required: true
+						required: true,
+						max:yyyy
+					},
+					"month_of_pub": {
+						max:mm
 					},
 					"journal_name": {
 						required: true

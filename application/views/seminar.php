@@ -142,6 +142,19 @@
 <script type="text/javascript">
 		$(function () {
 			// form validation
+			var today = new Date();
+		    var dd = today.getDate();
+		    var mm = today.getMonth()+1; //January is 0!
+
+		    var yyyy = today.getFullYear();
+		    if(dd<10){
+		        dd='0'+dd
+		    } 
+		    if(mm<10){
+		        mm='0'+mm
+		    } 
+		    var today = yyyy+'-'+mm+'-'+dd;
+
 			$('#new-seminar').validate({
 				rules: {
 					"seminar_title": {
@@ -151,7 +164,10 @@
 						required: true
 					},
 					"start_date": {
-						required: true
+						required: true,
+					},
+					"end_date":{
+						max:today
 					},
 					"region": {
 						required: true
