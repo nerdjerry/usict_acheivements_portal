@@ -1,4 +1,4 @@
-<form id="filter_publications" class="form-horizontal" method="post" action="#" role="form">
+<form id="filter_publications" class="form-horizontal filter-form" method="post" action="#" role="form">
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Name</label>
 	    <div class="col-sm-10 col-md-8">
@@ -50,7 +50,7 @@
   	</div>
   	<div class="form-group form-actions">
     	<div class="col-sm-offset-2 col-sm-10">
-      		<button type="submit" class="btn btn-success">Save customer</button>
+      		<button type="submit" class="btn btn-success">View Results</button>
       		<button type="submit" class="btn btn-danger">Export</button>
 		</div>
   	</div>

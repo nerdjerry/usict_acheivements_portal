@@ -128,15 +128,19 @@
 			<?php 
 				switch($infoType){
 				case 1:
+					include('filter/publications.php');
 					include('tables/publications.php');
 					break;
 				case 2:
+					include('filter/seminars.php');
 					include('tables/seminars.php');
 					break;
 				case 3:
+					include('filter/projects.php');
 					include('tables/projects.php');
 					break;
 				case 4:
+					include('filter/awards.php');
 					include('tables/awards.php');
 					break;
 				}
