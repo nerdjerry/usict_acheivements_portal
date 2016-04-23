@@ -106,7 +106,7 @@
 					break;
 				}
 			?>
-			<?php echo $links;?>
+			<div><?php echo $links;?></div>
 		</div>
 	</div>
 	
