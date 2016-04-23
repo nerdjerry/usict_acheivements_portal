@@ -64,7 +64,7 @@ class Achievement extends CI_Controller {
 
 				$month_of_pub 							= $this->input->post('month_of_pub');
 				if(isset($month_of_pub))
-					$insertData['month_of_pub']			= $month_of_pub;
+					$insertData['month_of_pub']			= monthToNo($month_of_pub);
 				else $insertData['month_of_pub']		= '';
 
 				$coauthor_1 							= $this->input->post('coauthor_1');

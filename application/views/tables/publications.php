@@ -43,7 +43,7 @@
 					<td><?php echo $detail['title']; ?></td>
 					<td><?php 
 						if(is_null($detail['month_of_pub']))
-							echo $detail['month_of_pub'].",".$detail['year_of_pub'];
+							echo noToMonth($detail['month_of_pub']).",".$detail['year_of_pub'];
 						else
 							echo $detail['year_of_pub'];
 					?></td>
