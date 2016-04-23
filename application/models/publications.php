@@ -18,7 +18,7 @@ class Publications extends CI_Model{
 		$offset = ($pageNo-1)*$limit;
 		$query = $this->db->where('faculty_id',$facultyId)
 							->limit($limit,$offset)
-							->order_by('year_of_pub','DESC')
+							->order_by('year_of_pub DESC,month_of_pub DESC')
 							->get('publications');
 		return $query->result_array();
 	}
