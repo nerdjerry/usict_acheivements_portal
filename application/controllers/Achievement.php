@@ -10,6 +10,7 @@ class Achievement extends CI_Controller {
 		parent::__construct();
 		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
 		$outputData = array();
+		$this->load->helper('date');
 	}
 	/**
 	 * Index Page for this controller.

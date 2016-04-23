@@ -56,5 +56,3 @@ function get_user_pic(){
 	else
 		return "photos/default.jpg";
 }
-
-
