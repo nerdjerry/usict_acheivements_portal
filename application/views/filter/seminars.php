@@ -22,10 +22,10 @@
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Date</label>
 	    <div class="col-sm-5 col-md-4">
-	    	<input type="text" class ="form-control start_date" name="start_date" id="start_date" placeholder="Start Date" />
+	    	<input type="text" class ="form-control start_date" name="start_date" id="start_date" placeholder="Start Date" autocomplete="off" />
 	    </div>
 	    <div class="col-sm-5 col-md-4">
-	    	<input type="text" class ="form-control end_date" name="end_date" id="end_date" placeholder="End date" />
+	    	<input type="text" class ="form-control end_date" name="end_date" id="end_date" placeholder="End date" autocomplete="off" />
 	    </div>
   	</div>
   	<div class="form-group">
@@ -55,7 +55,7 @@
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Number of Paricipants</label>
 	    <div class="col-sm-10 col-md-8">
-	      <input type="number" class="form-control" name="no_of_participants" />
+	      <input type="text" class="form-control" name="no_of_participants" />
 	    </div>
   	</div>
   	<div class="form-group form-actions">

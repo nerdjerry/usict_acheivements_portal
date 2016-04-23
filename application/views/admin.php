@@ -31,6 +31,8 @@
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.time.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.tooltip.js');?>"></script>
 
+	<script src="<?php echo base_url('js/vendor/jquery.validate.min.js');?>"></script>
+
 
 	<!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -147,13 +149,54 @@
 	
 	<script type="text/javascript">
 		$(function () {
-			
+				
+			$('#filter_awards').validate({
+				rules: {
+					"amount_start": {
+						min:0
+					},
+					"amount_end": {
+						min:0
+					},
+					"project_amount":{
+						number:true
+					}
+				},
+				highlight: function (element) {
+					$(element).closest('.form-group').removeClass('success').addClass('error');
+				},
+				success: function (element) {
+					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
+				}
+			});
+
+			$('#filter_seminars').validate({
+				rules: {
+					"no_of_participants" :{
+						min:1
+					}
+				},
+				highlight: function (element) {
+					$(element).closest('.form-group').removeClass('success').addClass('error');
+				},
+				success: function (element) {
+					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
+				}
+			});
+
 	        // Range Datepicker
-	        $('.input-daterange').datepicker({
+	        $('.start_date').datepicker({
 	        	autoclose: true,
 	        	orientation: 'right top',
 	        	endDate: new Date()
 	        });
+	        $('.end_date').datepicker({
+	        	autoclose: true,
+	        	orientation: 'right top',
+	        	endDate: new Date()
+	        });
+
+
 		});
 	</script>
 
