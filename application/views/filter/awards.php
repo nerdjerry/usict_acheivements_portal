@@ -1,4 +1,4 @@
-<form id="filter_awards" class="form-horizontal filter-form" method="post" action="#" role="form">
+<form id="filter_awards" class="form-horizontal filter-form" method="post" action="<?php echo base_url('/filter/award');?>" role="form">
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Name</label>
 	    <div class="col-sm-10 col-md-8">

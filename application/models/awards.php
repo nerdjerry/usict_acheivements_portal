@@ -33,4 +33,26 @@ class Awards extends CI_Model{
 						->get();
 		return $query->result_array();
 	}
+	function filteredAwards($condition,$limit,$pageNo){
+		$offset = ($pageNo-1)*$limit;
+		$designation = array($condition['isProfessor'],$condition['isAssociateProf'],$condition['isAssistantProf']);
+		if($designation[0] == '' && $designation[1] == '' && $designation[2] == '')
+			$designation = array('Professor','Associate Professor','Assistant Professor');
+		$startDate = $condition['startDate'];
+		$endDate = $condition['endDate'];
+		$dateCondition = array('date >=' => $startDate,'date <= ' => $endDate);
+		$amountCondition = is_null($condition['amountStart']) || is_null($condition['amountEnd'])
+					 ? 'amount IS NULL OR amount>=0' : 'amount>='.$condition['startAmount'].'AND amount<='.$condition['endAmount'];
+		$query = $this->db->select('name,designation,details,date,amount')
+							->from('awards')
+							->join('faculty','faculty.faculty_id = awards.faculty_id')
+							->like('name',$condition['name'])
+							->where_in('designation',$designation)
+							->where($dateCondition)
+							->where($amountCondition,NULL,FALSE)
+							->order_by('date', 'DESC')
+							->limit($limit,$offset)
+							->get();
+		return $query->result_array();
+	}
 }

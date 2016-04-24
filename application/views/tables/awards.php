@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" id="results">
 	<table class="table">
 	<?php if(!empty($info)):?>
 		<thead>

@@ -170,7 +170,44 @@ public function project(){
 	}else{
 		redirect('/home');
 	}
-
+}
+public function award(){
+	if($this ->currentUserType == 0){
+		$condition['name'] = $this->input->post('name') !=null ? $this->input->post('name') : '' ;
+		$condition['isProfessor'] = $this->input->post('professor') != null ? $this->input->post('professor') : '';
+		$condition['isAssociateProf'] = $this->input->post('associate_professor') != null ? $this->input->post('associate_professor') : '';
+		$condition['isAssistantProf'] = $this->input->post('assistant_professor') != null ? $this->input->post('assistant_professor') : '';
+		$condition['startDate'] = $this->input->post('start_date') != null ? $this->input->post('start_date') : '2000-01-01';
+		$condition['endDate'] = $this->input->post('end_date') != null ? $this->input->post('end_date') : date('Y-m-d');
+		$condition['amountStart'] = $this->input->post('amount_start') != null ? $this->input->post('amount_start') : NULL;
+		$condition['amountEnd'] = $this->input->post('amount_end') != null ? $this->input->post('amount_end') : NULL;
+		$this->filter = $condition;
+		$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
+		$this->load->model('awards');
+		$data['noOfPublications'] = $this->count['publications'];
+		$data['noOfSeminars'] = $this->count['seminars'];
+		$data['noOfProjects'] = $this->count['projects'];
+		$data['noOfAwards'] = $this->count['awards'];
+		$data['infoType'] = 4;
+		$data['requestedUserType'] = 1;
+		$data['results'] = true;
+		if($resultType == 'view'){
+			//Pagination
+			$totalRows = $this->count['awards'];
+			$perPage = 30;
+			$uriSegment = 3;
+			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
+			//Get data from model
+			$data['info'] = $this->awards->filteredAwards($condition,$perPage,$page);
+			$data['links'] = $this->doPagination('/filter/award/',$totalRows,$perPage,$uriSegment);
+			$this->load->view('admin',$data);
+		}else{
+			show_error("Exporting");
+			redirect('/filter/exportPublication');
+		}
+	}else{
+		redirect('/home');
+	}
 }
 private function doPagination($baseUrl,$totalRows,$perPage,$uriSegment){
 	$this->load->library('pagination');
