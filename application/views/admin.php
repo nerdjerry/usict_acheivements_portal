@@ -32,6 +32,14 @@
 	<script src="<?php echo base_url('js/vendor/jquery.flot/jquery.flot.tooltip.js');?>"></script>
 
 	<script src="<?php echo base_url('js/vendor/jquery.validate.min.js');?>"></script>
+	<!--Scrolling after filter logic-->
+	<script type="text/javascript">
+		function scrollToResult(){
+			$('html, body').animate({
+				scrollTop : $('#results').offset().top
+			},1000);
+		}
+	</script>
 
 
 	<!--[if lt IE 9]>
@@ -249,6 +257,5 @@
 
 		});
 	</script>
-
 </body>
 </html>

@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" id="results">
 	<table class="table">
 	<?php if(!empty($info)):?>
 		<thead>
@@ -102,3 +102,6 @@
 		</tbody>
 	</table>
 </div>
+<?php if(isset($results) && $results)
+	echo '<script>scrollToResult();</script>';
+?>

@@ -56,4 +56,11 @@ function noToMonth($monthNumber){
 			return "Decemeber";
 	}
 }
+function splitDate($date){
+	$explodedDate = explode('/',$date);
+	$month = array_slice($explodedDate, 0,1);
+	$year = array_slice($explodedDate, 2,1);
+	$monthAndYear = array($month,$year);
+	return $monthAndYear;
+}
 ?>

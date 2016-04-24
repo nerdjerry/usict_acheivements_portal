@@ -1,4 +1,4 @@
-<form id="filter_publications" class="form-horizontal filter-form" method="post" action="#" role="form">
+<form id="filter_publications" class="form-horizontal filter-form" method="post" action="<?php echo base_url('/filter/publication');?>" role="form">
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Name</label>
 	    <div class="col-sm-10 col-md-8">
@@ -22,10 +22,10 @@
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Date</label>
 	    <div class="col-sm-5 col-md-4">
-	    	<input type="text" class ="form-control publications_start_date" name="publications_start_date" id="publications_start_date" placeholder="Start Date" autocomplete="off" />
+	    	<input type="text" class ="form-control publications_start_date" name="start_date" id="publications_start_date" placeholder="Start Date" autocomplete="off" />
 	    </div>
 	    <div class="col-sm-5 col-md-4">
-	    	<input type="text" class ="form-control publications_end_date" name="publications_end_date" id="publications_end_date" placeholder="End date" autocomplete="off" />
+	    	<input type="text" class ="form-control publications_end_date" name="end_date" id="publications_end_date" placeholder="End date" autocomplete="off" />
 	    </div>
   	</div>
   	<div class="form-group">
