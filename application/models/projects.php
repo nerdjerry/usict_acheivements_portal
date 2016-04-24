@@ -32,4 +32,27 @@ class Projects extends CI_Model{
 						->get();
 		return $query->result_array();
 	}
+	function filteredProjects($condition,$limit,$pageNo){
+		$offset = ($pageNo-1)*$limit;
+		$designation = array($condition['isProfessor'],$condition['isAssociateProf'],$condition['isAssistantProf']);
+		if($designation[0] == '' && $designation[1] == '' && $designation[2] == '')
+			$designation = array('Professor','Associate Professor','Assistant Professor');
+		$startDate = $condition['startDate'];
+		$endDate = $condition['endDate'];
+		$dateCondition = array('date >=' => $startDate,'date <= ' => $endDate);
+		$grantingAgencyCondition = is_null($condition['grantingAgency']) ? 
+							'granting_agency IS NULL' : "granting_agency LIKE '%".$condition['grantingAgency']."%'";
+		$query = $this->db->select('name,designation,title,granting_agency,date,amount')
+							->from('projects')
+							->join('faculty','faculty.faculty_id = projects.faculty_id')
+							->like('name',$condition['name'])
+							->where_in('designation',$designation)
+							->like('title',$condition['title'])
+							->where($dateCondition)
+							->where($grantingAgencyCondition,NULL,FALSE)
+							->order_by('date', 'DESC')
+							->limit($limit,$offset)
+							->get();
+		return $query->result_array();
+	}
 }
