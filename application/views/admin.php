@@ -196,6 +196,19 @@
 	        	endDate: new Date()
 	        });
 
+	        $('.publications_end_date').datepicker({
+	        	format: " yyyy", // Notice the Extra space at the beginning
+				viewMode: "years", 
+				minViewMode: "years",
+				autoclose: true
+	        });
+	        $('.publications_start_date').datepicker({
+	        	format: " yyyy", // Notice the Extra space at the beginning
+				viewMode: "years", 
+				minViewMode: "years",
+				autoclose: true
+	        });
+
 
 		});
 	</script>
