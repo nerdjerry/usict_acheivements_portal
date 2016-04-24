@@ -89,6 +89,8 @@ class Filter extends CI_COntroller{
 				$condition['isAssociateProf'] = $this->input->post('associate_professor') != null ? $this->input->post('associate_professor') : '';
 				$condition['isAssistantProf'] = $this->input->post('assistant_professor') != null ? $this->input->post('assistant_professor') : '';
 				$condition['title'] = $this->input->post('title') != null ? $this->input->post('title') : '';
+				$condition['place'] = $this->input->post('place') != null ? $this->input->post('place') : '';
+				$condition['organiser'] = $this->input->post('organiser') != null ? $this->input->post('organiser') : '';
 				$condition['startDate'] = $this->input->post('start_date') != null ? $this->input->post('start_date') : '2000-01-01';
 				$condition['endDate'] = $this->input->post('end_date') != null ? $this->input->post('end_date') : date('Y-m-d');
 				$condition['isNational'] = $this->input->post('national') != null ? $this->input->post('national'): '';
@@ -114,11 +116,11 @@ class Filter extends CI_COntroller{
 				if($resultType == 'view'){
 					//Pagination
 					$totalRows = $this->count['seminars'];
-					$perPage = 1;
+					$perPage = 30;
 					$uriSegment = 3;
 					$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 					//Get data from model
-					$data['info'] = $this->publications->filteredSeminars($condition,$perPage,$page);
+					$data['info'] = $this->seminars->filteredSeminars($condition,$perPage,$page);
 					$data['links'] = $this->doPagination('/filter/seminar/',$totalRows,$perPage,$uriSegment);
 					$this->load->view('admin',$data);
 				}else{

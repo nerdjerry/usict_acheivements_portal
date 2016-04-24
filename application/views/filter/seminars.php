@@ -20,6 +20,18 @@
 	    </div>
   	</div>
   	<div class="form-group">
+	    <label class="col-sm-2 col-md-2 control-label">Place</label>
+	    <div class="col-sm-10 col-md-8">
+	      <input type="text" class="form-control" name="place" />
+	    </div>
+  	</div>
+  	<div class="form-group">
+	    <label class="col-sm-2 col-md-2 control-label">Organiser</label>
+	    <div class="col-sm-10 col-md-8">
+	      <input type="text" class="form-control" name="organiser" />
+	    </div>
+  	</div>
+  	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Date</label>
 	    <div class="col-sm-5 col-md-4">
 	    	<input type="text" class ="form-control start_date" name="start_date" id="start_date" placeholder="Start Date" autocomplete="off" />
