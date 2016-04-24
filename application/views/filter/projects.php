@@ -34,6 +34,15 @@
 	    	<input type="text" class ="form-control end_date" name="end_date" id="end_date" placeholder="End date" autocomplete="off" />
 	    </div>
   	</div>
+  	<div class="form-group">
+	    <label class="col-sm-2 col-md-2 control-label">Amount</label>
+	    <div class="col-sm-5 col-md-4">
+	    	<input type="text" class ="form-control amount_start" name="amount_start" id="amount_start" placeholder="Starting Amount"/>
+		</div>
+		<div class="col-sm-5 col-md-4">
+	    	<input type="text" class ="form-control amount_end" name="amount_end" id="amount_end" placeholder="Ending Amount"/>
+	    </div>
+  	</div>
   	<div class="form-group form-actions">
     	<div class="col-sm-offset-2 col-sm-10">
       		<button type="submit" class="btn btn-success">View Results</button>

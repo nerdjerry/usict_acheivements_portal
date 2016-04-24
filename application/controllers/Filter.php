@@ -141,6 +141,8 @@ public function project(){
 		$condition['grantingAgency'] = $this->input->post('granting_agency') != null ? $this->input->post('granting_agency') : NULL;
 		$condition['startDate'] = $this->input->post('start_date') != null ? $this->input->post('start_date') : '2000-01-01';
 		$condition['endDate'] = $this->input->post('end_date') != null ? $this->input->post('end_date') : date('Y-m-d');
+		$condition['amountStart'] = $this->input->post('amount_start') != null ? $this->input->post('amount_start') : NULL;
+		$condition['amountEnd'] = $this->input->post('amount_end') != null ? $this->input->post('amount_end') : NULL;
 		$this->filter = $condition;
 		$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
 		$this->load->model('projects');

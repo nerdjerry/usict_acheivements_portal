@@ -41,7 +41,9 @@ class Projects extends CI_Model{
 		$endDate = $condition['endDate'];
 		$dateCondition = array('date >=' => $startDate,'date <= ' => $endDate);
 		$grantingAgencyCondition = is_null($condition['grantingAgency']) ? 
-							'granting_agency IS NULL' : "granting_agency LIKE '%".$condition['grantingAgency']."%'";
+							"granting_agency IS NULL OR granting_agency LIKE'%%'" : "granting_agency LIKE '%".$condition['grantingAgency']."%'";
+		$amountCondition = is_null($condition['amountStart']) || is_null($condition['amountEnd'])
+					 ? 'amount IS NULL OR amount>=0' : 'amount>='.$condition['startAmount'].'AND amount<='.$condition['endAmount'];
 		$query = $this->db->select('name,designation,title,granting_agency,date,amount')
 							->from('projects')
 							->join('faculty','faculty.faculty_id = projects.faculty_id')
@@ -50,6 +52,7 @@ class Projects extends CI_Model{
 							->like('title',$condition['title'])
 							->where($dateCondition)
 							->where($grantingAgencyCondition,NULL,FALSE)
+							->where($amountCondition,NULL,FALSE)
 							->order_by('date', 'DESC')
 							->limit($limit,$offset)
 							->get();
