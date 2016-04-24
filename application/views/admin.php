@@ -160,6 +160,12 @@
 					},
 					"project_amount":{
 						number:true
+					},
+					"start_date":{
+						required:true
+					},
+					"end_date":{
+						required:true
 					}
 				},
 				highlight: function (element) {
@@ -169,7 +175,22 @@
 					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
 				}
 			});
-
+			$('#filter_publications').validate({
+				rules: {
+					"publications_start_date":{
+						required:true
+					},
+					"publications_end_date":{
+						required:true
+					}
+				},
+				highlight: function (element) {
+					$(element).closest('.form-group').removeClass('success').addClass('error');
+				},
+				success: function (element) {
+					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
+				}
+			});
 			$('#filter_seminars').validate({
 				rules: {
 					"no_of_participants" :{
@@ -183,31 +204,47 @@
 					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
 				}
 			});
+			var today = new Date();
+		    var dd = today.getDate();
+		    var mm = today.getMonth()+1; //January is 0!
 
+		    var yyyy = today.getFullYear();
+		    if(dd<10){
+		        dd='0'+dd
+		    } 
+		    if(mm<10){
+		        mm='0'+mm
+		    } 
+		    var today = yyyy+'-'+mm+'-'+dd;
 	        // Range Datepicker
 	        $('.start_date').datepicker({
+	        	format:"yyyy-mm-dd",
 	        	autoclose: true,
 	        	orientation: 'right top',
 	        	endDate: new Date()
 	        });
+	        $( ".start_date" ).val('2000-01-01');
 	        $('.end_date').datepicker({
+	        	format:"yyyy-mm-dd",
 	        	autoclose: true,
 	        	orientation: 'right top',
 	        	endDate: new Date()
 	        });
-
-	        $('.publications_end_date').datepicker({
-	        	format: " yyyy", // Notice the Extra space at the beginning
-				viewMode: "years", 
-				minViewMode: "years",
-				autoclose: true
-	        });
+	        $( ".end_date" ).val(today);
 	        $('.publications_start_date').datepicker({
 	        	format: " yyyy", // Notice the Extra space at the beginning
 				viewMode: "years", 
 				minViewMode: "years",
 				autoclose: true
 	        });
+	        $( ".publications_start_date" ).val('2000');
+	        $('.publications_end_date').datepicker({
+	        	format: " yyyy", // Notice the Extra space at the beginning
+				viewMode: "years", 
+				minViewMode: "years",
+				autoclose: true
+	        });
+	        $( ".publications_end_date" ).val(yyyy);
 
 
 		});
