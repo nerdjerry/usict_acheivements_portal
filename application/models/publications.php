@@ -33,7 +33,8 @@ class Publications extends CI_Model{
 				->get();
 		return $query->result_array();
 	}
-	function filteredPublications($condition){
+	function filteredPublications($condition,$limit,$pageNo){
+		$offset = ($pageNo-1)*$limit;
 		$designation = array($condition['isProfessor'],$condition['isAssociateProf'],$condition['isAssistantProf']);
 		if($designation[0] == '' && $designation[1] == '' && $designation[2] == '')
 			$designation = array('Professor','Associate Professor','Assistant Professor');
@@ -58,6 +59,7 @@ class Publications extends CI_Model{
 							->where_in('presented_in',$type)
 							->where_in('presented_at',$region)
 							->order_by('year_of_pub DESC,month_of_pub DESC')
+							->limit($limit,$offset)
 							->get();
 		return $query->result_array();
 	}
