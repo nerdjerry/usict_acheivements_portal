@@ -1,4 +1,4 @@
-<form id="filter_seminars" class="form-horizontal filter-form" method="post" action="#" role="form">
+<form id="filter_seminars" class="form-horizontal filter-form" method="post" action="<?php echo base_url('/filter/seminar');?>" role="form">
   	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Name</label>
 	    <div class="col-sm-10 col-md-8">
@@ -40,8 +40,8 @@
 	    <div class="col-sm-10 col-md-8">
 	      	<label class="checkbox-inline"><input type="checkbox" name="seminar" value="Seminar">Seminar</label>
 			<label class="checkbox-inline"><input type="checkbox" name="workshop" value="Workshop">Workshop</label>
-			<label class="checkbox-inline"><input type="checkbox" name="training_program" value="Training Program">Training Program</label>
-			<label class="checkbox-inline"><input type="checkbox" name="fdp" value="FDP">Faculty Development Program</label>
+			<label class="checkbox-inline"><input type="checkbox" name="training_program" value="Training Programme">Training Program</label>
+			<label class="checkbox-inline"><input type="checkbox" name="fdp" value="Faculty Development Programme">Faculty Development Program</label>
 			<label class="checkbox-inline"><input type="checkbox" name="symposium" value="Symposium">Symposium</label>
 	    </div>
   	</div>

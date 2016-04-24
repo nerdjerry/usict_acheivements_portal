@@ -116,6 +116,8 @@
 					include('tables/awards.php');
 					break;
 				}
+				if(isset($results) && $results)
+					echo '<script>scrollToResult();</script>';
 			?>
 			<?php elseif($requestedUserType == 2):?>
 				<!--TODO:Complete this<div class="page-title">
