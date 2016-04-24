@@ -89,7 +89,8 @@
 
 			$('.project_date').datepicker({
 				format: 'yyyy-mm-dd',
-				autoclose:true
+				autoclose:true,
+				endDate: new Date()
 			});
 
 			var today = new Date();

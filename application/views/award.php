@@ -83,6 +83,7 @@
 			$('.award_date').datepicker({
 				format: 'yyyy-mm-dd',
 				autoclose:true,
+				endDate: new Date()
 			});
 			var today = new Date();
 		    var dd = today.getDate();

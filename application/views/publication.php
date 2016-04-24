@@ -173,7 +173,7 @@
 				format: "MM", // Notice the Extra space at the beginning
 				viewMode: "months", 
 				minViewMode: "months",
-				autoclose: true
+				autoclose: true,
 			});
 			$('.year_of_pub').datepicker({
 				format: " yyyy", // Notice the Extra space at the beginning
