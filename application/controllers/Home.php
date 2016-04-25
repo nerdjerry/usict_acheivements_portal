@@ -44,7 +44,7 @@ class Home extends CI_Controller {
 			else if($user_type == '1')
 				$this->load->view('publication');
 			else if($user_type=='2')
-				$this->load->view('new_student_acheivement',$outputData);
+				$this->load->view('student');
 		} else {
 			return redirect('/');
 			//$message = 'Please '.'<a href ='.base_url().'><i>login</i></a> to View this Page';
