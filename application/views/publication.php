@@ -174,12 +174,14 @@
 				viewMode: "months", 
 				minViewMode: "months",
 				autoclose: true,
+				endDate:new Date()
 			});
 			$('.year_of_pub').datepicker({
 				format: " yyyy", // Notice the Extra space at the beginning
 				viewMode: "years", 
 				minViewMode: "years",
-				autoclose: true
+				autoclose: true,
+				endDate: new Date()
 			});
 		});
 	</script>
