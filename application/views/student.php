@@ -69,7 +69,7 @@
 				  	</div>
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">
-				      		<button type="submit" class="btn btn-success">Save Seminar</button>
+				      		<button type="submit" class="btn btn-success">Save Achievement</button>
 			    		</div>
 				  	</div>
 				</form>
