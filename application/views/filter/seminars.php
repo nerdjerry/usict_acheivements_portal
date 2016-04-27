@@ -72,8 +72,8 @@
   	</div>
   	<div class="form-group form-actions">
     	<div class="col-sm-offset-2 col-sm-10">
-      		<button type="submit" class="btn btn-success">View Results</button>
-      		<button type="submit" class="btn btn-danger">Export</button>
+      		<button type="submit" name="results" value="view" class="btn btn-success">View Results</button>
+      		<button type="submit" name="results" value="export" class="btn btn-danger">Export</button>
 		</div>
   	</div>
 </form>

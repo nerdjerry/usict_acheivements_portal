@@ -209,6 +209,46 @@ public function award(){
 		redirect('/home');
 	}
 }
+public function achievement(){
+	if($this ->currentUserType == 0){
+		$condition['name'] = $this->input->post('name') !=null ? $this->input->post('name') : '' ;
+		$condition['isIT'] = $this->input->post('IT') != null ? $this->input->post('IT') : '';
+		$condition['isCSE'] = $this->input->post('CSE') != null ? $this->input->post('CSE') : '';
+		$condition['isECE'] = $this->input->post('ECE') != null ? $this->input->post('ECE') : '';
+		$condition['isMCA'] = $this->input->post('MCA') != null ? $this->input->post('MCA') : '';
+		$condition['isFirst'] = $this->input->post('first') != null ? $this->input->post('first') : '';
+		$condition['isSecond'] = $this->input->post('second') != null ? $this->input->post('second') : '';
+		$condition['isThird'] = $this->input->post('third') != null ? $this->input->post('third') : '';
+		$condition['isFourth'] = $this->input->post('fourth') != null ? $this->input->post('fourth') : '';
+		$condition['startYear'] = $this->input->post('start_year') != null ? $this->input->post('start_year') : '2000';
+		$condition['endYear'] = $this->input->post('end_year') != null ? $this->input->post('end_year') : date('Y');
+		$this->filter = $condition;
+		$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
+		$this->load->model('achievements');
+		$this->count = $this->achievements->getAllStudentAchievementCounts();
+		$this->load->model('student');
+		$data['noOfAchievements'] = $this->count['achievements'];
+		$data['infoType'] = 1;
+		$data['requestedUserType'] = 2;
+		$data['results'] = true;
+		if($resultType == 'view'){
+			//Pagination
+			$totalRows = $this->count['achievements'];
+			$perPage = 30;
+			$uriSegment = 3;
+			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
+			//Get data from model
+			$data['info'] = $this->student->filteredAchievements($condition,$perPage,$page);
+			$data['links'] = $this->doPagination('/filter/achievement/',$totalRows,$perPage,$uriSegment);
+			$this->load->view('admin',$data);
+		}else{
+			show_error("Exporting");
+			redirect('/filter/exportPublication');
+		}
+	}else{
+		redirect('/home');
+	}
+}
 private function doPagination($baseUrl,$totalRows,$perPage,$uriSegment){
 	$this->load->library('pagination');
 	$config['base_url'] = base_url($baseUrl);

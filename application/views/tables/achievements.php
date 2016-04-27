@@ -30,7 +30,7 @@
 							<td><?php echo $detail['designation'];?></td>
 						<?php elseif($requestedUserType == 2):?>
 							<td><?php echo $detail['branch'];?></td>
-							<td><?php echo $detail['year'];?></td>
+							<td><?php echo format_student_year($detail['studentYear']);?></td>
 							<?php endif;?>
 						<?php endif;?>
 					<td><?php echo $detail['details']; ?></td>

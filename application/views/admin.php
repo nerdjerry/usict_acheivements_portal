@@ -137,6 +137,8 @@
 			<?php
 				include('filter/achievements.php');
 				include('tables/achievements.php');
+				if(isset($results) && $results)
+					echo '<script>scrollToResult();</script>';
 			?>
 			<?php endif;?>
 			<?php echo $links;?>

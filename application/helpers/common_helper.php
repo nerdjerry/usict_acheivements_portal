@@ -56,3 +56,23 @@ function get_user_pic(){
 	else
 		return "photos/default.jpg";
 }
+function format_student_year($year){
+	switch ($year) {
+		case 1:
+			return "1<sup>st</sup>";
+			break;
+		case 2:
+			return "2<sup>nd</sup>";
+			break;
+		case 3:
+			return "3<sup>rd</sup>";
+			break;
+		case 4:
+			return "4<sup>th</sup>";
+			break;
+		
+		default:
+			return "Error";
+			break;
+	}
+}
