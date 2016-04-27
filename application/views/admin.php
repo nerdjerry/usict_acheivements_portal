@@ -120,38 +120,24 @@
 					echo '<script>scrollToResult();</script>';
 			?>
 			<?php elseif($requestedUserType == 2):?>
-				<!--TODO:Complete this<div class="page-title">
+			<div class="page-title">
 					Achivements by Students
 				</div>
 			</div>
 			<div class="content-wrapper">
 				<div class="metrics clearfix">
 					<div class="metric">
-						<a href = "<?php echo base_url('/achievement/staff/1');?>">
-							<label class="field">Publications</label>
-							<div class="data"><?php echo $noOfPublications;?></div>
-						</a>
-					</div>
-					<div class="metric">
-						<a href = "<?php echo base_url('/achievement/staff/2');?>">
-							<label class="field">Seminars</label>
-							<div class="data"><?php echo $noOfSeminars;?></div>
-						</a>
-					</div>
-					<div class="metric">
-						<a href = "<?php echo base_url('/achievement/staff/3');?>">
-							<label class="field">Projects</label>
-							<div class="data"><?php echo $noOfProjects;?></div>
-						</a>
-					</div>
-					<div class="metric">
-						<a href = "<?php echo base_url('/achievement/staff/4');?>">
-							<label class="field">Awards</label>
-							<div class="data"><?php echo $noOfAwards;?></div>
+						<a href = "<?php echo base_url('/achievement/admin/2/1');?>">
+							<label class="field">Achievements</label>
+							<div class="data"><?php echo $noOfAchievements;?></div>
 						</a>
 					</div>
 				</div>
-			</div>-->
+			</div>
+			<?php
+				include('filter/achievements.php');
+				include('tables/achievements.php');
+			?>
 			<?php endif;?>
 			<?php echo $links;?>
 		</div>

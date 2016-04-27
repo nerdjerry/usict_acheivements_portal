@@ -13,6 +13,7 @@
 					<?php endif;?>
 				<?php endif;?>
 				<th>Details</th>
+				<th>Year</th>
 				<?php if(!isset($requestedUserType)):?>
 				<th></th>
 				<?php endif;?>
@@ -33,6 +34,7 @@
 							<?php endif;?>
 						<?php endif;?>
 					<td><?php echo $detail['details']; ?></td>
+					<td><?php echo $detail['year']; ?></td>
 					<?php if(!isset($requestedUserType)):?>
 					<div class="modal fade" id="confirm_deletion">
 						<div class="modal-dialog">

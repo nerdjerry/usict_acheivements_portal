@@ -271,8 +271,30 @@ class Achievement extends CI_Controller {
 				}	
 				$data['links'] = $this->doPagination('/achievement/admin/'.$requestedUserType.'/'.$requestedDataType,$totalRows,$perPage,$uriSegment);
 				$this->load->view('admin',$data);
+			}elseif($requestedUserType == self::STUDENT){
+				$this->load->model('achievements');
+				$count = $this->achievements->getAllStudentAchievementCounts();
+				$data['noOfAchievements'] = $count['achievements'];
+				$data['infoType'] = $requestedDataType;
+				$totalRows = $count['achievements'];
+				$perPage = 30;
+				$uriSegment = 5;
+				$page=$this->uri->segment(5) != null? $this->uri->segment(5) : 1;
+				switch ($requestedDataType) {
+					case 1:
+						$this->load->model('student');
+						$data['info'] = $this->student->getAllStudentAchievements($perPage,$page);
+						break;
+					
+					default:
+						redirect('achievement/admin/2');
+						break;
+				}
+				$data['links'] = $this->doPagination('/achievement/admin/'.$requestedUserType.'/'.$requestedDataType,$totalRows,$perPage,$uriSegment);
+				$this->load->view('admin',$data);
 			}
-		}else{
+		}
+		else{
 			redirect('/home');
 		}
 	}
@@ -283,6 +305,7 @@ class Achievement extends CI_Controller {
 		}else{
 			$data['details'] = $this->input->post('details');
 			$data['studentId'] = get_user_id();
+			$data['year'] = $this->input->post('year') != null ? $this->input->post('year'): date('Y') ;
 			$this->load->model('student');
 			$success = $this->student->store($data);
 			if($success){

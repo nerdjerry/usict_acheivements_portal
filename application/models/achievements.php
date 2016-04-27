@@ -32,5 +32,10 @@ class Achievements extends CI_Model {
 		$query = $this->db->where('user_id',$studentId)->get('achievements');
 		return $query->num_rows();
 	}
+	public function getAllStudentAchievementCounts(){
+		$query = $this->db->get('achievements');
+		$count['achievements'] = $query->num_rows();
+		return $count;
+	}
 }
 ?>
