@@ -59,6 +59,21 @@
 					      <input type="text" class="form-control" name="details" />
 					    </div>
 				  	</div>
+<<<<<<< HEAD:application/views/achievements.php
+=======
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Date</label>
+					    <div class="col-sm-10 col-md-8">
+					      	<input type="text" class="form-control date" name="date" autocomplete="off" />
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Year</label>
+					    <div class="col-sm-10 col-md-8">
+					      	<input type="text" class="form-control year" name="year" autocomplete="off" />
+					    </div>
+				  	</div>
+>>>>>>> 1e2a402c7d6eaeee628d04f66525e77b7942a2d7:application/views/student.php
 				  	<div class="form-group form-actions">
 				    	<div class="col-sm-offset-2 col-sm-10">
 				      		<button type="submit" class="btn btn-success">Save Achievement</button>
@@ -96,6 +111,13 @@
 			$('.date').datepicker({
 				format: 'yyyy-mm-dd',
 				autoclose:true,
+				endDate: new Date()
+			});
+			$('.year').datepicker({
+				format: " yyyy", // Notice the Extra space at the beginning
+				viewMode: "years", 
+				minViewMode: "years",
+				autoclose: true,
 				endDate: new Date()
 			});
 		});
