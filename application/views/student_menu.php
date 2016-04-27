@@ -38,7 +38,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="<?php echo base_url();?>">
+				<a href="<?php echo base_url('/achievement/student');?>">
 				<i class="fa fa-download" aria-hidden="true"></i>
 					<span>My Achievements</span>
 				</a>

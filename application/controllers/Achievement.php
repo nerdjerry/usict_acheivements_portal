@@ -12,21 +12,7 @@ class Achievement extends CI_Controller {
 		$outputData = array();
 		$this->load->helper('date');
 	}
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+
 	public function index(){
 		$userType = get_user_type();
 		if($userType==1){
@@ -290,15 +276,42 @@ class Achievement extends CI_Controller {
 			redirect('/home');
 		}
 	}
-	//TODO:Fix this function to show correct student view
+	public function studentStore(){
+		$currentUserType = get_user_type();
+		if($currentUserType == self::ADMIN || $currentUserType == self::FACULTY){
+			show_error("Action not allowed!!",401);
+		}else{
+			$data['details'] = $this->input->post('details');
+			$data['studentId'] = get_user_id();
+			$this->load->model('student');
+			$success = $this->student->store($data);
+			if($success){
+				$this->session->set_flashdata('insertStatus',$success);
+				redirect('/achievement/student');
+			}
+			else{
+				$this->session->set_flashdata('insertStatus',$success);
+				redirect('/home');
+			}
+		}
+	}
+
 	public function student(){
 		$currentUserType = get_user_type();
+		$studentId = get_user_id();
 		if($currentUserType == self::STUDENT){
-			$achievements = $this->achievement_model->getAllAchievements('2');
-			$achievements = $achievements->result_array();
-			$outputData['user_name'] 	= get_user_name();
-			$outputData['achievements'] = $achievements;
-			$this->load->view('home',$outputData);
+			$this->load->model('achievements');
+			$data['noOfAchievements'] = $this->achievements->getStudentAchievmentCounts($studentId);
+			$this->load->model('student');
+			//Pagination
+			$totalRows = $data['noOfAchievements'];
+			$perPage = 1;
+			$uriSegment = 3;
+			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
+			$data['infoType'] = 5;
+			$data['info'] = $this->student->getAchievements($studentId,$perPage,$page);
+			$data['links'] = $this->doPagination('/achievement/student/',$totalRows,$perPage,$uriSegment);
+			$this->load->view('studentAchievements',$data);
 		}else{
 			redirect('/home');
 		}
@@ -322,6 +335,11 @@ class Achievement extends CI_Controller {
 				break;
 			case 4:
 				$status = $this->common_model->delete('awards',array('id' => $id));
+				break;
+			case 5:
+				$status = $this->common_model->delete('achievements',array('id' => $id));
+				$this->session->set_flashdata('deleteStatus',$status);
+				redirect('achievement/student');
 				break;
 		}
 		$this->session->set_flashdata('deleteStatus',$status);
