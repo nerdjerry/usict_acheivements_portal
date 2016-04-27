@@ -255,9 +255,25 @@
 				autoclose: true
 	        });
 	        $( ".publications_end_date" ).val(yyyy);
-
-
+	        $('.student_year').datepicker({
+	        	format: " yyyy", // Notice the Extra space at the beginning
+				viewMode: "years", 
+				minViewMode: "years",
+				autoclose: true,
+				endDate:new Date()
+	        });
+	        $( ".student_year" ).val(yyyy-4);
+	        $('.achievement_year').datepicker({
+	        	format: " yyyy", // Notice the Extra space at the beginning
+				viewMode: "years", 
+				minViewMode: "years",
+				autoclose: true,
+				endDate:new Date()
+	        });
+	        $( ".student_year" ).val(yyyy);
 		});
+
+
 	</script>
 </body>
 </html>
