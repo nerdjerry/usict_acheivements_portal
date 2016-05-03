@@ -221,14 +221,14 @@
 	        	orientation: 'right top',
 	        	endDate: new Date()
 	        });
-	        $( ".start_date" ).val('2000-01-01');
+	        $( ".start_date" ).val('<?php if(isset($filter['startDate'])) echo $filter['startDate']; else echo '2000-01-01';?>');
 	        $('.end_date').datepicker({
 	        	format:"yyyy-mm-dd",
 	        	autoclose: true,
 	        	orientation: 'right top',
 	        	endDate: new Date()
 	        });
-	        $( ".end_date" ).val(today);
+	        $( ".end_date" ).val('<?php if(isset($filter['endDate'])) echo $filter["endDate"];  else echo date('Y-m-d');?>');
 	        $('.publications_start_date').datepicker({
 	        	format: " yyyy", // Notice the Extra space at the beginning
 				viewMode: "years", 
@@ -252,7 +252,7 @@
 				autoclose: true,
 				endDate:new Date()
 	        });
-	        $( ".student_year" ).val(yyyy-4);
+	        $( ".achievement_year_start" ).val('<?php if(isset($filter['startDate'])) echo $filter['startDate']; else echo '2000';?>');
 	        $('.achievement_year').datepicker({
 	        	format: " yyyy", // Notice the Extra space at the beginning
 				viewMode: "years", 
@@ -260,7 +260,7 @@
 				autoclose: true,
 				endDate:new Date()
 	        });
-	        $( ".student_year" ).val(yyyy);
+	        $( ".achievement_year_end" ).val('<?php if(isset($filter['endDate'])) echo $filter["endDate"];  else echo date('Y');?>');
 		});
 
 

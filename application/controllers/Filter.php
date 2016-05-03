@@ -277,7 +277,7 @@ public function achievement(){
 		if($resultType == 'view'){
 			//Pagination
 			$totalRows = $this->count['achievements'];
-			$perPage = 30;
+			$perPage = 1 	;
 			$uriSegment = 3;
 			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 			//Get data from model
