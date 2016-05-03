@@ -17,18 +17,23 @@ class Filter extends CI_COntroller{
 
 	public function publication(){
 		if($this ->currentUserType == 0){
-			$condition['name'] = $this->input->post('name') !=null ? $this->input->post('name') : '' ;
-			$condition['isProfessor'] = $this->input->post('professor') != null ? $this->input->post('professor') : '';
-			$condition['isAssociateProf'] = $this->input->post('associate_professor') != null ? $this->input->post('associate_professor') : '';
-			$condition['isAssistantProf'] = $this->input->post('assistant_professor') != null ? $this->input->post('assistant_professor') : '';
-			$condition['title'] = $this->input->post('title') != null ? $this->input->post('title') : '';
-			$condition['startDate'] = $this->input->post('start_date') != null ? $this->input->post('start_date') : 2000;
-			$condition['endDate'] = $this->input->post('end_date') != null ? $this->input->post('end_date') : date('Y');
-			$condition['journalName'] = $this->input->post('journal_name') != null ?$this->input->post('journal_name') : '' ;
-			$condition['isJournal'] = $this->input->post('journal') != null ? $this->input->post('journal') : '';
-			$condition['isConference'] = $this->input->post('conference') != null ? $this->input->post('conference') : '';
-			$condition['isNational'] = $this->input->post('national') != null ? $this->input->post('national'): '';
-			$condition['isInternational'] = $this->input->post('international') != null ?$this->input->post('international')  : '';
+			$achievementType = 'publication';
+			//If form again submitted then take values from form not from session
+			if($this->input->post('results') != null){
+				unset($_SESSION[$achievementType]);
+			}
+			$condition['name'] = filterInput($achievementType,'name','name','');
+			$condition['isProfessor'] = filterInput($achievementType,'professor','isProfessor','');
+			$condition['isAssociateProf'] = filterInput($achievementType,'associate_professor','isAssociateProf','');
+			$condition['isAssistantProf'] = filterInput($achievementType,'assistant_professor','isAssistantProf','');
+			$condition['title'] = filterInput($achievementType,'title','title','');
+			$condition['startDate'] = filterInput($achievementType,'start_date','startDate',2000);
+			$condition['endDate'] = filterInput($achievementType,'end_date','endDate',date('Y'));
+			$condition['journalName'] = filterInput($achievementType,'journal_name','journalName','') ;
+			$condition['isJournal'] = filterInput($achievementType,'journal','isJournal','');
+			$condition['isConference'] =  filterInput($achievementType,'conference','isConference','');
+			$condition['isNational'] = filterInput($achievementType,'national','isNational','');
+			$condition['isInternational'] = filterInput($achievementType,'international','isInternational','');
 			$this->filter = $condition;
 			$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
 			$this->load->model('publications');
@@ -39,19 +44,24 @@ class Filter extends CI_COntroller{
 			$data['infoType'] = 1;
 			$data['requestedUserType'] = 1;
 			$data['results'] = true;
+			//Sava filter conditions in session so that they can be used in different pages of pagination
+			$_SESSION[$achievementType] = $condition;
+			$data['filter'] = $_SESSION[$achievementType];
+			//show_error(var_dump($_SESSION[$achievementType]));
 			if($resultType == 'view'){
 				//Pagination
 				$totalRows = $this->count['publications'];
-				$perPage = 30;
+				$perPage = 1;
 				$uriSegment = 3;
 				$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 				//Get data from model
 				$data['info'] = $this->publications->filteredPublications($condition,$perPage,$page);
+				$totalRows = $this->publications->filteredPublicationsCount($condition);
+				//show_error($totalRows);
 				$data['links'] = $this->doPagination('/filter/publication/',$totalRows,$perPage,$uriSegment);
 				$this->load->view('admin',$data);
 			}else{
 				show_error("Exporting");
-
 				redirect('/filter/exportPublication');
 			}
 			

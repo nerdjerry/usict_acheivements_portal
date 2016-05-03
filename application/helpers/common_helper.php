@@ -76,3 +76,15 @@ function format_student_year($year){
 			break;
 	}
 }
+/*If form values set then return those,is filter fields saved in session then return thode
+else return the default value */
+function filterInput($achivementType,$formField,$sessionField,$default){
+	$fieldFromForm = get_instance()->input->post($formField);
+	if($fieldFromForm != null){
+		return $fieldFromForm;
+	}elseif(isset($_SESSION[$achivementType][$sessionField])){
+		return $_SESSION[$achivementType][$sessionField];
+	}else{
+		return $default;
+	}
+}

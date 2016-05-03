@@ -35,6 +35,12 @@ class Publications extends CI_Model{
 	}
 	function filteredPublications($condition,$limit,$pageNo){
 		$offset = ($pageNo-1)*$limit;
+		$innerQuery = $this->filter($condition);
+		$query = $innerQuery->limit($limit,$offset)
+						->get();
+		return $query->result_array();
+	}
+	private function filter($condition){
 		$designation = array($condition['isProfessor'],$condition['isAssociateProf'],$condition['isAssistantProf']);
 		if($designation[0] == '' && $designation[1] == '' && $designation[2] == '')
 			$designation = array('Professor','Associate Professor','Assistant Professor');
@@ -47,7 +53,7 @@ class Publications extends CI_Model{
 		$startYear = $condition['startDate'];
 		$endYear = $condition['endDate'];
 		$yearCondition = array('year_of_pub >=' => $startYear,'year_of_pub <= ' => $endYear);
-		$query = $this->db->select('name,designation,title,month_of_pub,year_of_pub,
+		$query = $this->db->select('name,designation,id,title,month_of_pub,year_of_pub,
 			journal_name,coauthor_1,coauthor_2,coauthor_3,coauthor_4,presented_in,presented_at')
 							->from('publications')
 							->join('faculty','faculty.faculty_id = publications.faculty_id')
@@ -58,9 +64,12 @@ class Publications extends CI_Model{
 							->like('journal_name',$condition['journalName'])
 							->where_in('presented_in',$type)
 							->where_in('presented_at',$region)
-							->order_by('year_of_pub DESC,month_of_pub DESC')
-							->limit($limit,$offset)
-							->get();
-		return $query->result_array();
+							->order_by('year_of_pub DESC,month_of_pub DESC');
+		return $query;
+	}
+	function filteredPublicationsCount($condition){
+		$innerQuery = $this->filter($condition);
+		$query = $innerQuery->get();
+		return $query->num_rows();
 	}
 }

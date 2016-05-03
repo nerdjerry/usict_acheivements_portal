@@ -235,14 +235,16 @@
 				minViewMode: "years",
 				autoclose: true
 	        });
-	        $( ".publications_start_date" ).val('2000');
+	        $( ".publications_start_date" )
+	        .val('<?php if(isset($filter['startDate'])) echo $filter['startDate']; else echo '2000';?>');
 	        $('.publications_end_date').datepicker({
 	        	format: " yyyy", // Notice the Extra space at the beginning
 				viewMode: "years", 
 				minViewMode: "years",
 				autoclose: true
 	        });
-	        $( ".publications_end_date" ).val(yyyy);
+	        $( ".publications_end_date" )
+	        .val('<?php if(isset($filter['endDate'])) echo $filter["endDate"];  else echo date('Y');?>');
 	        $('.student_year').datepicker({
 	        	format: " yyyy", // Notice the Extra space at the beginning
 				viewMode: "years", 
