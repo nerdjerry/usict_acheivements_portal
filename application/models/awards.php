@@ -47,8 +47,15 @@ class Awards extends CI_Model{
 		$startDate = $condition['startDate'];
 		$endDate = $condition['endDate'];
 		$dateCondition = array('date >=' => $startDate,'date <= ' => $endDate);
-		$amountCondition = is_null($condition['amountStart']) || is_null($condition['amountEnd'])
-					 ? '(amount IS NULL OR amount>=0)' : 'amount>='.$condition['startAmount'].'AND amount<='.$condition['endAmount'];
+		if(is_null($condition['amountStart']) && is_null($condition['amountEnd'])){
+			$amountCondition = '(amount IS NULL OR amount>=0)';
+		}elseif(is_null($condition['amountEnd'])){
+			$amountCondition = 'amount>='.$condition['amountStart'];
+		}elseif(is_null($condition['amountStart'])){
+			$amountCondition = 'amount<='.$condition['amountEnd'];
+		}else{
+			$amountCondition = 'amount>='.$condition['amountStart'].'AND amount<='.$condition['amountEnd'];
+		}
 		$query = $this->db->select('name,designation,details,date,amount')
 							->from('awards')
 							->join('faculty','faculty.faculty_id = awards.faculty_id')
