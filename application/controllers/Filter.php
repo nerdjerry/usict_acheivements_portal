@@ -47,7 +47,6 @@ class Filter extends CI_COntroller{
 			//Sava filter conditions in session so that they can be used in different pages of pagination
 			$_SESSION[$achievementType] = $condition;
 			$data['filter'] = $_SESSION[$achievementType];
-			//show_error(var_dump($_SESSION[$achievementType]));
 			if($resultType == 'view'){
 				//Pagination
 				$totalRows = $this->count['publications'];
@@ -57,7 +56,6 @@ class Filter extends CI_COntroller{
 				//Get data from model
 				$data['info'] = $this->publications->filteredPublications($condition,$perPage,$page);
 				$totalRows = $this->publications->filteredPublicationsCount($condition);
-				//show_error($totalRows);
 				$data['links'] = $this->doPagination('/filter/publication/',$totalRows,$perPage,$uriSegment);
 				$this->load->view('admin',$data);
 			}else{
@@ -94,25 +92,30 @@ class Filter extends CI_COntroller{
 
 	public function seminar(){
 	if($this ->currentUserType == 0){
-		$condition['name'] = $this->input->post('name') !=null ? $this->input->post('name') : '' ;
-		$condition['isProfessor'] = $this->input->post('professor') != null ? $this->input->post('professor') : '';
-		$condition['isAssociateProf'] = $this->input->post('associate_professor') != null ? $this->input->post('associate_professor') : '';
-		$condition['isAssistantProf'] = $this->input->post('assistant_professor') != null ? $this->input->post('assistant_professor') : '';
-		$condition['title'] = $this->input->post('title') != null ? $this->input->post('title') : '';
-		$condition['place'] = $this->input->post('place') != null ? $this->input->post('place') : '';
-		$condition['organiser'] = $this->input->post('organiser') != null ? $this->input->post('organiser') : '';
-		$condition['startDate'] = $this->input->post('start_date') != null ? $this->input->post('start_date') : '2000-01-01';
-		$condition['endDate'] = $this->input->post('end_date') != null ? $this->input->post('end_date') : date('Y-m-d');
-		$condition['isNational'] = $this->input->post('national') != null ? $this->input->post('national'): '';
-		$condition['isInternational'] = $this->input->post('international') != null ?$this->input->post('international')  : '';
-		$condition['isSeminar'] = $this->input->post('seminar') != null ?$this->input->post('seminar')  : '';
-		$condition['isWorkshop'] = $this->input->post('workshop') != null ?$this->input->post('workshop')  : '';
-		$condition['isTraining'] = $this->input->post('training_program') != null ?$this->input->post('training_program')  : '';
-		$condition['isFDP'] = $this->input->post('fdp') != null ?$this->input->post('fdp')  : '';
-		$condition['isSymposium'] = $this->input->post('symposium') != null ?$this->input->post('symposium')  : '';
-		$condition['isAttended'] = $this->input->post('attended') != null ?$this->input->post('attended')  : '';
-		$condition['isOrganised'] = $this->input->post('organised') != null ?$this->input->post('organised')  : '';
-		$condition['noOfParticipants'] = $this->input->post('no_of_participants') != null ? $this->input->post('no_of_participants') : null; 
+		$achievementType = 'seminar';
+		//If form again submitted then take values from form not from session
+		if($this->input->post('results') != null){
+			unset($_SESSION[$achievementType]);
+		}
+		$condition['name'] = filterInput($achievementType,'name','name','');
+		$condition['isProfessor'] = filterInput($achievementType,'professor','isProfessor','');
+		$condition['isAssociateProf'] = filterInput($achievementType,'associate_professor','isAssociateProf','');
+		$condition['isAssistantProf'] = filterInput($achievementType,'assistant_professor','isAssistantProf','');
+		$condition['title'] = filterInput($achievementType,'title','title','');
+		$condition['place'] = filterInput($achievementType,'place','place','');
+		$condition['organiser'] = filterInput($achievementType,'organiser','organiser','');
+		$condition['startDate'] = filterInput($achievementType,'start_date','startDate','2000-01-01');
+		$condition['endDate'] = filterInput($achievementType,'end_date','endDate',date('Y-m-d'));
+		$condition['isNational'] = filterInput($achievementType,'national','isNational','');
+		$condition['isInternational'] = filterInput($achievementType,'international','isInternational','');
+		$condition['isSeminar'] = filterInput($achievementType,'seminar','isSeminar','');
+		$condition['isWorkshop'] = filterInput($achievementType,'workshop','isWorkshop','');
+		$condition['isTraining'] = filterInput($achievementType,'training_program','isTraining','');
+		$condition['isFDP'] = filterInput($achievementType,'fdp','isFDP','');
+		$condition['isSymposium'] = filterInput($achievementType,'symposium','isSymposium','');
+		$condition['isAttended'] = filterInput($achievementType,'attended','isAttended','');
+		$condition['isOrganised'] = filterInput($achievementType,'organised','isOrganised','');;
+		$condition['noOfParticipants'] = filterInput($achievementType,'no_of_participants','noOfParticipants',null);
 		$this->filter = $condition;
 		$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
 		$this->load->model('seminars');
@@ -123,14 +126,18 @@ class Filter extends CI_COntroller{
 		$data['infoType'] = 2;
 		$data['requestedUserType'] = 1;
 		$data['results'] = true;
+		//Sava filter conditions in session so that they can be used in different pages of pagination
+		$_SESSION[$achievementType] = $condition;
+		$data['filter'] = $_SESSION[$achievementType];
 		if($resultType == 'view'){
 			//Pagination
 			$totalRows = $this->count['seminars'];
-			$perPage = 30;
+			$perPage = 1;
 			$uriSegment = 3;
 			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 			//Get data from model
 			$data['info'] = $this->seminars->filteredSeminars($condition,$perPage,$page);
+			$totalRows = $this->seminars->filteredSeminarsCount($condition);
 			$data['links'] = $this->doPagination('/filter/seminar/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{
@@ -143,16 +150,21 @@ class Filter extends CI_COntroller{
 }
 public function project(){
 	if($this ->currentUserType == 0){
-		$condition['name'] = $this->input->post('name') !=null ? $this->input->post('name') : '' ;
-		$condition['isProfessor'] = $this->input->post('professor') != null ? $this->input->post('professor') : '';
-		$condition['isAssociateProf'] = $this->input->post('associate_professor') != null ? $this->input->post('associate_professor') : '';
-		$condition['isAssistantProf'] = $this->input->post('assistant_professor') != null ? $this->input->post('assistant_professor') : '';
-		$condition['title'] = $this->input->post('title') != null ? $this->input->post('title') : '';
-		$condition['grantingAgency'] = $this->input->post('granting_agency') != null ? $this->input->post('granting_agency') : NULL;
-		$condition['startDate'] = $this->input->post('start_date') != null ? $this->input->post('start_date') : '2000-01-01';
-		$condition['endDate'] = $this->input->post('end_date') != null ? $this->input->post('end_date') : date('Y-m-d');
-		$condition['amountStart'] = $this->input->post('amount_start') != null ? $this->input->post('amount_start') : NULL;
-		$condition['amountEnd'] = $this->input->post('amount_end') != null ? $this->input->post('amount_end') : NULL;
+		$achievementType = 'project';
+		//If form again submitted then take values from form not from session
+		if($this->input->post('results') != null){
+			unset($_SESSION[$achievementType]);
+		}
+		$condition['name'] = filterInput($achievementType,'name','name','') ;
+		$condition['isProfessor'] = filterInput($achievementType,'professor','isProfessor','');
+		$condition['isAssociateProf'] = filterInput($achievementType,'associate_professor','isAssociateProf','');
+		$condition['isAssistantProf'] = filterInput($achievementType,'assistant_professor','isAssistantProf','');
+		$condition['title'] = filterInput($achievementType,'title','title','');
+		$condition['grantingAgency'] = filterInput($achievementType,'granting_agency','grantingAgency',NULL);
+		$condition['startDate'] = filterInput($achievementType,'start_date','startDate','2000-01-01');
+		$condition['endDate'] = filterInput($achievementType,'end_date','endDate',date('Y-m-d'));
+		$condition['amountStart'] = filterInput($achievementType,'amount_start','amountStart',NULL);
+		$condition['amountEnd'] = filterInput($achievementType,'amount_end','amountEnd',NULL);
 		$this->filter = $condition;
 		$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
 		$this->load->model('projects');
@@ -163,6 +175,9 @@ public function project(){
 		$data['infoType'] = 3;
 		$data['requestedUserType'] = 1;
 		$data['results'] = true;
+		//Sava filter conditions in session so that they can be used in different pages of pagination
+		$_SESSION[$achievementType] = $condition;
+		$data['filter'] = $_SESSION[$achievementType];
 		if($resultType == 'view'){
 			//Pagination
 			$totalRows = $this->count['projects'];
@@ -171,6 +186,7 @@ public function project(){
 			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 			//Get data from model
 			$data['info'] = $this->projects->filteredProjects($condition,$perPage,$page);
+			$totalRows = $this->projects->filteredProjectsCount($condition);
 			$data['links'] = $this->doPagination('/filter/project/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{
@@ -183,14 +199,19 @@ public function project(){
 }
 public function award(){
 	if($this ->currentUserType == 0){
-		$condition['name'] = $this->input->post('name') !=null ? $this->input->post('name') : '' ;
-		$condition['isProfessor'] = $this->input->post('professor') != null ? $this->input->post('professor') : '';
-		$condition['isAssociateProf'] = $this->input->post('associate_professor') != null ? $this->input->post('associate_professor') : '';
-		$condition['isAssistantProf'] = $this->input->post('assistant_professor') != null ? $this->input->post('assistant_professor') : '';
-		$condition['startDate'] = $this->input->post('start_date') != null ? $this->input->post('start_date') : '2000-01-01';
-		$condition['endDate'] = $this->input->post('end_date') != null ? $this->input->post('end_date') : date('Y-m-d');
-		$condition['amountStart'] = $this->input->post('amount_start') != null ? $this->input->post('amount_start') : NULL;
-		$condition['amountEnd'] = $this->input->post('amount_end') != null ? $this->input->post('amount_end') : NULL;
+		$achievementType = 'award';
+		//If form again submitted then take values from form not from session
+		if($this->input->post('results') != null){
+			unset($_SESSION[$achievementType]);
+		}
+		$condition['name'] = filterInput($achievementType,'name','name','');
+		$condition['isProfessor'] = filterInput($achievementType,'professor','isProfessor','');
+		$condition['isAssociateProf'] = filterInput($achievementType,'associate_professor','isAssociateProf','');
+		$condition['isAssistantProf'] = filterInput($achievementType,'assistant_professor','isAssistantProf','');
+		$condition['startDate'] = filterInput($achievementType,'start_date','startDate','2000-01-01');
+		$condition['endDate'] = filterInput($achievementType,'end_date','endDate',date('Y-m-d'));
+		$condition['amountStart'] = filterInput($achievementType,'amount_start','amountStart',NULL);
+		$condition['amountEnd'] = filterInput($achievementType,'amount_end','amountEnd',NULL);
 		$this->filter = $condition;
 		$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
 		$this->load->model('awards');
@@ -201,6 +222,9 @@ public function award(){
 		$data['infoType'] = 4;
 		$data['requestedUserType'] = 1;
 		$data['results'] = true;
+		//Sava filter conditions in session so that they can be used in different pages of pagination
+		$_SESSION[$achievementType] = $condition;
+		$data['filter'] = $_SESSION[$achievementType];
 		if($resultType == 'view'){
 			//Pagination
 			$totalRows = $this->count['awards'];
@@ -209,6 +233,7 @@ public function award(){
 			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 			//Get data from model
 			$data['info'] = $this->awards->filteredAwards($condition,$perPage,$page);
+			$totalRows = $this->awards->filteredAwardsCount($condition);
 			$data['links'] = $this->doPagination('/filter/award/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{
@@ -221,17 +246,22 @@ public function award(){
 }
 public function achievement(){
 	if($this ->currentUserType == 0){
-		$condition['name'] = $this->input->post('name') !=null ? $this->input->post('name') : '' ;
-		$condition['isIT'] = $this->input->post('IT') != null ? $this->input->post('IT') : '';
-		$condition['isCSE'] = $this->input->post('CSE') != null ? $this->input->post('CSE') : '';
-		$condition['isECE'] = $this->input->post('ECE') != null ? $this->input->post('ECE') : '';
-		$condition['isMCA'] = $this->input->post('MCA') != null ? $this->input->post('MCA') : '';
-		$condition['isFirst'] = $this->input->post('first') != null ? $this->input->post('first') : '';
-		$condition['isSecond'] = $this->input->post('second') != null ? $this->input->post('second') : '';
-		$condition['isThird'] = $this->input->post('third') != null ? $this->input->post('third') : '';
-		$condition['isFourth'] = $this->input->post('fourth') != null ? $this->input->post('fourth') : '';
-		$condition['startYear'] = $this->input->post('start_year') != null ? $this->input->post('start_year') : '2000';
-		$condition['endYear'] = $this->input->post('end_year') != null ? $this->input->post('end_year') : date('Y');
+		$achievementType = 'award';
+		//If form again submitted then take values from form not from session
+		if($this->input->post('results') != null){
+			unset($_SESSION[$achievementType]);
+		}
+		$condition['name'] = filterInput($achievementType,'name','name','') ;
+		$condition['isIT'] = filterInput($achievementType,'IT','isIT','');
+		$condition['isCSE'] = filterInput($achievementType,'CSE','isCSE','');
+		$condition['isECE'] = filterInput($achievementType,'ECE','isECE','');
+		$condition['isMCA'] = filterInput($achievementType,'MCA','isMCA','');
+		$condition['isFirst'] = filterInput($achievementType,'first','isFirst','');
+		$condition['isSecond'] = filterInput($achievementType,'second','isSecond','');
+		$condition['isThird'] = filterInput($achievementType,'third','isThird','');
+		$condition['isFourth'] = filterInput($achievementType,'fourth','isFourth','');
+		$condition['startYear'] = filterInput($achievementType,'start_date','startDate',2000);
+		$condition['endYear'] = filterInput($achievementType,'end_date','endDate',date('Y'));
 		$this->filter = $condition;
 		$resultType = $this->input->post('results') != null ? $this->input->post('results') : 'view';
 		$this->load->model('achievements');
@@ -241,6 +271,9 @@ public function achievement(){
 		$data['infoType'] = 1;
 		$data['requestedUserType'] = 2;
 		$data['results'] = true;
+		//Sava filter conditions in session so that they can be used in different pages of pagination
+		$_SESSION[$achievementType] = $condition;
+		$data['filter'] = $_SESSION[$achievementType];
 		if($resultType == 'view'){
 			//Pagination
 			$totalRows = $this->count['achievements'];
@@ -249,6 +282,7 @@ public function achievement(){
 			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 			//Get data from model
 			$data['info'] = $this->student->filteredAchievements($condition,$perPage,$page);
+			$totalRows = $this->student->filteredAchievementsCount($condition);
 			$data['links'] = $this->doPagination('/filter/achievement/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{

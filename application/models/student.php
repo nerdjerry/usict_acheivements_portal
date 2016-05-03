@@ -58,7 +58,7 @@ class Student extends CI_Model{
 							->order_by('achievements.year', 'DESC');
 		return $query;
 	}
-	function filteredStudentsCount($condition){
+	function filteredAchievementsCount($condition){
 		$innerQuery = $this->filter($condition);
 		$query = $innerQuery->get();
 		return $query->num_rows();
