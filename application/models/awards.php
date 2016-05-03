@@ -35,6 +35,12 @@ class Awards extends CI_Model{
 	}
 	function filteredAwards($condition,$limit,$pageNo){
 		$offset = ($pageNo-1)*$limit;
+		$innerQuery = $this->filter($condition);
+		$query = $innerQuery->limit($limit,$offset)
+							->get();
+		return $query->result_array();
+	}
+	private function filter($condition){
 		$designation = array($condition['isProfessor'],$condition['isAssociateProf'],$condition['isAssistantProf']);
 		if($designation[0] == '' && $designation[1] == '' && $designation[2] == '')
 			$designation = array('Professor','Associate Professor','Assistant Professor');
@@ -50,9 +56,12 @@ class Awards extends CI_Model{
 							->where_in('designation',$designation)
 							->where($dateCondition)
 							->where($amountCondition,NULL,FALSE)
-							->order_by('date', 'DESC')
-							->limit($limit,$offset)
-							->get();
-		return $query->result_array();
+							->order_by('date', 'DESC');
+		return $query;
+	}
+	function filteredAwardsCount($condition){
+		$innerQuery = $this->filter($condition);
+		$query = $innerQuery->get();
+		return $query->num_rows();
 	}
 }

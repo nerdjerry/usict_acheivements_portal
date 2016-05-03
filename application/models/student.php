@@ -33,6 +33,12 @@ class Student extends CI_Model{
 	}
 	function filteredAchievements($condition,$limit,$pageNo){
 		$offset = ($pageNo-1)*$limit;
+		$innerQuery = $this->filter($condition);
+		$query = $innerQuery->limit($limit,$offset)
+							->get();
+		return $query->result_array();
+	}
+	private function filter($condition){
 		$branch = array($condition['isIT'],$condition['isCSE'],$condition['isECE'],$condition['isMCA']);
 		if($branch[0] == '' && $branch[1] == '' && $branch[2] == '' && $branch[3] == '')
 			$branch = array('IT','CSE','ECE','MCA');
@@ -49,9 +55,12 @@ class Student extends CI_Model{
 							->where_in('branch',$branch)
 							->where_in('student.year',$studentYear)
 							->where($dateCondition)
-							->order_by('achievements.year', 'DESC')
-							->limit($limit,$offset)
-							->get();
-		return $query->result_array();
+							->order_by('achievements.year', 'DESC');
+		return $query;
+	}
+	function filteredStudentsCount($condition){
+		$innerQuery = $this->filter($condition);
+		$query = $innerQuery->get();
+		return $query->num_rows();
 	}
 }
