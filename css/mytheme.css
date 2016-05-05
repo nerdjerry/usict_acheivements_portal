@@ -30,3 +30,29 @@ a:hover{
 	padding-top: 10px;
 	height: 90px;
 }
+.header{
+	height: 150px;
+	background: #041E54;
+	padding:10px;
+}
+nav .login-logo{
+	width: 30%;
+	height: 130px;
+	margin: 0;
+	display: inline-block;
+}
+nav .login-heading{
+	width:40%;
+	display: inline-block;
+}
+#signin.clear #heading-text {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 26px;
+	color: #FFF;
+	font-weight: bold;
+	line-height: 44px;
+}
+#signin.clear .login{
+	margin-top:180px;
+	padding-top: 60px;
+}
