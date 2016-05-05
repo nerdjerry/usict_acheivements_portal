@@ -59,7 +59,7 @@ class Filter extends CI_COntroller{
 				$data['links'] = $this->doPagination('/filter/publication/',$totalRows,$perPage,$uriSegment);
 				$this->load->view('admin',$data);
 			}else{
-				//show_error("Exporting");
+				//Exporting
 				redirect('/export/exportPublication');
 			}
 			
@@ -119,8 +119,8 @@ class Filter extends CI_COntroller{
 			$data['links'] = $this->doPagination('/filter/seminar/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{
-			show_error("Exporting");
-			redirect('/filter/exportPublication');
+			//Exporting
+			redirect('/export/exportSeminar');
 		}
 	}else{
 		redirect('/home');
@@ -168,8 +168,8 @@ public function project(){
 			$data['links'] = $this->doPagination('/filter/project/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{
-			show_error("Exporting");
-			redirect('/filter/exportPublication');
+			//Exporting
+			redirect('/export/exportProject');
 		}
 	}else{
 		redirect('/home');
@@ -216,8 +216,8 @@ public function award(){
 			$data['links'] = $this->doPagination('/filter/award/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{
-			show_error("Exporting");
-			redirect('/filter/exportPublication');
+			//Exporting
+			redirect('/export/exportAward');
 		}
 	}else{
 		redirect('/home');
@@ -225,7 +225,7 @@ public function award(){
 }
 public function achievement(){
 	if($this ->currentUserType == 0){
-		$achievementType = 'award';
+		$achievementType = 'achievement';
 		//If form again submitted then take values from form not from session
 		if($this->input->post('results') != null){
 			unset($_SESSION[$achievementType]);
@@ -265,8 +265,8 @@ public function achievement(){
 			$data['links'] = $this->doPagination('/filter/achievement/',$totalRows,$perPage,$uriSegment);
 			$this->load->view('admin',$data);
 		}else{
-			show_error("Exporting");
-			redirect('/filter/exportPublication');
+			//Exporting
+			redirect('/export/exportAchievement');
 		}
 	}else{
 		redirect('/home');
