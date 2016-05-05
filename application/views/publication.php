@@ -72,7 +72,7 @@
 					    </div>
 				  	</div>
 				  	<div class="form-group">
-					    <label class="col-sm-2 col-md-2 control-label">Journal Name</label>
+					    <label class="col-sm-2 col-md-2 control-label">Journal/Conference Name</label>
 					    <div class="col-sm-10 col-md-8">
 					      	<input type="text" class="form-control" name="journal_name" />
 					    </div>
