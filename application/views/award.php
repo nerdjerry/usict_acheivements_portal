@@ -56,6 +56,12 @@
 					    </div>
 				  	</div>
 				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Awarding Agency</label>
+					    <div class="col-sm-10 col-md-8">
+					      <input type="text" class="form-control" name="award_agency" />
+					    </div>
+				  	</div>
+				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Date</label>
 					    <div class="col-sm-10 col-md-8">
 					      <input type="text" class="form-control award_date" name="award_date" autocomplete="off" />
@@ -103,8 +109,12 @@
 					"award_details": {
 						required: true
 					},
+					"award_agency": {
+						required: true
+					},
 					"award_amount":{
-						number: true
+						number: true,
+						min : 0
 					},
 					"award_date":{
 						max:today

@@ -62,7 +62,7 @@
 					    </div>
 				  	</div>
 				  	<div class="form-group">
-					    <label class="col-sm-2 col-md-2 control-label">Date</label>
+					    <label class="col-sm-2 col-md-2 control-label">Date of Granting</label>
 					    <div class="col-sm-10 col-md-8">
 					    	<input type="text" class="form-control project_date" name="project_date" placeholder="Date of Submission" autocomplete="off" />
 					    </div>
@@ -117,7 +117,8 @@
 						max:today
 					},
 					"project_amount":{
-						number:true
+						number:true,
+						min: 0
 					}
 				},
 				highlight: function (element) {
