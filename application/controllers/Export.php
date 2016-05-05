@@ -47,7 +47,7 @@ class Export extends CI_Controller{
 				$index++;
 			}
 			$this->wrapAndCenterText('M',$index);
-			$fileName = 'USITPublications'.date('d-m-Y').'.xls';
+			$fileName = 'USITPublications ('.date('d-m-Y').')'.'xls';
 			$this->sendFile($fileName);
 			redirect('filter/publication');
 		}else{
@@ -100,7 +100,7 @@ class Export extends CI_Controller{
 				$index++;
 			}
 			$this->wrapAndCenterText('L',$index);
-			$fileName = 'USITSeminars'.date('d-m-Y').'.xls';
+			$fileName = 'USITSeminars ('.date('d-m-Y').')'.'xls';
 			$this->sendFile($fileName);
 			redirect('filter/seminar');
 		}else{
@@ -137,7 +137,7 @@ class Export extends CI_Controller{
 				$index++;
 			}
 			$this->wrapAndCenterText('F',$index);
-			$fileName = 'USITProjects'.date('d-m-Y').'.xls';
+			$fileName = 'USITProjects ('.date('d-m-Y').')'.'xls';
 			$this->sendFile($fileName);
 			redirect('filter/project');
 		}else{
@@ -145,43 +145,44 @@ class Export extends CI_Controller{
 		}			
 	}
 
-	/*public function exportAward(){
-		if(isset($_SESSION['']) && $this->currentUserType == 0){
+	public function exportAward(){
+		if(isset($_SESSION['award']) && $this->currentUserType == 0){
 			$this->setupFile();
 			//This contains all attributes we need in header
-			$fieldNames= array('Name', 'Designation', );	
+			$fieldNames= array('Name', 'Designation', 'Details', 'Awarding Agency', 'Date', 'Amount' );	
 			$this->setHeader($fieldNames);	
 			//Load model,get data based on filter saved in session
-			$this->load->model('');
-			$resultsData = $this->->($_SESSION[''],$this->count[''],1);
+			$this->load->model('awards');
+			$resultsData = $this->awards->filteredAwards($_SESSION['award'],$this->count['awards'],1);
 			$index = 2;
 			//Set values for each rows as per result returned from model
 			foreach ($resultsData as $result) {
+				if(isset($result['date']))
+					$date = $result['date'];
+				else
+					$date = "Not Available";
+				if(isset($result['amount']))
+					$amount = "&#x20B9;".formattedMoney($result['amount']);
+				else
+					$amount = "Not Available";
 				$this->excel->getActiveSheet()->setCellValue("A".$index,$result['name']);
 				$this->excel->getActiveSheet()->setCellValue("B".$index,$result['designation']);
-				$this->excel->getActiveSheet()->setCellValue("C".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("D".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("E".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("F".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("G".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("H".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("I".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("J".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("K".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("L".$index,$result['']);
-				$this->excel->getActiveSheet()->setCellValue("M".$index,$result['']);								
+				$this->excel->getActiveSheet()->setCellValue("C".$index,$result['details']);
+				$this->excel->getActiveSheet()->setCellValue("D".$index,$result['agency']);
+				$this->excel->getActiveSheet()->setCellValue("E".$index,$date);
+				$this->excel->getActiveSheet()->setCellValue("F".$index,$amount);							
 				$index++;
 			}
-			$this->wrapAndCenterText('',$index);
-			$fileName = 'USIT'.date('d-m-Y').'.xls';
+			$this->wrapAndCenterText('F',$index);
+			$fileName = 'USITAwards ('.date('d-m-Y').')'.'xls';
 			$this->sendFile($fileName);
-			redirect('filter/');
+			redirect('filter/award');
 		}else{
 			show_error("Action not Allowed");
 		}	
 	}
 
-	public function exportAchievement(){
+	/*public function exportAchievement(){
 		if(isset($_SESSION['']) && $this->currentUserType == 0){
 			$this->setupFile();
 			//This contains all attributes we need in header
