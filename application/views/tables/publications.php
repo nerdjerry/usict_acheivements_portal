@@ -19,6 +19,8 @@
 				<th>Co Author</th>
 				<th>Co Author</th>
 				<th>Co Author</th>
+				<th>Communicating Author</th>
+				<th>First Author</th>
 				<th>Presented In</th>
 				<th>Level</th>
 				<?php if(!isset($requestedUserType)):?>
@@ -72,6 +74,8 @@
 						else
 							echo "--";
 					?></td>
+					<td><?php echo $detail['comm_author'];?></td>
+					<td><?php echo $detail['first_author'];?></td>
 					<td><?php echo $detail['presented_in'];?></td>
 					<td><?php echo $detail['presented_at'];?></td>
 					<?php if(!isset($requestedUserType)):?>

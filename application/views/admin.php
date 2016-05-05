@@ -180,7 +180,7 @@
 					},
 					"publications_end_date":{
 						required:true
-					}
+					},
 				},
 				highlight: function (element) {
 					$(element).closest('.form-group').removeClass('success').addClass('error');

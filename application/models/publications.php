@@ -25,7 +25,7 @@ class Publications extends CI_Model{
 	function getAllStaffPublications($limit,$pageNo){
 		$offset = ($pageNo-1)*$limit;
 		$query = $this->db->select('name,designation,title,month_of_pub,year_of_pub,
-			journal_name,coauthor_1,coauthor_2,coauthor_3,coauthor_4,presented_in,presented_at')
+			journal_name,coauthor_1,coauthor_2,coauthor_3,coauthor_4,comm_author,first_author,presented_in,presented_at')
 				->from('publications')
 				->join('faculty','faculty.faculty_id = publications.faculty_id')
 				->limit($limit,$offset)

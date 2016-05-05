@@ -48,7 +48,8 @@ class Achievement extends CI_Controller {
 				$insertData['journal_name']				= $this->input->post('journal_name');
 				$insertData['presented_in']				= $this->input->post('presented_in');
 				$insertData['presented_at']				= $this->input->post('presented_at');
-
+				$insertData['comm_author']				= $this->input->post('comm_author');
+				$insertData['first_author']				= $this->input->post('first_author');
 				$month_of_pub 							= $this->input->post('month_of_pub');
 				if(isset($month_of_pub))
 					$insertData['month_of_pub']			= monthToNo($month_of_pub);

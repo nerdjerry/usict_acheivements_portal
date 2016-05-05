@@ -74,6 +74,10 @@
 					    </div>
 				  	</div>
 				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label"></label>
+					    <label class="col-sm-10 col-md-8">Please Specify co-authors(if any)</label>
+				  	</div>
+				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Co-Author 1</label>
 					    <div class="col-sm-10 col-md-8">
 					      	<input type="text" class="form-control" name="coauthor_1" />
@@ -95,6 +99,40 @@
 					    <label class="col-sm-2 col-md-2 control-label">Co-Author 4</label>
 					    <div class="col-sm-10 col-md-8">
 					      	<input type="text" class="form-control" name="coauthor_4" />
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Are you a Communicating Author?</label>
+					    <div class="col-sm-10 col-md-8">
+					      	<label class="radio-inline"><input type="radio" name="comm_author_radio" value="Yes">Yes</label>
+							<label class="radio-inline"><input type="radio" name="comm_author_radio" value="No" checked="true">No</label> 
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label"></label>
+					    <label class="col-sm-10 col-md-8">Please Specify communicating author(if selected no)</label>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Communicating Author</label>
+					    <div class="col-sm-10 col-md-8">
+					      	<input type="text" class="form-control" name="comm_author" id="comm_author" /> 
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Are you a First Author?</label>
+					    <div class="col-sm-10 col-md-8">
+					      	<label class="radio-inline"><input type="radio" name="first_author_radio" value="Yes">Yes</label>
+							<label class="radio-inline"><input type="radio" name="first_author_radio" value="No" checked="true">No</label>
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label"></label>
+					    <label class="col-sm-10 col-md-8">Please Specify first author(if selected no)</label>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">First Author</label>
+					    <div class="col-sm-10 col-md-8">
+					      	<input type="text" class="form-control" name="first_author" id="first_author" /> 
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -154,6 +192,12 @@
 					"journal_name": {
 						required: true
 					},
+					"comm_author" : {
+						required:true
+					},
+					"first_author": {
+						required:true
+					},
 					"presented_in": {
 						required: true
 					},
@@ -167,6 +211,25 @@
 				},
 				success: function (element) {
 					element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
+				}
+			});
+			//Filling communicating author and first author field
+			$('input[name="comm_author_radio"]').change(function(){
+				if(this.value === 'Yes'){
+					$('#comm_author').val('<?php echo get_user_name();?>');
+					$('#comm_author').prop('readonly',true);
+				}else{
+					$('#comm_author').val('');
+					$('#comm_author').prop('readonly',false);
+				}
+			});
+			$('input[name="first_author_radio"]').change(function(){
+				if(this.value === 'Yes'){
+					$('#first_author').val('<?php echo get_user_name();?>');
+					$('#first_author').prop('readonly',true);
+				}else{
+					$('#first_author').val('');
+					$('#first_author').prop('readonly',false);
 				}
 			});
 			$('.month_of_pub').datepicker({
