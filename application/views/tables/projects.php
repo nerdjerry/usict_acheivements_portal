@@ -12,7 +12,6 @@
 						<th>Year</th>
 					<?php endif;?>
 				<?php endif;?>
-				<th>id</th>
 				<th>Title</th>
 				<th>Granting Agency</th>
 				<th>Date of Granting</th>
@@ -36,7 +35,6 @@
 							<td><?php echo $detail['year'];?></td>
 							<?php endif;?>
 						<?php endif;?>
-					<td><?php echo $detail['id'];?></td>
 					<td><?php echo $detail['title']; ?></td>
 					<td><?php 
 						if(isset($detail['granting_agency']))
