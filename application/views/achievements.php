@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
-	<title>Add Seminar</title>
+	<title>Add Achievement</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- stylesheets -->
@@ -62,7 +62,7 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Year</label>
 					    <div class="col-sm-10 col-md-8">
-					      	<input type="text" class="form-control year" name="year" autocomplete="off" />
+					      	<input type="text" class="form-control year" class ="year" name="year" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group form-actions">
