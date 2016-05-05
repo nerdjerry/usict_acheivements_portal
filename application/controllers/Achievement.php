@@ -21,6 +21,9 @@ class Achievement extends CI_Controller {
 		}elseif ($userType==0) {
 			//User is a admin member so show that view
 			$this->admin();
+		}elseif ($userType == 2){
+			//User is a student member so show that view
+			$this->student();
 		}
 	}
 	public function store(){

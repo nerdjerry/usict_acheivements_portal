@@ -42,9 +42,9 @@ class Home extends CI_Controller {
 			}
 			//Load Faculty View,by default option to add publications if user is faculty member
 			else if($user_type == '1')
-				$this->load->view('publication');
+				redirect('/achievement');
 			else if($user_type == '2')
-				$this->load->view('achievements.php');
+				redirect('/achievement');
 		} else {
 			return redirect('/');
 			//$message = 'Please '.'<a href ='.base_url().'><i>login</i></a> to View this Page';
