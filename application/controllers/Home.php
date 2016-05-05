@@ -72,7 +72,9 @@ class Home extends CI_Controller {
 		//$this->isAllowed();
 		$this->load->view('seminar');	
 	}
-
+	public function achievement(){
+		$this->load->view('achievements');
+	}
 	//To restrict direct access to function calls.Direct user to home if he is not authorized
 	private function isAllowed(){
 		if($this->currentUserType != self::FACULTY){

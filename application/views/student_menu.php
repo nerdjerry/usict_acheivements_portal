@@ -32,7 +32,7 @@
 	<div class="menu-section">
 		<ul>
 			<li>
-				<a href="<?php echo base_url();?>">
+				<a href="<?php echo base_url('/home/achievement');?>">
 				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 					<span>Add Achievement</span>
 				</a>
