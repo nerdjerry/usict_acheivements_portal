@@ -56,9 +56,10 @@ class Seminars extends CI_Model{
 			$status = array('Attended','Organised');
 		$startDate = $condition['startDate'];
 		$endDate = $condition['endDate'];
-		$dateCondition = array('start_date >=' => $startDate,'end_date <= ' => $endDate);
+		$startDateCondition = array('start_date >=' => $startDate);
+		$endDateCondition = '(end_date <= "'.$endDate.'" OR end_date IS NULL)';
 		$noOfParticipants = is_null($condition['noOfParticipants']) ? 
-							'no_of_participant IS NULL' : 'no_of_participant >='.$condition['noOfParticipants'];
+							'no_of_participant IS NULL OR (no_of_participant >=0)' : 'no_of_participant >='.$condition['noOfParticipants'];
 		$query = $this->db->select('name,designation,title,organiser,
 			place,start_date,end_date,region,type,event_details,status,
 			no_of_participant')
@@ -67,7 +68,8 @@ class Seminars extends CI_Model{
 							->like('name',$condition['name'])
 							->where_in('designation',$designation)
 							->like('title',$condition['title'])
-							->where($dateCondition)
+							->where($startDateCondition)
+							->where($endDateCondition,NULL,FALSE)
 							->like('organiser',$condition['organiser'])
 							->like('place',$condition['place'])
 							->where_in('type',$type)

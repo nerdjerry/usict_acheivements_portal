@@ -43,7 +43,7 @@
 						<?php endif;?>
 						<td><?php echo $detail['title']; ?></td>
 					<td><?php 
-						if(isset($detail['organiser']))
+						if($detail['organiser']!='')
 							echo $detail['organiser'];
 						else
 							echo "Not Available";
@@ -59,7 +59,7 @@
 					<td><?php echo $detail['region'];?></td>
 					<td><?php echo $detail['type'];?></td>
 					<td><?php 
-						if(isset($detail['event_details']))
+						if($detail['event_details'] != '')
 							echo $detail['event_details'];
 						else
 							echo "Not Available";

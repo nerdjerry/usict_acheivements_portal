@@ -69,7 +69,7 @@ class Export extends CI_Controller{
 			$index = 2;
 			//Set values for each rows as per result returned from model
 			foreach ($resultsData as $result) {
-				if(isset($result['organiser']))
+				if($result['organiser'] != '')
 					$organiser = $result['organiser'];
 				else
 					$organiser = "Not Available";
@@ -77,7 +77,7 @@ class Export extends CI_Controller{
 					$endDate =  $result['end_date'];
 				else
 					$endDate = "Not Available";
-				if(isset($result['event_details']))
+				if($result['event_details'] != '')
 					$detail = $result['event_details'];
 				else
 					$detail = "Not Available";
