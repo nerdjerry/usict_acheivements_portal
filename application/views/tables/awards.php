@@ -67,7 +67,7 @@
 								</div>
 							</div>
 						</div>
-					<td><i class="fa fa-trash-o" aria-hidden="true" data-toggle="modal" data-target="#confirm_deletion"></i></a></td>
+					<td><a href="<?php echo base_url('/achievement/deleteAchievement/'.$infoType.'/'.$detail['id']);?>"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="modal" data-target="#confirm_deletion"></i></a></td>
 					<?php endif;?>
 				</tr>
 				<?php endforeach;

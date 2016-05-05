@@ -349,16 +349,16 @@ class Achievement extends CI_Controller {
 		}
 		switch ($infoType) {
 			case 1:
-				$status = $this->common_model->delete('publications',array('id' => $id));
+				$status = $this->common_model->delete('publications',$id);
 				break;
 			case 2:
-				$status = $this->common_model->delete('seminars',array('id' => $id));
+				$status = $this->common_model->delete('seminars',$id);
 				break;
 			case 3:
-				$status = $this->common_model->delete('projects',array('id' => $id));
+				$status = $this->common_model->delete('projects',$id);
 				break;
 			case 4:
-				$status = $this->common_model->delete('awards',array('id' => $id));
+				$status = $this->common_model->delete('awards',$id);
 				break;
 			case 5:
 				$status = $this->common_model->delete('achievements',array('id' => $id));

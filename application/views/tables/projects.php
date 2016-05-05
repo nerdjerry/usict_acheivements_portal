@@ -12,6 +12,7 @@
 						<th>Year</th>
 					<?php endif;?>
 				<?php endif;?>
+				<th>id</th>
 				<th>Title</th>
 				<th>Granting Agency</th>
 				<th>Date of Granting</th>
@@ -35,6 +36,7 @@
 							<td><?php echo $detail['year'];?></td>
 							<?php endif;?>
 						<?php endif;?>
+					<td><?php echo $detail['id'];?></td>
 					<td><?php echo $detail['title']; ?></td>
 					<td><?php 
 						if(isset($detail['granting_agency']))
@@ -67,7 +69,7 @@
 							</div>
 						</div>
 					</div>
-				<td><i class="fa fa-trash-o" aria-hidden="true" data-toggle="modal" data-target="#confirm_deletion"></i></a></td>
+				<td><a href="<?php echo base_url('/achievement/deleteAchievement/'.$infoType.'/'.$detail['id']);?>"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="modal" data-target="#confirm_deletion"></i></a></td>
 					<?php endif;?>
 			</tr>
 				<?php endforeach;

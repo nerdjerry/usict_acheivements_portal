@@ -19,11 +19,9 @@ class Common_model extends CI_Model {
 			$table_name = 'Colleges'
 		this would delete all rows in colleges table where name='USIT'
 	*/
-	function delete($table_name, $conditions=array()) {
-		if(count($conditions)>0) {
-			$this->db->where($conditions);
-		}
-		$status = $this->db->delete($table_name); 
+	function delete($table_name, $id) {
+		$status = $this->db->where('id',$id)
+							->delete($table_name); 
 		if(!$status)
 			return false;
 		else
