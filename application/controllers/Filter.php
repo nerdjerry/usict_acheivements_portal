@@ -59,35 +59,13 @@ class Filter extends CI_COntroller{
 				$data['links'] = $this->doPagination('/filter/publication/',$totalRows,$perPage,$uriSegment);
 				$this->load->view('admin',$data);
 			}else{
-				show_error("Exporting");
-				redirect('/filter/exportPublication');
+				//show_error("Exporting");
+				redirect('/export/exportPublication');
 			}
 			
 		}else{
 			redirect('/home');
 		}
-	}
-
-	public function exportPublication(){
-		if(!is_null($this->filter)){
-			$this->load->library('excel');
-			//Activate worksheet number 1
-			$this->excel->setActiveSheetIndex(0);
-			$this->excel->getActiveSheet()->setTitle('Results');
-			$this->load->model('publications');
-			$resultsData = $this->publications->filteredPublications($this->filter,$this->count['publications'],1);
-			$this->excel->getActiveSheet()->fromArray($resultsData);
-			$fileName = 'Publications.xlsx';
-			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			header('Content-Disposition: attachment;filename="'.$fileName.'"');
-			header('Cache-Control: max-age=0');
-			$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-			$objWriter->save('php://output');
-			redirect('filter/publication');
-		}else{
-			show_error("Message");
-		}
-		
 	}
 
 	public function seminar(){
