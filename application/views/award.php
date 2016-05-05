@@ -117,6 +117,7 @@
 						min : 0
 					},
 					"award_date":{
+						required: true,
 						max:today
 					}
 				},

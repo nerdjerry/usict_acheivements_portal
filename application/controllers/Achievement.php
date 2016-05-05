@@ -139,9 +139,9 @@ class Achievement extends CI_Controller {
 				else $insertData['date']				= '';
 
 				$amount 								=  $this->input->post('award_amount');
-				if(isset($amount))
+				if(isset($amount) && $amount != 0)
 					$insertData['amount']				= $amount;
-				else $insertData['amount']				= '';
+				else $insertData['amount']				= NULL;
 			} 
 			$this->common_model->add($table_name,$insertData);
 		}
