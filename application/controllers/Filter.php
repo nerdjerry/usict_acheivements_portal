@@ -132,7 +132,7 @@ class Filter extends CI_COntroller{
 		if($resultType == 'view'){
 			//Pagination
 			$totalRows = $this->count['seminars'];
-			$perPage = 1;
+			$perPage = 3;
 			$uriSegment = 3;
 			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 			//Get data from model
