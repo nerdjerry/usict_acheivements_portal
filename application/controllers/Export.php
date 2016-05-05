@@ -47,7 +47,7 @@ class Export extends CI_Controller{
 				$index++;
 			}
 			$this->wrapAndCenterText('M',$index);
-			$fileName = 'USITPublications ('.date('d-m-Y').')'.'xls';
+			$fileName = 'USITPublications ('.date('d-m-Y').')'.'.xls';
 			$this->sendFile($fileName);
 			redirect('filter/publication');
 		}else{
@@ -100,7 +100,7 @@ class Export extends CI_Controller{
 				$index++;
 			}
 			$this->wrapAndCenterText('L',$index);
-			$fileName = 'USITSeminars ('.date('d-m-Y').')'.'xls';
+			$fileName = 'USITSeminars ('.date('d-m-Y').')'.'.xls';
 			$this->sendFile($fileName);
 			redirect('filter/seminar');
 		}else{
@@ -137,7 +137,7 @@ class Export extends CI_Controller{
 				$index++;
 			}
 			$this->wrapAndCenterText('F',$index);
-			$fileName = 'USITProjects ('.date('d-m-Y').')'.'xls';
+			$fileName = 'USITProjects ('.date('d-m-Y').')'.'.xls';
 			$this->sendFile($fileName);
 			redirect('filter/project');
 		}else{
@@ -174,7 +174,7 @@ class Export extends CI_Controller{
 				$index++;
 			}
 			$this->wrapAndCenterText('F',$index);
-			$fileName = 'USITAwards ('.date('d-m-Y').')'.'xls';
+			$fileName = 'USITAwards ('.date('d-m-Y').')'.'.xls';
 			$this->sendFile($fileName);
 			redirect('filter/award');
 		}else{
