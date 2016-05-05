@@ -29,7 +29,7 @@
 	    </div>
   	</div>
   	<div class="form-group">
-	    <label class="col-sm-2 col-md-2 control-label">Date</label>
+	    <label class="col-sm-2 col-md-2 control-label">Date of Granting</label>
 	    <div class="col-sm-5 col-md-4">
 	    	<input type="text" class ="form-control start_date" name="start_date" id="start_date" placeholder="Start Date" autocomplete="off" />
 	    </div>
