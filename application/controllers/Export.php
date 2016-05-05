@@ -12,6 +12,7 @@ class Export extends CI_Controller{
 		$this->count = $this->achievements->getAllStaffAchievementCounts();
 		$this->columns = range('A','Z');
 	}
+
 	public function exportPublication(){
 		if(isset($_SESSION['publication']) && $this->currentUserType == 0){
 			$this->setupFile();
@@ -49,11 +50,172 @@ class Export extends CI_Controller{
 			$fileName = 'USITPublications'.date('d-m-Y').'.xls';
 			$this->sendFile($fileName);
 			redirect('filter/publication');
-			end;
 		}else{
 			show_error("Action not Allowed");
 		}
 	}
+
+	public function exportSeminar(){
+		if(isset($_SESSION['seminar']) && $this->currentUserType == 0){
+			$this->setupFile();
+			//This contains all attributes we need in header
+			$fieldNames= array('Name', 'Designation','Title','Organiser',
+			'Place of Event','Start Date','End Date','Level','Event','Event Details',"Attended/Organised",
+			'No of Participants');	
+			$this->setHeader($fieldNames);	
+			//Load model,get data based on filter saved in session
+			$this->load->model('seminars');
+			$resultsData = $this->seminars->filteredSeminars($_SESSION['seminar'],$this->count['seminars'],1);
+			$index = 2;
+			//Set values for each rows as per result returned from model
+			foreach ($resultsData as $result) {
+				if(isset($result['organiser']))
+					$organiser = $result['organiser'];
+				else
+					$organiser = "Not Available";
+				if(isset($result['end_date']))
+					$endDate =  $result['end_date'];
+				else
+					$endDate = "Not Available";
+				if(isset($result['event_details']))
+					$detail = $result['event_details'];
+				else
+					$detail = "Not Available";
+				if(isset($result['no_of_participants'])) 
+					$participants = $result['no_of_participants'];
+				else
+					$participants = "Not Applicable";
+				$this->excel->getActiveSheet()->setCellValue("A".$index,$result['name']);
+				$this->excel->getActiveSheet()->setCellValue("B".$index,$result['designation']);
+				$this->excel->getActiveSheet()->setCellValue("C".$index,$result['title']);
+				$this->excel->getActiveSheet()->setCellValue("D".$index,$organiser);
+				$this->excel->getActiveSheet()->setCellValue("E".$index,$result['place']);
+				$this->excel->getActiveSheet()->setCellValue("F".$index,$result['start_date']);
+				$this->excel->getActiveSheet()->setCellValue("G".$index,$endDate);
+				$this->excel->getActiveSheet()->setCellValue("H".$index,$result['region']);
+				$this->excel->getActiveSheet()->setCellValue("I".$index,$result['type']);
+				$this->excel->getActiveSheet()->setCellValue("J".$index,$detail);
+				$this->excel->getActiveSheet()->setCellValue("K".$index,$result['status']);
+				$this->excel->getActiveSheet()->setCellValue("L".$index,$participants);								
+				$index++;
+			}
+			$this->wrapAndCenterText('L',$index);
+			$fileName = 'USITSeminars'.date('d-m-Y').'.xls';
+			$this->sendFile($fileName);
+			redirect('filter/seminar');
+		}else{
+			show_error("Action not Allowed");
+		}	
+	}
+
+	/*public function exportProject(){
+		if(isset($_SESSION['']) && $this->currentUserType == 0){
+			$this->setupFile();
+			//This contains all attributes we need in header
+			$fieldNames= array('Name', 'Designation', );	
+			$this->setHeader($fieldNames);	
+			//Load model,get data based on filter saved in session
+			$this->load->model('');
+			$resultsData = $this->->($_SESSION[''],$this->count[''],1);
+			$index = 2;
+			//Set values for each rows as per result returned from model
+			foreach ($resultsData as $result) {
+				$this->excel->getActiveSheet()->setCellValue("A".$index,$result['name']);
+				$this->excel->getActiveSheet()->setCellValue("B".$index,$result['designation']);
+				$this->excel->getActiveSheet()->setCellValue("C".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("D".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("E".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("F".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("G".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("H".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("I".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("J".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("K".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("L".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("M".$index,$result['']);								
+				$index++;
+			}
+			$this->wrapAndCenterText('',$index);
+			$fileName = 'USIT'.date('d-m-Y').'.xls';
+			$this->sendFile($fileName);
+			redirect('filter/');
+		}else{
+			show_error("Action not Allowed");
+		}			
+	}
+
+	public function exportAward(){
+		if(isset($_SESSION['']) && $this->currentUserType == 0){
+			$this->setupFile();
+			//This contains all attributes we need in header
+			$fieldNames= array('Name', 'Designation', );	
+			$this->setHeader($fieldNames);	
+			//Load model,get data based on filter saved in session
+			$this->load->model('');
+			$resultsData = $this->->($_SESSION[''],$this->count[''],1);
+			$index = 2;
+			//Set values for each rows as per result returned from model
+			foreach ($resultsData as $result) {
+				$this->excel->getActiveSheet()->setCellValue("A".$index,$result['name']);
+				$this->excel->getActiveSheet()->setCellValue("B".$index,$result['designation']);
+				$this->excel->getActiveSheet()->setCellValue("C".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("D".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("E".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("F".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("G".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("H".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("I".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("J".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("K".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("L".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("M".$index,$result['']);								
+				$index++;
+			}
+			$this->wrapAndCenterText('',$index);
+			$fileName = 'USIT'.date('d-m-Y').'.xls';
+			$this->sendFile($fileName);
+			redirect('filter/');
+		}else{
+			show_error("Action not Allowed");
+		}	
+	}
+
+	public function exportAchievement(){
+		if(isset($_SESSION['']) && $this->currentUserType == 0){
+			$this->setupFile();
+			//This contains all attributes we need in header
+			$fieldNames= array('Name', 'Designation', );	
+			$this->setHeader($fieldNames);	
+			//Load model,get data based on filter saved in session
+			$this->load->model('');
+			$resultsData = $this->->($_SESSION[''],$this->count[''],1);
+			$index = 2;
+			//Set values for each rows as per result returned from model
+			foreach ($resultsData as $result) {
+				$this->excel->getActiveSheet()->setCellValue("A".$index,$result['name']);
+				$this->excel->getActiveSheet()->setCellValue("B".$index,$result['designation']);
+				$this->excel->getActiveSheet()->setCellValue("C".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("D".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("E".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("F".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("G".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("H".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("I".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("J".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("K".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("L".$index,$result['']);
+				$this->excel->getActiveSheet()->setCellValue("M".$index,$result['']);								
+				$index++;
+			}
+			$this->wrapAndCenterText('',$index);
+			$fileName = 'USIT'.date('d-m-Y').'.xls';
+			$this->sendFile($fileName);
+			redirect('filter/');
+		}else{
+			show_error("Action not Allowed");
+		}	
+	}*/
+
 	private function setupFile(){
 		//Load the PHP EXCEL library instance
 		$this->load->library('excel');
@@ -86,6 +248,7 @@ class Export extends CI_Controller{
 				$this->excel->getActiveSheet()->getStyle($cellId)->applyFromArray($style);
 		}
 	}
+	/*This function takes the last row number and column no to set all cells*/
 	private function wrapAndCenterText($endColumnName,$index){
 		//Set all text to wrap in cell and center vertically and horizontally
 		$this->excel->getActiveSheet()->getStyle('A'.'1'.":".$endColumnName.$index)->getAlignment()
