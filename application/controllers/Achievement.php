@@ -132,7 +132,7 @@ class Achievement extends CI_Controller {
 				$table_name 							= 'awards';
 				$insertData['faculty_id']				= $this->session->userdata('user_id');
 				$insertData['details']					= $this->input->post('award_details');
-
+				$insertData['agency']					= $this->input->post('award_agency');
 				$date 									= $this->input->post('award_date');
 				if(isset($date))
 					$insertData['date']					= $date;

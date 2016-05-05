@@ -17,6 +17,12 @@
 	    </div>
   	</div>
   	<div class="form-group">
+	    <label class="col-sm-2 col-md-2 control-label">Awarding Agency</label>
+	    <div class="col-sm-10 col-md-8">
+	      <input type="text" class="form-control" name="awarding_agency" value="<?php if(isset($filter['awardingAgency'])) echo $filter['awardingAgency']?>"/>
+	    </div>
+  	</div>
+  	<div class="form-group">
 	    <label class="col-sm-2 col-md-2 control-label">Date</label>
 	    <div class="col-sm-5 col-md-4">
 	    	<input type="text" class ="form-control start_date" name="start_date" id="start_date"  autocomplete="off" />

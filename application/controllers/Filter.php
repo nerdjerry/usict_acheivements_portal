@@ -208,6 +208,7 @@ public function award(){
 		$condition['isProfessor'] = filterInput($achievementType,'professor','isProfessor','');
 		$condition['isAssociateProf'] = filterInput($achievementType,'associate_professor','isAssociateProf','');
 		$condition['isAssistantProf'] = filterInput($achievementType,'assistant_professor','isAssistantProf','');
+		$condition['awardingAgency'] = filterInput($achievementType,'awarding_agency','awardingAgency','');
 		$condition['startDate'] = filterInput($achievementType,'start_date','startDate','2000-01-01');
 		$condition['endDate'] = filterInput($achievementType,'end_date','endDate',date('Y-m-d'));
 		$condition['amountStart'] = filterInput($achievementType,'amount_start','amountStart',NULL);

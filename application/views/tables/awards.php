@@ -13,6 +13,7 @@
 					<?php endif;?>
 				<?php endif;?>
 				<th>Details</th>
+				<th>Awarding Agency</th>
 				<th>Date</th>
 				<th>Amount</th>
 				<?php if(!isset($requestedUserType)):?>
@@ -35,6 +36,7 @@
 							<?php endif;?>
 						<?php endif;?>
 					<td><?php echo $detail['details']; ?></td>
+					<td><?php echo $detail['agency']; ?></td>
 					<td><?php 
 						if(isset($detail['date']))
 							echo $detail['date'];

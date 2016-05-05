@@ -25,7 +25,7 @@ class Awards extends CI_Model{
 	}
 	function getAllStaffAwards($limit,$pageNo){
 		$offset = ($pageNo-1)*$limit;
-		$query = $this->db->select('name,designation,details,date,amount')
+		$query = $this->db->select('name,designation,details,agency,date,amount')
 						->from('awards')
 						->join('faculty','faculty.faculty_id = awards.faculty_id')
 						->limit($limit,$offset)
@@ -56,10 +56,11 @@ class Awards extends CI_Model{
 		}else{
 			$amountCondition = 'amount>='.$condition['amountStart'].'AND amount<='.$condition['amountEnd'];
 		}
-		$query = $this->db->select('name,designation,details,date,amount')
+		$query = $this->db->select('name,designation,details,agency,date,amount')
 							->from('awards')
 							->join('faculty','faculty.faculty_id = awards.faculty_id')
 							->like('name',$condition['name'])
+							->like('agency',$condition['awardingAgency'])
 							->where_in('designation',$designation)
 							->where($dateCondition)
 							->where($amountCondition,NULL,FALSE)
