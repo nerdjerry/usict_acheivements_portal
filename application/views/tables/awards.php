@@ -45,7 +45,7 @@
 					?></td>
 					<td><?php 
 						if(isset($detail['amount']))
-							echo "&#x20B9;".$detail['amount'];
+							echo "&#x20B9;".formattedMoney($detail['amount']);
 						else
 							echo "Not Available";
 					?></td>

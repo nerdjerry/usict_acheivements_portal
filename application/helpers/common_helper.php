@@ -88,3 +88,7 @@ function filterInput($achivementType,$formField,$sessionField,$default){
 		return $default;
 	}
 }
+/*Format amount to display as indian comma seperated format*/
+function formattedMoney($amount){
+	return number_format($amount);
+}
