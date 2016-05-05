@@ -9,11 +9,11 @@
 						<th>Designation</th>
 					<?php elseif ($requestedUserType == 2):?>
 						<th>Branch</th>
-						<th>Year</th>
+						<th>Student Year</th>
 					<?php endif;?>
 				<?php endif;?>
 				<th>Details</th>
-				<th>Year</th>
+				<th>Year of Achievement</th>
 				<?php if(!isset($requestedUserType)):?>
 				<th></th>
 				<?php endif;?>

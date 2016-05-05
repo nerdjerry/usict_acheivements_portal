@@ -64,7 +64,7 @@
 					    </div>
 				  	</div>
 				  	<div class="form-group">
-					    <label class="col-sm-2 col-md-2 control-label">Year</label>
+					    <label class="col-sm-2 col-md-2 control-label">Year of Achievement</label>
 					    <div class="col-sm-10 col-md-8">
 					      	<input type="text" class="form-control year" class ="year" name="year" autocomplete="off" />
 					    </div>
