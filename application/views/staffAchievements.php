@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/font-awesome.min.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/datepicker.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/morris.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/mytheme.css');?>"/>
 	<link rel="icon" href="<?php echo base_url('favicon.png');?>" type="image/png"/>
 	<!-- javascript -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -46,6 +47,9 @@
 
 				<div class="page-title">
 					Achievements
+				</div>
+				<div class="page-logo">
+					<img src="<?php echo base_url('images/univ_logo.png');?>"/>
 				</div>
 			</div>
 			<?php if($this->session->flashdata('insertionSuccess')): ?>

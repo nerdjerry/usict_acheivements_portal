@@ -68,6 +68,9 @@
 				<div class="page-title">
 					Achivements by Faculty
 				</div>
+				<div class="page-logo">
+					<img src="<?php echo base_url('images/univ_logo.png');?>"/>
+				</div>
 			</div>
 			<div class="content-wrapper">
 				<div class="metrics clearfix">
@@ -122,6 +125,9 @@
 			<?php elseif($requestedUserType == 2):?>
 			<div class="page-title">
 					Achivements by Students
+				</div>
+			<div class="page-logo">
+					<img src="<?php echo base_url('images/univ_logo.png');?>"/>
 				</div>
 			</div>
 			<div class="content-wrapper">

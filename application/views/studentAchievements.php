@@ -48,6 +48,9 @@
 				<div class="page-title">
 					Achievements
 				</div>
+				<div class="page-logo">
+					<img src="<?php echo base_url('images/univ_logo.png');?>"/>
+				</div>
 			</div>
 			<?php if($this->session->flashdata('insertStatus')): ?>
 				<div class="alert alert-success" role="alert">Achivement Succesfully Added!</div>

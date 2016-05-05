@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/font-awesome.min.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/datepicker.css');?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/vendor/morris.css');?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/mytheme.css');?>"/>
 	<link rel="icon" href="<?php echo base_url('favicon.png');?>" type="image/png"/>
 
 	<!-- javascript -->
@@ -45,6 +46,9 @@
 
 				<div class="page-title">
 					Add an Award 
+				</div>
+				<div class="page-logo">
+					<img src="<?php echo base_url('images/univ_logo.png');?>"/>
 				</div>
 			</div>
 			<div class="content-wrapper">
