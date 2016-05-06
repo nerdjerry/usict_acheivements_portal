@@ -2,55 +2,18 @@
 
 
 function get_user_type(){
-	$CI = get_instance();
-	$user = $CI->user_model->getUserDetails(array('user_id'=>$CI->session->userdata('user_id')));
-	if(isset($user) && !empty($user))
-	{
-		$user = $user->row();
-		$type = $user->type;
-		return $type;
-	}
+	return $_SESSION['userType'];
 }
 
 function get_user_name(){
-	$CI = get_instance();
-	$type = get_user_type();
-	if($type == '1'){
-		$faculty = $CI->user_model->getFacultyDetails(array('faculty_id'=>get_user_id()));
-		if(isset($faculty) && !empty($faculty)){
-			$faculty = $faculty->row();
-			$name = $faculty->name;
-			return $name;
-		}
-	} else if($type == '2'){
-		$student = $CI->user_model->getStudentDetails(array('student_id'=>get_user_id()));
-		if(isset($student) && !empty($student)){
-			$student = $student->row();
-			$name = $student->name;
-			return $name;
-		}
-	}
+	return $_SESSION['name'];
 }
 function get_user_id(){
 	$CI = get_instance();
-	return $CI->session->userdata('user_id');
+	return $_SESSION['user_id'];
 }
 function get_user_pic(){
-	$CI = get_instance();
-	$type = get_user_type();
-	if($type == '1'){
-		$faculty = $CI->user_model->getFacultyDetails(array('faculty_id'=>get_user_id()));
-		if(isset($faculty) && !empty($faculty)){
-			$faculty = $faculty->row();
-			$pic = $faculty->profile_pic;
-		}
-	} else if($type == '2'){
-		$student = $CI->user_model->getStudentDetails(array('student_id'=>get_user_id()));
-		if(isset($student) && !empty($student)){
-			$student = $student->row();
-			$pic = $student->profile_pic;
-		}
-	}
+	$pic = $_SESSION['profilePic'];
 	if(isset($pic))
 		return $pic;
 	else

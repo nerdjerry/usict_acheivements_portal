@@ -5,31 +5,43 @@ class Login extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('auth_model');
 	}
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		if($this->session->userdata('user_id') || $this->input->cookie('user_id')){
-			return redirect('/home');
-		} else $this->load->view('login');
+	public function index(){
+		//Check already logged in or not
+		if(isUserLoggedIn()){
+			redirect('/home');
+		}else{
+			$this->load->view('login');
+		}	
 	}
 
-	public function auth_login()
-	{
+	public function auth_login(){
+		$email = $this->input->post('email');
+		$password = md5($this->input->post('password'));
+		$isRemember = $this->input->post('remember');
+		$user = $this->auth_model->login($email,$password);
+		if($user!=NULL){
+			$this->setSession($user);
+			//Make rememeber me work
+			redirect('/home');
+		}else{
+			$this->session->set_flashdata('loginError', 'Invalid Credentials');
+			redirect('/');
+		}
+	}
+
+	private function setSession($user){
+		$sessionData = array(
+				'user_id' => $user['user_id'],
+				'userType' => intval($user['type']),
+				'isLogged' => TRUE,
+				'name' => $user['name'],
+				'profilePic' => $user['profile_pic']
+			);
+		$this->session->set_userdata($sessionData);
+	}
+	/*public function auth_login1(){
 		$email 			= $this->input->post('email');
 		$password 		= md5($this->input->post('password'));
 		$remember_me 	= $this->input->post('remember');
@@ -60,10 +72,9 @@ class Login extends CI_Controller {
 				return redirect('/home');
 			} else 
 			{
-				$this->session->set_flashdata('loginError', 'Invalid Credentials');
-				return redirect('/');
+				
 			}
 		
 		}	
-	}
+	}*/
 }

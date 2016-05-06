@@ -6,43 +6,30 @@ class Auth_model extends CI_Model {
 		parent::__construct();
 	}
 	
-	function login($conditions=array())
-	{
-		if(count($conditions)>0)
-		{
-			$this->db->where($conditions);
+	function login($email,$password){
+		$query = $this->db->select('user_id,type')
+						->where('email_id',$email)
+						->where('password',$password)
+						->from('users')
+						->get();
+		$result = $query->row_array();
+		if($result['type'] == 1){
+			$user = $this->getUserDetails('faculty',$result);
+		}else if($result['type'] == 2){
+			$user = $this->getUserDetails('student',$result);
+		}else{
+			$user = array(
+				'name' => 'Admin',
+				'profile_pic' => NULL);
 		}
-		$this->db->select('users.user_id');
-		$result = $this->db->get('users');
-		if($result->num_rows()>0)
-		{
-			return true;
-		} else {
-			return false;
-		}
+		return array_merge($result,$user);
 	}
-	
-	function setSession($conditions=array())
-	{
-		if(count($conditions)>0)
-		{
-			$this->db->where($conditions);
-		}
-		
-		$this->db->select('users.user_id');
-		$result = $this->db->get('users');
-		
-		if($result->num_rows()>0)
-		{
-			$row = $result->row();
-			$values = array('user_id'=>$row->user_id);
-			$this->session->set_userdata($values);
-		}
-	}
-	function clearSession()
-	{
-		$array_items = array('user_id');
-		$this->session->unset_userdata($array_items);
+	private function getUserDetails($userType,$result){
+		$query = $this->db->select('name,profile_pic')
+						->where($userType.'_id',$result['user_id'])
+						->from($userType)
+						->get();
+		return $query->row_array();
 	}
 }
 ?>

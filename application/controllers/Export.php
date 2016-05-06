@@ -6,7 +6,9 @@ class Export extends CI_Controller{
 	private $columns;
 	public function __construct(){
 		parent::__construct();
+		if(!isUserLoggedIn()) redirect('/login');
 		$this->currentUserType = get_user_type();
+		if($this->currentUserType != 0) redirect('/home');
 		//Get number of achievements
 		$this->load->model('achievements');
 		$this->count = $this->achievements->getAllStaffAchievementCounts();

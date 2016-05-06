@@ -2,22 +2,20 @@
 
 class Logout extends CI_Controller {
 	
-	function __construct()
-	{
+	function __construct(){
 		parent::__construct();
+		if(!isUserLoggedIn()) redirect('/login');
 		$this->load->helper('cookie');
 	}
 	
-	function index()
-	{
-		$this->auth_model->clearSession();
-		delete_cookie("user_id");
+	function index(){
+		$sessionDataKeys = array('user_id','userType','isLogged','name','profilePic');
+		$this->session->unset_userdata($sessionDataKeys);
+		$this->session->sess_destroy();
+		//delete_cookie("user_id");
 		$this->session->set_flashdata('logoutSuccess', 'Logout Successful');
-		return redirect('/');
+		redirect('/');
 	}
 	
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/admin/logout.php */
 ?>

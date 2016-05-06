@@ -9,67 +9,36 @@ class Home extends CI_Controller {
 	private $currentUserType;
 	public function __construct(){
 		parent::__construct();
-		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
+		if(!isUserLoggedIn()) redirect('/login');
 		$this->currentUserType = get_user_type();
 	}
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		$user = $this->user_model->getUserDetails(array('user_id'=>$this->session->userdata('user_id')));
-		if(isset($user) && !empty($user))
-		{
-			$outputData = array();
-			$outputData['user_name'] = get_user_name();
-			$user = $user->row();
-			$user_type = get_user_type();
-			//Redirect to admin view of achivement if user is admin
-			if($user_type == '0'){
-				redirect('/achievement/admin');
-			}
-			//Load Faculty View,by default option to add publications if user is faculty member
-			else if($user_type == '1')
-				redirect('/achievement');
-			else if($user_type == '2')
-				redirect('/achievement');
-		} else {
-			return redirect('/');
-			//$message = 'Please '.'<a href ='.base_url().'><i>login</i></a> to View this Page';
-			//show_error($message);
+	public function index(){
+		$user_type = get_user_type();
+		//Redirect to admin view of achivement if user is admin
+		if($user_type == '0'){
+			redirect('/achievement/admin');
 		}
+		//Load Faculty View,by default option to add publications if user is faculty member
+		else if($user_type == '1')
+			redirect('/achievement');
+		else if($user_type == '2')
+			redirect('/achievement');
 	}
 
-	public function award()
-	{
-		//$this->isAllowed();
+	public function award(){
+		$this->isAllowed();
 		$this->load->view('award');
 	}
-	public function project()
-	{
-		//$this->isAllowed();
+	public function project(){
+		$this->isAllowed();
 		$this->load->view('project');
 	}
-	public function publication()
-	{
-		//$this->isAllowed();
+	public function publication(){
+		$this->isAllowed();
 		$this->load->view('publication');
 	}
-	public function seminar()
-	{
-		//$this->isAllowed();
+	public function seminar(){
+		$this->isAllowed();
 		$this->load->view('seminar');	
 	}
 	public function achievement(){

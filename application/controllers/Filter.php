@@ -8,6 +8,7 @@ class Filter extends CI_COntroller{
 	private $filter;
 	public function __construct(){
 		parent::__construct();
+		if(!isUserLoggedIn()) redirect('/login');
 		$this->currentUserType = get_user_type();
 		//Get number of achievements
 		$this->load->model('achievements');
