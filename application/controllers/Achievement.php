@@ -8,7 +8,7 @@ class Achievement extends CI_Controller {
 	const STUDENT = 2;
 	public function __construct(){
 		parent::__construct();
-		if(!$this->session->userdata('user_id')) header('location:'.base_url('login'));
+		if(!isUserLoggedIn()) redirect('/login');
 		$outputData = array();
 		$this->load->helper('date');
 	}
@@ -332,7 +332,7 @@ class Achievement extends CI_Controller {
 			$this->load->model('student');
 			//Pagination
 			$totalRows = $data['noOfAchievements'];
-			$perPage = 1;
+			$perPage = 10;
 			$uriSegment = 3;
 			$page=$this->uri->segment(3) != null? $this->uri->segment(3) : 1;
 			$data['infoType'] = 5;
@@ -364,7 +364,7 @@ class Achievement extends CI_Controller {
 				$status = $this->common_model->delete('awards',$id);
 				break;
 			case 5:
-				$status = $this->common_model->delete('achievements',array('id' => $id));
+				$status = $this->common_model->delete('achievements',$id);
 				$this->session->set_flashdata('deleteStatus',$status);
 				redirect('achievement/student');
 				break;
