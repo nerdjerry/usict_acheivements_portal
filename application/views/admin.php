@@ -58,7 +58,7 @@
 </head>
 <body id="dashboard">
 	<div id="wrapper">
-		<?php include('admin_menu.php') ?>
+		<?php include('menu/admin.php') ?>
 		<div id="content">
 			<div class="menubar">
 				<div class="sidebar-toggler visible-xs">

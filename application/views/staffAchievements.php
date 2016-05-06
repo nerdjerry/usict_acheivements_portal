@@ -38,7 +38,7 @@
 </head>
 <body id="dashboard">
 	<div id="wrapper">
-		<?php include('staff_menu.php') ?>
+		<?php include('menu/staff.php') ?>
 		<div id="content">
 			<div class="menubar">
 				<div class="sidebar-toggler visible-xs">
