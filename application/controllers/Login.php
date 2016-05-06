@@ -5,7 +5,7 @@ class Login extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('auth_model');
+		$this->load->model('authentication');
 	}
 	public function index(){
 		//Check already logged in or not
@@ -20,10 +20,19 @@ class Login extends CI_Controller {
 		$email = $this->input->post('email');
 		$password = md5($this->input->post('password'));
 		$isRemember = $this->input->post('remember');
-		$user = $this->auth_model->login($email,$password);
+		$user = $this->authentication->login($email,$password);
 		if($user!=NULL){
 			$this->setSession($user);
-			//Make rememeber me work
+			//Remember me functionality
+			if($isRemember == 'true'){
+				//Generate a token
+				$token = mt_rand();
+				//Save token and user Id in database
+				$this->authentication->setToken($user['user_id'],md5($token));
+				//Set cookie for token and userId to be used for login
+				set_cookie("token",$token,30*24*60*60);
+				set_cookie("userId",$user['user_id'],30*24*60*60);
+			}
 			redirect('/home');
 		}else{
 			$this->session->set_flashdata('loginError', 'Invalid Credentials');
@@ -41,40 +50,4 @@ class Login extends CI_Controller {
 			);
 		$this->session->set_userdata($sessionData);
 	}
-	/*public function auth_login1(){
-		$email 			= $this->input->post('email');
-		$password 		= md5($this->input->post('password'));
-		$remember_me 	= $this->input->post('remember');
-		
-		$this->load->helper('cookie');
-
-		if($this->input->cookie('user_id'))
-		{	
-			if($this->auth_model->login(array('users.user_id'=>$this->input->cookie('user_id'))))
-			{
-				$conditions = array('email_id'=>$email,'password'=>$password);
-				$this->auth_model->setSession($conditions);
-				return redirect('/home');
-			}
-		} 
-		if(isset($email) && !empty($email))
-		{
-			$conditions = array('email_id'=>$email,'password'=>$password);
-			if($this->auth_model->login($conditions))
-			{ 
-				$this->auth_model->setSession($conditions);
-				if(isset($remember_me) && $remember_me!='' && $remember_me == 'true'){
-					$this->input->set_cookie('user_id',$this->session->userdata('user_id'), mktime(). time()+60*60*24*365);
-				} else {
-					if($this->input->cookie('user_id'))
-						$this->input->delete_cookie("user_id");
-				}
-				return redirect('/home');
-			} else 
-			{
-				
-			}
-		
-		}	
-	}*/
 }
