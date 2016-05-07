@@ -64,8 +64,9 @@ class Authentication extends CI_Model {
 		}
 		return array_merge($result,$user);
 	}
-	function deleteToken($userId){
+	function deleteToken($userId,$token){
 		$this->db->where('user_id',$userId)
+				->where('token',md5($token))
 				->delete('login');
 	}
 }

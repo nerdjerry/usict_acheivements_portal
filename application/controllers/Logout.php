@@ -13,10 +13,11 @@ class Logout extends CI_Controller {
 		$this->session->unset_userdata($sessionDataKeys);
 		$this->session->sess_destroy();
 		$userId = get_cookie("userId");
+		$token = get_cookie("token");
 		//Not null means cookie exist which means user checked remember me so delete
 		//token from database and cookie.
-		if(!is_null($userId)){
-			$this->authentication->deleteToken($userId);
+		if(!is_null($userId) && !is_null($token)){
+			$this->authentication->deleteToken($userId,$token);
 			delete_cookie("userId");
 			delete_cookie("token");
 		}
