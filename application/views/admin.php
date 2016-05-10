@@ -18,7 +18,7 @@
 	<link rel="icon" href="<?php echo base_url('favicon.png');?>" type="image/png"/>
 
 	<!-- javascript -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<script src="<?php echo base_url('js/jquery/jquery-2.2.3.min.js');?>"></script>
 	<script src="<?php echo base_url('js/bootstrap/bootstrap.min.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/jquery.cookie.js');?>"></script>
 	<script src="<?php echo base_url('js/vendor/moment.min.js');?>"></script>
