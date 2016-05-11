@@ -62,12 +62,12 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-										<a href="<?php echo base_url('/achievement/deleteAchievement/'.$infoType.'/'.$detail['id']);?>"><button class="btn btn-primary">Yes</button></a>
+										<a href="" id="yes_button"><button class="btn btn-primary">Yes</button></a>
 									</div>
 								</div>
 							</div>
 						</div>
-					<td><a href="<?php echo base_url('/achievement/deleteAchievement/'.$infoType.'/'.$detail['id']);?>"><i class="fa fa-trash-o" aria-hidden="true" data-toggle="modal" data-target="#confirm_deletion"></i></a></td>
+					<td><a aria-hidden="true" data-toggle="modal" data-target="#confirm_deletion" data-id="<?php echo $detail['id'];?>" data-info = "<?php echo $infoType ?>"><i class="fa fa-trash-o"></i></a></td>
 					<?php endif;?>
 				</tr>
 				<?php endforeach;

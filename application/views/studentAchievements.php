@@ -93,6 +93,13 @@
 	        	endDate: new Date()
 	        });
 		});
+		$('#confirm_deletion').on('show.bs.modal', function (event) {
+  			var button = $(event.relatedTarget);
+  			var id = button.data('id'); // Extract id from data-id attribute
+  			var infoType = button.data('info');
+  			var modal = $(this);
+  			modal.find('.modal-footer #yes_button').attr('href','/usict/achievement/deleteAchievement/'+infoType+'/'+id);
+		});
 	</script>
 
 </body>
