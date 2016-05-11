@@ -60,15 +60,15 @@
 					    </div>
 				  	</div>
 				  	<div class="form-group">
-					    <label class="col-sm-2 col-md-2 control-label">Month of Publication</label>
-					    <div class="col-sm-10 col-md-8">
-					      <input type="text" class="form-control month_of_pub" name="month_of_pub" autocomplete="off" />
-					    </div>
-				  	</div>
-				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Year of Publication</label>
 					    <div class="col-sm-10 col-md-8">
 					    	<input type="text" class="form-control year_of_pub" name="year_of_pub" autocomplete="off" />
+					    </div>
+				  	</div>
+				  	<div class="form-group">
+					    <label class="col-sm-2 col-md-2 control-label">Month of Publication</label>
+					    <div class="col-sm-10 col-md-8">
+					      <input type="text" class="form-control month_of_pub" name="month_of_pub" autocomplete="off" />
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -177,9 +177,23 @@
 		    var mm = today.getMonth()+1; //January is 0!
 		    var yyyy = today.getFullYear();
 		    
-		    if(mm<10){
-		        mm='0'+mm
-		    } 
+		$('.month_of_pub').keyup(function(){
+			if($('.year_of_pub').val()==2016){
+				$('#new-publication').validate({
+					rules:{
+						"month_of_pub": {
+							max:mm
+						},
+					},
+					highlight: function (element) {
+						$(element).closest('.form-group').removeClass('success').addClass('error');
+					},
+					success: function (element) {
+						element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
+					}
+				});
+			}
+		});
 			// form validation
 			$('#new-publication').validate({
 				rules: {
@@ -189,9 +203,6 @@
 					"year_of_pub": {
 						required: true,
 						max:yyyy
-					},
-					"month_of_pub": {
-						max:mm
 					},
 					"journal_name": {
 						required: true
