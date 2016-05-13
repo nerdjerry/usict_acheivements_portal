@@ -68,7 +68,20 @@
 				  	<div class="form-group">
 					    <label class="col-sm-2 col-md-2 control-label">Month of Publication</label>
 					    <div class="col-sm-10 col-md-8">
-					      <input type="text" class="form-control month_of_pub" name="month_of_pub" autocomplete="off" />
+					      <select class="form-control month_of_pub" name="month_of_pub">
+					      	<option value"January">January</option>
+					      	<option value"Februray">February</option>
+					      	<option value"March">March</option>
+					      	<option value"April">April</option>
+					      	<option value"May">May</option>
+					      	<option value"June">June</option>
+					      	<option value"July">July</option>
+					      	<option value"August">August</option>
+					      	<option value"September">September</option>
+					      	<option value"October">October</option>
+					      	<option value"November">November</option>
+					      	<option value"December">December</option>
+					      </select>
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -172,28 +185,22 @@
 
 	<script type="text/javascript">
 		$(function () {
-
+			var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 			var today = new Date();
-		    var mm = today.getMonth()+1; //January is 0!
+		    var mm = today.getMonth(); //January is 0!
 		    var yyyy = today.getFullYear();
-		    
-		$('.month_of_pub').keyup(function(){
-			if($('.year_of_pub').val()==2016){
-				$('#new-publication').validate({
-					rules:{
-						"month_of_pub": {
-							max:mm
-						},
-					},
-					highlight: function (element) {
-						$(element).closest('.form-group').removeClass('success').addClass('error');
-					},
-					success: function (element) {
-						element.addClass('valid').closest('.form-group').removeClass('error').addClass('success');
+		    $('.month_of_pub').val(months[mm]);
+			$('.year_of_pub').change(function(){
+				if($('.year_of_pub').val()== " 2016"){
+					for(month=mm+1;month<12;month++){
+						$(".month_of_pub option:contains("+months[month]+")").hide(); 
 					}
-				});
-			}
-		});
+				}else{
+					for(month=0;month<12;month++){
+						$(".month_of_pub option:contains("+months[month]+")").show();
+					}
+				}
+			});
 			// form validation
 			$('#new-publication').validate({
 				rules: {
@@ -246,13 +253,6 @@
 					$('#first_author').val('');
 					$('#first_author').prop('readonly',false);
 				}
-			});
-			$('.month_of_pub').datepicker({
-				format: "MM", // Notice the Extra space at the beginning
-				viewMode: "months", 
-				minViewMode: "months",
-				autoclose: true,
-				endDate:new Date()
 			});
 			$('.year_of_pub').datepicker({
 				format: " yyyy", // Notice the Extra space at the beginning
